@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/wander/wander",
+    "pages/bazzar/bazzar",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/fangdajing/fangdajing"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "aaa",
+        "pagePath": "pages/bazzar/bazzar",
+        "iconPath": "./static/icon/bazzar.png"
+      },
+      {
+        "pagePath": "pages/wander/wander",
+        "iconPath": "./static/icon/wander.png"
+      },
+      {
+        "pagePath": "pages/fangdajing/fangdajing",
+        "iconPath": "./static/icon/fangdajing.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "./static/icon/mine.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}
