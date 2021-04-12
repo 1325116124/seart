@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "盛开在广州的花",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "nv": "/component/pyh-nv/pyh-nv"
-  }
-}
