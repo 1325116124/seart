@@ -1,10 +1,14 @@
 {
   "pages": [
     "pages/wander/wander",
+    "pages/real-time-communication/real-time-communication",
+    "pages/living/living",
+    "pages/broadcast/broadcast",
     "pages/bazzar/bazzar",
     "pages/index/index",
     "pages/mine/mine",
-    "pages/fangdajing/fangdajing"
+    "pages/discover/discover",
+    "pages/communication-circle/communication-circle"
   ],
   "subPackages": [],
   "window": {
@@ -16,24 +20,26 @@
   "tabBar": {
     "list": [
       {
-        "text": "aaa",
         "pagePath": "pages/bazzar/bazzar",
-        "iconPath": "./static/icon/bazzar.png"
+        "iconPath": "./static/icon/bazzar-1.png",
+        "selectedIconPath": "./static/icon/bazzar-2.png"
       },
       {
         "pagePath": "pages/wander/wander",
-        "iconPath": "./static/icon/wander.png"
+        "iconPath": "./static/icon/wander-1.png",
+        "selectedIconPath": "./static/icon/wander.png"
       },
       {
-        "pagePath": "pages/fangdajing/fangdajing",
-        "iconPath": "./static/icon/fangdajing.png"
+        "pagePath": "pages/discover/discover",
+        "iconPath": "./static/icon/discover-1.png",
+        "selectedIconPath": "./static/icon/discover.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "iconPath": "./static/icon/mine.png"
+        "iconPath": "./static/icon/mine-1.png",
+        "selectedIconPath": "./static/icon/mine.png"
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

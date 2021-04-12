@@ -10,6 +10,34 @@
 		    
 		},
 		{
+		    "path" : "pages/real-time-communication/real-time-communication",
+		    "style" :                                                                                    
+		    {
+				// "navigationStyle":"custom"
+		        "navigationBarTitleText": "盛开在广州的花",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/living/living",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+		    "path" : "pages/broadcast/broadcast",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
 		    "path" : "pages/bazzar/bazzar",
 		    "style" :                                                                                    
 		    {
@@ -35,10 +63,21 @@
             
         }
         ,{
-            "path" : "pages/fangdajing/fangdajing",
+            "path" : "pages/discover/discover",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        
+        ,{
+            "path" : "pages/communication-circle/communication-circle",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "交流圈",
                 "enablePullDownRefresh": false
             }
             
@@ -53,21 +92,24 @@
 	"tabBar":{
 		"list":[
 			{
-				"text":"aaa",
 				"pagePath":"pages/bazzar/bazzar",
-				"iconPath":"./static/icon/bazzar.png"
+				"iconPath":"./static/icon/bazzar-1.png",
+				"selectedIconPath":"./static/icon/bazzar-2.png"
 			},
 			{
 				"pagePath":"pages/wander/wander",
-				"iconPath":"./static/icon/wander.png"
+				"iconPath":"./static/icon/wander-1.png",
+				"selectedIconPath":"./static/icon/wander.png"
 			},
 			{
-				"pagePath":"pages/fangdajing/fangdajing",
-				"iconPath":"./static/icon/fangdajing.png"
+				"pagePath":"pages/discover/discover",
+				"iconPath":"./static/icon/discover-1.png",
+				"selectedIconPath":"./static/icon/discover.png"
 			},
 			{
 				"pagePath":"pages/mine/mine",
-				"iconPath":"./static/icon/mine.png"
+				"iconPath":"./static/icon/mine-1.png",
+				"selectedIconPath":"./static/icon/mine.png"
 			}
 		]
 	}

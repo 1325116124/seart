@@ -1,0 +1,101 @@
+.real-time-communication {
+  margin-bottom: 100rpx;
+}
+.real-time-communication .real-time-communication-body {
+  width: 700rpx;
+  margin: 0 auto;
+}
+.real-time-communication .real-time-communication-body .communication-top {
+  margin-top: 40rpx;
+}
+.real-time-communication .real-time-communication-body .communication-top .living {
+  width: 100%;
+  height: 1130rpx;
+  -webkit-border-radius: 24rpx;
+          border-radius: 24rpx;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons {
+  margin-top: 30rpx;
+  width: 700rpx;
+  height: 28rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons .icon {
+  margin-right: 70rpx;
+  text-align: center;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons .icon .iconfont {
+  width: 30rpx;
+  height: 28rpx;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons .icon:nth-child(3) .iconfont {
+  color: #f00;
+  font-size: 36rpx;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons .icon text {
+  font-size: 20rpx;
+}
+.real-time-communication .real-time-communication-body .communication-top .icons .icon:last-child {
+  margin-right: 0;
+}
+.real-time-communication .real-time-communication-body .communication-center {
+  margin-top: 50rpx;
+}
+.real-time-communication .real-time-communication-body .communication-center .description .description-top {
+  width: 100%;
+  line-height: 40rpx;
+  height: 40rpx;
+  margin-bottom: 30rpx;
+}
+.real-time-communication .real-time-communication-body .communication-center .description .description-top .block {
+  display: inline-block;
+  width: 12rpx;
+  height: 30rpx;
+  background-color: #306FB6;
+  margin-right: 20rpx;
+  -webkit-border-radius: 4rpx;
+          border-radius: 4rpx;
+  vertical-align: middle;
+}
+.real-time-communication .real-time-communication-body .communication-center .description .description-top .description-title {
+  font-size: 28rpx;
+  color: #1E6CB5;
+}
+.real-time-communication .real-time-communication-body .communication-center .description .description-content {
+  font-size: 28rpx;
+  color: #888;
+}
+.real-time-communication .real-time-communication-body .communication-bottom {
+  position: fixed;
+  bottom: 0;
+}
+.real-time-communication .real-time-communication-body .communication-bottom .comment {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.real-time-communication .real-time-communication-body .communication-bottom .comment .comment-input {
+  padding: 0 30rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 626rpx;
+  height: 50rpx;
+  -webkit-border-radius: 30rpx;
+          border-radius: 30rpx;
+  border: 2rpx solid #1E6CB5;
+  font-size: 30rpx;
+}
+.real-time-communication .real-time-communication-body .communication-bottom .comment .iconfont {
+  margin-left: 20rpx;
+  font-size: 50rpx;
+}
+

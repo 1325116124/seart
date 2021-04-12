@@ -1,0 +1,97 @@
+.communication-circle .communication-circle-body {
+  width: 700rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+}
+.communication-circle .communication-circle-body .circle-top {
+  width: 100%;
+  line-height: 40rpx;
+  height: 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.communication-circle .communication-circle-body .circle-top .block {
+  display: inline-block;
+  width: 12rpx;
+  height: 40rpx;
+  background-color: #306FB6;
+  -webkit-border-radius: 4rpx;
+          border-radius: 4rpx;
+  vertical-align: text-top;
+}
+.communication-circle .communication-circle-body .circle-top .title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  width: 600rpx;
+}
+.communication-circle .communication-circle-body .circle-top .title .circle-top-title {
+  font-size: 28rpx;
+}
+.communication-circle .communication-circle-body .circle-top .title .circle-top-title:first-child {
+  margin-left: -40rpx;
+}
+.communication-circle .communication-circle-body .circle-top .title .active {
+  color: #1E6CB5;
+  border-bottom: 2rpx solid #1E6CB5;
+}
+.communication-circle .communication-circle-body .circle-center {
+  width: 100%;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show {
+  margin-top: 50rpx;
+  width: 100%;
+  height: 400rpx;
+  overflow: hidden;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show .exhibits-show-body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  white-space: nowrap;
+  height: 100%;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show .exhibits-show-body .exhibits-item {
+  display: inline-block;
+  width: 300rpx;
+  height: 400rpx;
+  background-color: #C9DCF0;
+  position: relative;
+  padding: 40rpx 50rpx 0 50rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 24rpx;
+          border-radius: 24rpx;
+  margin-right: 30rpx;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show .exhibits-show-body .exhibits-item view {
+  width: 220rpx;
+  height: 220rpx;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  margin-bottom: 30rpx;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show .exhibits-show-body .exhibits-item view image {
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
+}
+.communication-circle .communication-circle-body .circle-center .exhibits-show .exhibits-show-body .exhibits-item text {
+  font-size: 20rpx;
+  line-height: 40rpx;
+  color: #717175;
+  white-space: normal;
+}
+

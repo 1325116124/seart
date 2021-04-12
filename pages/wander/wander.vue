@@ -5,7 +5,7 @@
 				<text class="iconfont icon-fangdajing"></text>
 				<input type="text" placeholder-class="Search" placeholder="Discover">
 				<view class="location">
-					<txet class="iconfont icon-location"></text>
+					<text class="iconfont icon-location"></text>
 					<text>广州</text>
 				</view>
 			</view>

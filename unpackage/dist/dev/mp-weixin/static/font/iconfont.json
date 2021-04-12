@@ -6,46 +6,39 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "2665173",
-      "name": "骆驼",
-      "font_class": "luotuo",
-      "unicode": "e77e",
-      "unicode_decimal": 59262
+      "icon_id": "338465",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e628",
+      "unicode_decimal": 58920
     },
     {
-      "icon_id": "3050508",
-      "name": "定位",
-      "font_class": "location",
-      "unicode": "e611",
-      "unicode_decimal": 58897
+      "icon_id": "767542",
+      "name": "发送",
+      "font_class": "send",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
     },
     {
-      "icon_id": "4770728",
-      "name": "放大镜",
-      "font_class": "fangdajing",
-      "unicode": "e637",
-      "unicode_decimal": 58935
-    },
-    {
-      "icon_id": "5381996",
-      "name": "我的",
-      "font_class": "wode",
-      "unicode": "e6f3",
-      "unicode_decimal": 59123
-    },
-    {
-      "icon_id": "6308230",
+      "icon_id": "924711",
       "name": "收藏",
       "font_class": "shoucang",
-      "unicode": "e698",
-      "unicode_decimal": 59032
+      "unicode": "e61d",
+      "unicode_decimal": 58909
     },
     {
-      "icon_id": "11370993",
-      "name": "订单",
-      "font_class": "dingdan-",
-      "unicode": "e638",
-      "unicode_decimal": 58936
+      "icon_id": "1279440",
+      "name": "聊天",
+      "font_class": "liaotian",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "9568076",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "e654",
+      "unicode_decimal": 58964
     },
     {
       "icon_id": "14666053",
@@ -53,13 +46,6 @@
       "font_class": "shizhong",
       "unicode": "e72a",
       "unicode_decimal": 59178
-    },
-    {
-      "icon_id": "19254962",
-      "name": "分 享",
-      "font_class": "fenxiang",
-      "unicode": "e6d1",
-      "unicode_decimal": 59089
     }
   ]
 }
