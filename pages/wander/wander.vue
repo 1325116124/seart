@@ -115,7 +115,6 @@
 					width: 700rpx;
 					height: 280rpx;
 					border-radius: 24rpx;
-					
 				}
 			}
 			.dots {

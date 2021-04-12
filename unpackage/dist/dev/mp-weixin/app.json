@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/living/living",
     "pages/wander/wander",
     "pages/real-time-communication/real-time-communication",
-    "pages/living/living",
     "pages/broadcast/broadcast",
     "pages/bazzar/bazzar",
     "pages/index/index",
@@ -41,5 +41,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
