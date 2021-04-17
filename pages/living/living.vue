@@ -36,7 +36,7 @@
 				</view>
 				<view class="remind">
 					<view class="remind-top">
-						<txet class="block"></txet>
+						<text class="block"></text>
 						<text class="remind-title">看展提醒</text>
 						<switch class="switch" checked="true" @change="" color="#0077AA"/>
 					</view>
@@ -51,7 +51,7 @@
 			<view class="living-bottom">
 				<view class="shop-around">
 					<view class="shop-around-top">
-						<txet class="block"></txet>
+						<text class="block"></text>
 						<text class="shop-around-title">展览周边</text>
 					</view>
 					<view class="auction">
@@ -72,7 +72,7 @@
 				</view>
 				<view class="exhibits">
 					<view class="exhibits-top">
-						<txet class="block"></txet>
+						<text class="block"></text>
 						<text class="exhibits-title">相关展品</text>
 					</view>
 					<scroll-view class="exhibits-show" scroll-x="true">
