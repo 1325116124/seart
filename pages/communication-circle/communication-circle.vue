@@ -95,7 +95,7 @@
 					width: 600rpx;
 					.circle-top-title{
 						font-size: 28rpx;
-						transition: all 10s ease;
+						transition: all 0.2s ease;
 						&:first-child{
 							margin-left: -40rpx;
 						}

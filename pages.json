@@ -1,13 +1,60 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-		    "path" : "pages/wander/wander",
+		    "path" : "pages/more/more",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    } 
+		},
+		{
+		    "path" : "pages/course-template/course-template",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
 		    }
+		    
 		},
+		{
+			"path" : "pages/wander/wander",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		
+		{
+			"path" : "pages/album-template/album-template",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+				    
+		},
+		{
+		    "path" : "pages/discover-result/discover-result",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+		    "path" : "pages/wander-discover/wander-discover",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -77,6 +124,16 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "交流圈",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+       
+        ,{
+            "path" : "pages/artSalon/artSalon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             
