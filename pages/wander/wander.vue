@@ -63,7 +63,7 @@
 					<view class="exhibits-around-body">
 						<view class="exhibits-around-item">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
 								<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -81,7 +81,7 @@
 						</view>
 						<view class="exhibits-around-item">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
 								<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -99,7 +99,7 @@
 						</view>
 						<view class="exhibits-around-item">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
 								<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -117,7 +117,7 @@
 						</view>
 						<view class="exhibits-around-item">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
 								<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -146,10 +146,10 @@
 			return {
 				isInputActive:false,//判断输入框是否focus
 				swiperImg: [
-					'../../static/images/body-2-2.jpg',					
-					'../../static/images/body-2-3.jpg',
-					'../../static/images/body-2-4.jpg',
-					'../../static/images/body-2-4.jpg'
+					'../../static/images/wander-exhibits1.jpg',					
+					'../../static/images/wander-exhibits1.jpg',
+					'../../static/images/wander-exhibits1.jpg',
+					'../../static/images/wander-exhibits1.jpg'
 				],
 				swiperCurrent:0,
 				functionTitle:["展览","沙龙","live专区"],

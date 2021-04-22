@@ -27,37 +27,37 @@
 				<view class="result-items">
 					<view class="result-left">
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 					</view>
 					<view class="result-right">
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						<view class="result-item">
-							<image src="../../static/images/result-item.jpg" mode="aspectFill"></image>
+							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							<view class="iconfont icon-shoucang"></view>
 						</view>
 						

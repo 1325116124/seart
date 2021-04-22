@@ -18,7 +18,7 @@
 					<text class="album-center-title">解读雕像之花</text>
 				</view>
 				<view class="chair">
-					<image src="../../static/images/album.jpg" mode="aspectFill"></image>
+					<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 					<view class="description">欧初捐赠文物纪念展"分为“诸家合壁”<br>
 					“历代陶瓷”“文房用品”和“青铜器”四个篇章</view>
 				</view>
@@ -29,7 +29,7 @@
 					<text class="album-bottom-title">解读雕像之花</text>
 				</view>
 				<view class="chair">
-					<image src="../../static/images/wander-exhibits3.jpg" mode="aspectFill"></image>
+					<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 				</view>
 			</view>
 		</view>

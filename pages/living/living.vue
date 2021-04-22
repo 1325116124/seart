@@ -2,7 +2,7 @@
 	<view class="living">
 		<view class="living-main">
 			<view class="living-top">
-				<image src="../../static/images/living-top.jpg" mode="aspectFill"></image>
+				<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 				<view class="enter-living">进入直播</view>
 				<view class="icons">
 					<view class="icon">
@@ -58,14 +58,14 @@
 						<view class="auction-work">
 							<view class="auction-work-title">拍卖作品</view>
 							<view class="auction-work-content">
-								<view><image src="../../static/images/auction-work.png" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
 							</view>
 						</view>
 						<view class="online-auction">
 							<text class="online-auction-title">近期拍卖会</text>
 							<view class="online-auction-content">
-								<image src="../../static/images/online-auction.gif" mode="aspectFill"></image>
+								<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
 						</view>
 					</view>
@@ -78,35 +78,35 @@
 					<scroll-view class="exhibits-show" scroll-x="true">
 						<view class="exhibits-show-body">
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 						</view>
@@ -114,35 +114,35 @@
 					<scroll-view class="exhibits-show" scroll-x="true">
 						<view class="exhibits-show-body">
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 							<view class="exhibits-item">
-								<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
 						</view>

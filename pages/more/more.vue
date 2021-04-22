@@ -72,7 +72,7 @@
 				<view class="more-bottom-body">
 					<view class="more-bottom-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -90,7 +90,7 @@
 					</view>
 					<view class="more-bottom-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -108,7 +108,7 @@
 					</view>
 					<view class="more-bottom-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -126,7 +126,7 @@
 					</view>
 					<view class="more-bottom-item" @click="toArtSalon">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>

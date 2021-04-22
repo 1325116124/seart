@@ -3,7 +3,7 @@
 		<view class="course-body">
 			<view class="course-top">
 				<view class="course-top-top">
-					<image src="../../static/images/result-bazzar4.jpg" mode="aspectFill"></image>
+					<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 					<view class="icons">
 						<view class="icon">
 							<view class="iconfont icon-shoucang"></view>
@@ -41,19 +41,19 @@
 						<scroll-view class="team-show" scroll-x="true">
 							<view class="team-show-body">
 								<view class="team-item">
-									<view><image src="../../static/images/course1.jpg" mode="aspectFill"></image></view>
+									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
 								</view>
 								<view class="team-item">
-									<view><image src="../../static/images/course1.jpg" mode="aspectFill"></image></view>
+									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
 								</view>
 								<view class="team-item">
-									<view><image src="../../static/images/course1.jpg" mode="aspectFill"></image></view>
+									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
 								</view>
 								<view class="team-item">
-									<view><image src="../../static/images/course1.jpg" mode="aspectFill"></image></view>
+									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
 								</view>
 							</view>
@@ -108,7 +108,7 @@
 						<view class="comment-body">
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -117,7 +117,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -126,7 +126,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -135,7 +135,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -144,7 +144,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -153,7 +153,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -162,7 +162,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">
@@ -171,7 +171,7 @@
 							</view>
 							<view class="comment-item">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/user-image.jpg" mode="aspectFill"></image></view>
+									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 									<text class="user-id">草间弥生</text>
 								</view>
 								<view class="comment-content">

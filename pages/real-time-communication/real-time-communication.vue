@@ -2,7 +2,7 @@
 	<view class="real-time-communication">
 		<view class="real-time-communication-body">
 			<view class="communication-top">
-				<image class="living" src="../../static/images/real-time-communication.jpg" mode="aspectFill"></image>
+				<image class="living" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 				<view class="icons">
 					<view class="icon">
 						<view class="iconfont icon-liaotian" @click="communicate"></view>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	import nv from "../../component/pyh-nv/pyh-nv.vue"
+	
 	export default {
 		data() {
 			return {
@@ -50,7 +50,7 @@
 			}
 		},
 		components:{
-			nv
+			
 		},
 		methods: {
 			setCursor(){

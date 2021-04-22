@@ -14,35 +14,35 @@
 				<scroll-view class="exhibits-show" scroll-x="true">
 					<view class="exhibits-show-body">
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 						<view class="exhibits-item">
-							<view><image src="../../static/images/item-1.jpg" mode="aspectFill"></image></view>
+							<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 							<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 						</view>
 					</view>
