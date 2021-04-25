@@ -1,6 +1,14 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/wander/wander",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 		    "path" : "pages/more/more",
 		    "style" :                                                                                    
 		    {
@@ -17,15 +25,7 @@
 		    }
 		    
 		},
-		{
-			"path" : "pages/wander/wander",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		
+
 		{
 			"path" : "pages/album-template/album-template",
 			"style" :                                                                                    

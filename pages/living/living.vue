@@ -3,7 +3,7 @@
 		<view class="living-main">
 			<view class="living-top">
 				<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-				<view class="enter-living">进入直播</view>
+				<view class="enter-living" @click="toBroadcast">进入直播</view>
 				<view class="icons">
 					<view class="icon">
 						<view class="iconfont icon-shoucang"></view>
@@ -32,7 +32,7 @@
 						<txet class="block"></txet>
 						<text class="map-title">地图导航</text>
 					</view>
-					<map class="map" :enable-scroll='false' :longitude="longitude" :latitude="latitude" :markers="markers" :scale="scale"></map>
+					<map class="map" :enable-scroll='false' :longitude="longitude" :latitude="latitude" :scale="scale"></map>
 				</view>
 				<view class="remind">
 					<view class="remind-top">
@@ -174,7 +174,11 @@
 			}
 		},
 		methods: {
-			
+			toBroadcast(){
+				uni.navigateTo({
+					url:"../real-time-communication/real-time-communication"
+				})
+			}
 		}
 	}
 </script>
@@ -190,7 +194,7 @@
 			position: relative;
 			image{
 				width: 700rpx;
-				height: 532rpx;
+				height: 500rpx;
 				border-radius: 24rpx;
 			}
 			// 68x27	12 0 0 12
@@ -204,7 +208,7 @@
 				border-radius: 24rpx 0 0 24rpx;
 				background-color: #fff;
 				color: @color;
-				top: 460rpx;
+				top: 428rpx;
 				right: 0;
 			}
 			.icons{
@@ -213,7 +217,7 @@
 				display: flex;
 				justify-content: flex-end;
 				.icon{
-					margin-right: 20rpx;
+					margin-right: 40rpx;
 					text-align: center;
 					.iconfont{
 						width: 30rpx;
@@ -221,9 +225,12 @@
 					}
 					&:nth-child(2){
 						.iconfont{
-							color: @color;
+							color: #4F73A5;
 							font-size: 36rpx;
 						}
+					}
+					&:last-child{
+						margin-right: 0rpx;
 					}
 					text{
 						font-size: 20rpx;
@@ -235,22 +242,22 @@
 		.living-center{
 			margin-top: 50rpx;
 			.text-title{
-				font-size: 36rpx;
-				color: #1E6CB5;
+				font-size: 32rpx;
+				color: #0069D6;
 			}
 			.tabs{
 				width: 100%;
 				margin-top: 20rpx;
 				display: flex;
-				font-size: 26rpx;
-				color: #ccc;
+				font-size: 20rpx;
+				color: #4E72A5;
 				padding: 0 20rpx;
 				.tab{
 					box-sizing: border-box;
 					display: inline-block;
 					padding: 2rpx 26rpx 2rpx 26rpx;
 					text-align: center;
-					border: 2rpx solid #ccc;
+					border: 2rpx solid #A5B7D1;
 					margin-right: 20rpx;
 					border-radius: 18rpx;
 					line-height: 34rpx;
@@ -260,12 +267,12 @@
 				text-indent: 2em;
 				margin-top: 30rpx;
 				font-size: 28rpx;
-				color: #717175;
+				color: #707070;
 				line-height: 60rpx;
 			}
 			//地图区域
 			.map-block{
-				margin-top: 60rpx;
+				margin-top: 80rpx;
 				.map-top{
 					width: 100%;
 					line-height: 40rpx;
@@ -274,22 +281,23 @@
 						display: inline-block;
 						width: 12rpx;
 						height: 40rpx;
-						background-color: #306FB6;
+						background-color: #21277B;
 						margin-right: 20rpx;
 						border-radius: 4rpx;
 						vertical-align: text-top;
 					}
 					.map-title{
 						font-size: 28rpx;
-						color: #1E6CB5;
+						color: #4F73A5;
+						font-weight: bold;
 					}
 				}
 				.map{
 					margin-top: 50rpx;
 					width: 100%;
-					height: 400rpx;
+					height: 428rpx;
 					border-radius: 30rpx;
-					border: 2rpx solid #1E6CB5;
+					border: 2rpx solid #006FFF;
 					overflow: hidden;
 				}
 			}
@@ -300,20 +308,21 @@
 					width: 100%;
 					line-height: 40rpx;
 					height: 40rpx;
-					margin-bottom: 40rpx;
+					margin-bottom: 80rpx;
 					.block{
 						display: inline-block;
 						width: 12rpx;
 						height: 40rpx;
-						background-color: #306FB6;
+						background-color: #21277B;
 						margin-right: 20rpx;
 						border-radius: 4rpx;
 						vertical-align: text-top;
 					}
 					.remind-title{
 						font-size: 28rpx;
-						color: #1E6CB5;
+						color: #4F73A5;
 						margin-right: 50rpx;
+						font-weight: bold;
 					}
 					switch{
 						transform: scale(0.7);
@@ -327,17 +336,17 @@
 					line-height: 80rpx;
 					display: flex;
 					justify-content: space-around;
-					border: 2rpx solid @color;
-					font-size: 30rpx;
+					border: 2rpx solid #006AD7;
+					font-size: 28rpx;
 					border-radius: 26rpx;
 					padding: 0 10rpx;
 					box-sizing: border-box;
-					color: #0077AA;
+					color: #4F73A5;
 				}
 			}
 		}
 		.living-bottom{
-			margin-top: 50rpx;
+			margin-top: 80rpx;
 			.shop-around{
 				.shop-around-top{
 					width: 100%;
@@ -347,14 +356,15 @@
 						display: inline-block;
 						width: 12rpx;
 						height: 40rpx;
-						background-color: #306FB6;
+						background-color: #21277B;
 						margin-right: 20rpx;
 						border-radius: 4rpx;
 						vertical-align: text-top;
 					}
 					.shop-around-title{
 						font-size: 28rpx;
-						color: #1E6CB5;
+						color: #4F73A5;
+						font-weight: bold;
 					}
 				}
 				.auction{
@@ -364,20 +374,21 @@
 					.auction-work{
 						width: 40%;
 						.auction-work-title{
-							font-size: 28rpx;
-							color: #0077AA;
+							font-size: 26rpx;
+							color: #5F83B1;
 						}
 						.auction-work-content{
 							width: 226rpx;
 							height: 200rpx;
 							margin-top: 20rpx;
-							background-color: #C9DCF0;
 							text-align: center;
 							position: relative;
 							padding: 20rpx 10rpx;
-							font-size: 18rpx;
-							box-sizing: border-box;
+							font-size: 16rpx;
 							border-radius: 24rpx;
+							border: 4rpx solid #3742DF;
+							color: #707070;
+							box-sizing: border-box;
 							view{
 								width: 164rpx;
 								height: 100rpx;
@@ -398,13 +409,13 @@
 					.online-auction{
 						width: 60%;
 						.online-auction-title{
-							font-size: 28rpx;
-							color: #0077AA;
+							font-size: 26rpx;
+							color: #5F83B1;
 						}
 						.online-auction-content{
 							margin-top: 20rpx;
 							image{
-								width: 400rpx;
+								width: 100%;
 								height: 200rpx;
 								border-radius: 24rpx;
 							}
@@ -413,7 +424,7 @@
 				}
 			}
 			.exhibits{
-				margin-top: 40rpx;
+				margin-top: 50rpx;
 				.exhibits-top{
 					width: 100%;
 					line-height: 40rpx;
@@ -422,18 +433,19 @@
 						display: inline-block;
 						width: 12rpx;
 						height: 40rpx;
-						background-color: #306FB6;
+						background-color: #21277B;
 						margin-right: 20rpx;
 						border-radius: 4rpx;
 						vertical-align: text-top;
 					}
 					.exhibits-title{
 						font-size: 28rpx;
-						color: #1E6CB5;
+						color: #4F73A5;
+						font-weight: bold;
 					}
 				}
 				.exhibits-show{
-					margin-top: 40rpx;
+					margin-top: 60rpx;
 					width: 100%;
 					overflow: hidden;
 					.exhibits-show-body{
@@ -467,26 +479,24 @@
 							text{
 								font-size: 20rpx;
 								line-height: 40rpx;
-								color: #717175;
+								color: #707070;
 								white-space: normal;
 							}
 						}
 					}
 				}
-			
 			}
 		}
 		.purchase{
 			// 254x52	12 0 46 12
-			width: 508rpx;
+			width: 100%;
 			height: 104rpx;
 			line-height: 104rpx;
 			text-align: center;
-			border-radius: 24rpx 0 92rpx 24rpx;
-			background-color: #2275BB;
+			background-color: #006AD7;
 			color: #fff;
 			position: fixed;
-			right: -80rpx;
+			right: 0;
 			bottom: 0;
 			z-index: 2;
 		}

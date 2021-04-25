@@ -249,12 +249,16 @@
 				.course-top-center{
 					padding-left: 40rpx;
 					margin-top: 34rpx;
-					font-size: 26rpx;
+					font-size: 28rpx;
 					line-height: 44rpx;
-					color: #717175;
+					color: #707070;
+					letter-spacing: 2rpx;
+					.course-member{
+						margin-top: 18rpx;
+					}
 				}
 				.course-top-bottom{
-					margin-top: 50rpx;
+					margin-top: 80rpx;
 					.course-top-bottom-top{
 						width: 100%;
 						line-height: 40rpx;
@@ -263,21 +267,21 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 40rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: text-top;
 						}
 						.course-top-bottom-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color: #4F73A5;
 						}
 					}
 					.text-content{
 						text-indent: 2em;
 						margin-top: 30rpx;
-						font-size: 26rpx;
-						color: #717175;
+						font-size: 28rpx;
+						color: #707070;
 						line-height: 50rpx;
 					}
 				}
@@ -294,14 +298,14 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 40rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: text-top;
 						}
 						.course-center-top-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color: #4F73A5;
 						}
 					}
 					.course-center-top-bottom{
@@ -340,7 +344,7 @@
 									text{
 										font-size: 20rpx;
 										line-height: 40rpx;
-										color: #717175;
+										color: #707070;
 										white-space: normal;
 									}
 								}

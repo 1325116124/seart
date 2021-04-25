@@ -85,7 +85,7 @@
 					display: inline-block;
 					width: 12rpx;
 					height: 40rpx;
-					background-color: #306FB6;
+					background-color: #006FFF;
 					border-radius: 4rpx;
 					vertical-align: text-top;
 				}
@@ -94,15 +94,14 @@
 					justify-content: space-around;
 					width: 600rpx;
 					.circle-top-title{
-						font-size: 28rpx;
+						font-size: 32rpx;
 						transition: all 0.2s ease;
 						&:first-child{
-							margin-left: -40rpx;
+							margin-left: -20rpx;
 						}
 					}
 					.active{
-						color: #1E6CB5;
-						border-bottom: 2rpx solid #1E6CB5;
+						color: #006FFF;
 					}
 				}
 			}
@@ -144,7 +143,7 @@
 							text{
 								font-size: 20rpx;
 								line-height: 40rpx;
-								color: #717175;
+								color: #707070;
 								white-space: normal;
 							}
 						}

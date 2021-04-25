@@ -4,14 +4,14 @@
 			<view class="more-top">
 				<view class="function-title" :class="{functionTitleActive:functionIndex===1}">
 					<view class="function-block" v-for="(item,index) in functionTitle" 
-					:key="index" @click="changeIndex(index)">{{item}}</view>
+					:key="index" @click="changeIndex(index)" :class="{textActive:functionIndex===index}">{{item}}</view>
 					<view class="assistant" :class="{assistantActive1:functionIndex===0,
 					assistantActive3:functionIndex===2}"></view><!-- 该盒子仅仅作为背景填充辅助作用 -->
 					<view class="assistant-bottom" :class="{assistantBottomActive1:functionIndex===0,
 					assistantBottomActive2:functionIndex===1,assistantBottomActive3:functionIndex===2}"></view>
 				</view>
 			</view>
-			<view class="more-center1" v-if="functionIndex===0">
+			<view class="more-center1" v-if="functionIndex===0||functionIndex===1">
 				<text class="block"></text>
 				<view class="title">
 					<view v-for="(item,index) in titles" class="more-center-title" 
@@ -30,7 +30,7 @@
 					<!-- wander里面的组件 -->
 					<scroll-view scroll-x="true" class="more-exhibits">
 						<view class="more-exhibits-item">
-							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+							<image src="http://47.112.188.99/images/1.png" mode="aspectFill"></image>
 						</view>
 						<view class="more-exhibits-item">
 							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
@@ -50,14 +50,6 @@
 							<image :src="item.albumImage" mode="aspectFill"></image>
 							<view class="description">{{item.albumDescription}}</view>
 						</view>
-						<!-- <view class="more-exhibits-item">
-							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							<view class="description">如何理解艺术之美</view>
-						</view>
-						<view class="more-exhibits-item">
-							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							<view class="description">古籍收藏</view>
-						</view> -->
 					</scroll-view>
 				</view>
 				<view class="more-center2-bottom">
@@ -154,7 +146,7 @@
 			return {
 				functionTitle:["展览","沙龙","live专区"],
 				functionIndex:0,
-				titles:["live","待开始","已结束"],
+				titles:["live","待开始","已结束","all"],
 				currentIndex:0,
 				//专辑区域
 				albumArea:[
@@ -209,7 +201,7 @@
 </script>
 
 <style lang="less">
-	@color:#1E6CB5;
+	@color:#4F73A5;
 	.more{
 		.more-body{
 			width: 700rpx;
@@ -232,11 +224,16 @@
 						border-radius: 24rpx;
 						font-size: 28rpx;
 						color: #52739D;
+						transition: background-color 0.5s ease;
 						// background-color: #D5E3EF;
 					}
 					.assistant{
 						position: absolute;
-						transition: all 0.5s ease;
+						width: 0;
+						right: 0;
+						top: 0;
+						transition: all 0.1s ease;
+						animation: fadeInOut 1s;
 					}
 					.assistant-bottom{
 						position: absolute;
@@ -251,21 +248,22 @@
 						border-radius: 24rpx;
 						background-color: #D5E3EF;
 						z-index: -1;
+						
 					}
 					.assistantBottomActive1{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						left: 0;
 					}
 					// 第二种情况
 					.assistantBottomActive2{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						left: center;
 						
@@ -282,13 +280,14 @@
 					}
 					.assistantBottomActive3{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						right: 0;
 					}
 				}
+				
 				//第二种情况的两侧
 				.functionTitleActive{
 					.function-block{
@@ -299,6 +298,11 @@
 							background-color: #D5E3EF;
 						}
 					}
+				}
+				//文字效果
+				.textActive{
+					color: #0069D6;
+					font-weight: 700;
 				}
 				// ---------------------
 				.exhibits{
@@ -336,24 +340,25 @@
 			}
 			//当索引为0时出现的样式
 			.more-center1{
-				margin-top: 60rpx;
+				margin-top: 40rpx;
 				width: 100%;
 				line-height: 40rpx;
 				height: 40rpx;
 				display: flex;
-				justify-content: flex-start;
+				justify-content: space-between;
 				.block{
 					display: inline-block;
 					width: 12rpx;
 					height: 40rpx;
-					background-color: #306FB6;
+					background-color: #21277B;
 					border-radius: 4rpx;
 					vertical-align: text-top;
 				}
 				.title{
 					display: flex;
-					justify-content: space-around;
+					justify-content: space-between;
 					width: 600rpx;
+					color: #4F73A5;
 					.more-center-title{
 						font-size: 28rpx;
 						transition: all 0.5s ease;
@@ -362,11 +367,11 @@
 						}
 					}
 					.active{
-						font-size: 26rpx;
-						color: #427FC1;
+						color: #006AD7;
 					}
 				}
 			}
+			
 			//当索引为2时出现的样式
 			.more-center2{
 				.more-center2-top{
@@ -379,14 +384,14 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 40rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: text-top;
 						}
 						.center2-top-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color: #4E73A4;
 						}
 					}
 					.more-exhibits{
@@ -425,14 +430,14 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 40rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: text-top;
 						}
 						.center2-center-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color:  #4E73A4;
 						}
 					}
 					.more-exhibits{
@@ -460,8 +465,8 @@
 							}
 							.description{
 								text-align: center;
-								font-size: 26rpx;
-								color: #97989D;
+								font-size: 24rpx;
+								color: #006AD7;
 							}
 						}
 					}
@@ -475,18 +480,19 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 40rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: text-top;
 						}
 						.center2-bottom-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color:  #4E73A4;
 						}
 					}
 				}
 			}
+			
 			.more-bottom{
 				padding-top: 30rpx;
 				.more-bottom-body{
@@ -497,7 +503,7 @@
 						margin-top: 80rpx;
 						width: 100%;
 						height: 326rpx;
-						background-color: #D3DDE6;
+						background-color: #E5ECF5;
 						border-radius: 24rpx;
 						display: flex;
 						justify-content: space-around;
@@ -505,6 +511,8 @@
 						padding: 30rpx 0;
 						box-sizing: border-box;
 						.item-left{
+							width: 260rpx;
+							height: 332rpx;
 							.item-image{
 								// 115x170
 								position: absolute;
@@ -517,32 +525,34 @@
 							}
 						}
 						.item-right{
-							margin-left: 200rpx;
+							margin-left: -100rpx;
 							.item-right-title{
-								font-size: 32rpx;
+								font-size: 30rpx;
 								color: @color;
 								line-height: 60rpx;
 							}
 							.item-right-des{
-								font-size: 20rpx;
+								font-size: 16rpx;
 								line-height: 60rpx;
-								color: #888;
+								color: #8C8C8E;
 							}
 							.item-tabs{
 								margin-top: 30rpx;
 								display: flex;
-								justify-content: space-around;
+								justify-content: space-between;
+								width: 310rpx;
+								height: 36rpx;
 								.tab{
 									// 38x18（单个）
 									// 左右间隔13	5
 									width: 80rpx;
 									height: 36rpx;
-									margin-left: 22rpx;
+									line-height: 36rpx;	
 									border-radius: 10rpx;
-									font-size: 24rpx;
-									border: 2rpx solid @color;
+									font-size: 18rpx;
+									border: 1rpx solid #4E72A5;
 									text-align: center;
-									color: #888;
+									color: #4E72A5;
 								}
 							}
 						}
@@ -551,6 +561,7 @@
 							bottom: 30rpx;
 							right: 50rpx;
 							font-size: 24rpx;
+							color: #4E72A5;
 							.iconfont{
 								margin-left: 15rpx;
 							}
@@ -558,6 +569,7 @@
 					}
 				}
 			}
+		
 		}
 	}
 </style>

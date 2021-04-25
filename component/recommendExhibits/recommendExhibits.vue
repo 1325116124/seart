@@ -14,7 +14,7 @@
 				<view class="recommend-exhibits-items">
 					<view class="recommend-exhibits-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/broadcast.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -32,7 +32,7 @@
 					</view>
 					<view class="recommend-exhibits-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/result-bazzar1.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -50,7 +50,7 @@
 					</view>
 					<view class="recommend-exhibits-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/result-bazzar2.jpg" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>
@@ -68,7 +68,7 @@
 					</view>
 					<view class="recommend-exhibits-item">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/result-bazzar3.png" mode="aspectFill"></image>
+							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">毕加索，麻胶版画展</view>

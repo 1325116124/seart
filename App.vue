@@ -2,6 +2,13 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			//实现remove的方法
+			Array.prototype.remove = function(val) {
+			var index = this.indexOf(val);
+			if (index > -1) {
+			this.splice(index, 1);
+			}
+			};
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -14,6 +21,11 @@
 
 <style>
 	html,page,#app {height: 100%;}
+	::-webkit-scrollbar{
+	
+	  display: none;
+	
+	}
 	/*每个页面公共css */
 	@font-face {font-family: "iconfont";
 	  src: url('~@/static/font/iconfont.eot?t=1618244634245'); /* IE9 */

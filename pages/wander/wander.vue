@@ -2,22 +2,28 @@
 	<view class="wander">
 		<view class="wander-body">
 			<view class="wander-top">
-				<view class="search">
+				<!-- 搜索框模块 -->
+				<view class="search" >
 					<text class="iconfont icon-fangdajing" @click='toSearch'></text>
+					<!-- 按照设计图来看，搜索点击之后没有动态样式 -->
 					<input type="text" placeholder-class="Search" placeholder="Discover" 
-					@focus="changeInputClass" :class="{inputActive:isInputActive}" @blur="removeInputClass">
+					@focus="changeInputClass" @blur="removeInputClass" @click='toSearch' disabled="true">
 					<view class="location">
 						<text class="iconfont icon-icon-test"></text>
 						<text>广州</text>
 					</view>
 				</view>
+				<!-- ------------------------------------------------ -->
+				
+				<!-- 轮播图模块 -->
 				<view class="container">
-					<swiper :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" :current="swiperCurrent" @change="changeSwiper">
-						<swiper-item v-for="(item,index) in swiperImg" :key='index'>
+					<swiper :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" 
+					:current="swiperCurrent" @change="changeSwiper">
+						<swiper-item v-for="(item,index) in swiperImg" :key='index' @click="toLiving">
 							<view class="swiper-item">
 								<image :src="item" mode="aspectFill"></image>
-								<view class="description">欧初捐赠文物纪念展"分为“诸家合璧”<br>
-								“历代陶瓷”、“文房用品”和“青铜器”四个篇章</view>
+								<view class="description">欧初捐赠文物纪念展"分为“诸家合璧”“历代陶瓷”、“文房
+								<br>用品”和“青铜器”四个篇章。欧初先生希望能但求天下暖......</view>
 							</view>
 						</swiper-item>
 					</swiper>
@@ -27,41 +33,55 @@
 						</block>
 					</view>
 				</view>
+				<!-- ------------------------------------------------------- -->
 			</view>
-			<view class="wander-center">
+			<view class="wander-center" >
 				<view class="function-title" :class="{functionTitleActive:functionIndex===1}">
 					<view class="function-block" v-for="(item,index) in functionTitle" 
-					:key="index" @click="changeIndex(index)">{{item}}</view>
+					:key="index" @click="changeIndex(index)" :class="{textActive:functionIndex===index}">{{item}}</view>
 					<view class="assistant" :class="{assistantActive1:functionIndex===0,
 					assistantActive3:functionIndex===2}"></view><!-- 该盒子仅仅作为背景填充辅助作用 -->
 					<view class="assistant-bottom" :class="{assistantBottomActive1:functionIndex===0,
 					assistantBottomActive2:functionIndex===1,assistantBottomActive3:functionIndex===2}"></view>
 				</view>
-				<scroll-view scroll-x="true" class="exhibits">
-					<view class="exhibits-item">
-						<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						<view class="live-state">live</view>
-					</view>
-					<view class="exhibits-item">
-						<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						<view class="live-state">live</view>
-					</view>
-					<view class="exhibits-item">
-						<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						<view class="live-state">live</view>
-					</view>
-				</scroll-view>
+				
+				<!-- 用v-show来切换不同tab的内容 -->
+				<view v-show="functionIndex===0">
+					<scroll-view scroll-x="true" class="exhibits" @click="toLiving()">
+						<view class="exhibits-item" v-for="(item,index) in exhibitionsImg" :key="index">
+							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+						</view>
+					</scroll-view>
+				</view>
+				<view v-show="functionIndex===1">
+					<scroll-view scroll-x="true" class="exhibits" @click="toSalon">
+						<view class="exhibits-item" v-for="(item,index) in salonsImg" :key="index">
+							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+						</view>
+					</scroll-view>
+				</view>
+				<view v-show="functionIndex===2">
+					<scroll-view scroll-x="true" class="exhibits" @click="toCourse">
+						<view class="exhibits-item" v-for="(item,index) in livesImg" :key="index">
+							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+						</view>
+					</scroll-view>
+				</view>
+
+				<!-- ---------------------------------------- -->
 				<view class="more" @click="toMore">more ></view>
 			</view>
 			<view class="wander-bottom">
 				<!-- 复用living组件 -->
 				<view class="exhibits-around-top">
-					<txet class="block"></txet>
-					<text class="exhibits-around-title">周围的展</text>
+					<text class="block"></text>
+					<text class="exhibits-around-title" v-show="functionIndex===0||functionIndex===2">周 围 的 展</text>
+					<text class="exhibits-around-title" v-show="functionIndex===1">热 门 沙 龙</text>
 				</view>
+				<!-- 展览的展示 -->
 				<view class="exhibits-around">
 					<view class="exhibits-around-body">
-						<view class="exhibits-around-item">
+						<view class="exhibits-around-item" @click="toClassify()">
 							<view class="item-left">
 								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 							</view>
@@ -76,61 +96,7 @@
 							</view>
 							<view class="location">
 								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
-						<view class="exhibits-around-item">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
-						<view class="exhibits-around-item">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
-						<view class="exhibits-around-item">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
+								<text class="distance">距1.5km</text>
 							</view>
 						</view>
 					</view>
@@ -146,10 +112,25 @@
 			return {
 				isInputActive:false,//判断输入框是否focus
 				swiperImg: [
-					'../../static/images/wander-exhibits1.jpg',					
-					'../../static/images/wander-exhibits1.jpg',
-					'../../static/images/wander-exhibits1.jpg',
-					'../../static/images/wander-exhibits1.jpg'
+					'http://47.112.188.99/images/shuffling.jpg',					
+					'http://47.112.188.99/images/shuffling.jpg',
+					'http://47.112.188.99/images/shuffling.jpg',
+					'http://47.112.188.99/images/shuffling.jpg'
+				],
+				exhibitionsImg:[
+					'http://47.112.188.99/images/exhibition-1.jpg',
+					'http://47.112.188.99/images/exhibition-2.jpg',
+					'http://47.112.188.99/images/exhibition-3.jpg'
+				],
+				salonsImg:[
+					'http://47.112.188.99/images/salons-1.jpg',
+					'http://47.112.188.99/images/salons-2.jpg',
+					'http://47.112.188.99/images/salons-3.jpg'
+				],
+				livesImg:[
+					'http://47.112.188.99/images/lives-1.jpg',
+					'http://47.112.188.99/images/lives-2.jpg',
+					'http://47.112.188.99/images/lives-3.jpg',
 				],
 				swiperCurrent:0,
 				functionTitle:["展览","沙龙","live专区"],
@@ -171,20 +152,75 @@
 					url:'../wander-discover/wander-discover'
 				})
 			},
+			//切换tab选项卡的标题
 			changeIndex(index){
 				this.functionIndex=index;
 			},
 			toMore(){
 				uni.navigateTo({
-					url:"../more/more"
+					url:"../more/more",
+					animationType:"fade-in",
+					animationDuration:1000
 				})
+			},
+			//轮播图的点击跳转
+			toLiving(){
+				uni.navigateTo({
+					url:"../living/living"
+				})
+			},
+			toClassify(){
+				if(this.functionIndex===0){
+					uni.navigateTo({
+						url:"../living/living"
+					})
+				}else if(this.functionIndex===1){
+					uni.navigateTo({
+						url:"../artSalon/artSalon"
+					})
+				}else{
+					uni.navigateTo({
+						url:"../course-template/course-template"
+					})
+				}
+			},
+			toSalon(){
+				uni.navigateTo({
+					url:"../artSalon/artSalon"
+				})
+			},
+			toCourse(){
+				uni.navigateTo({
+					url:"../course-template/course-template"
+				})
+			},
+			//获取展览的请求
+			async getExhibitions(){
+				const res = await this.$myRequest({
+					url:"/exhibitions",
+				})
+				console.log(res)
 			}
+		},
+		onLoad() {
+			this.getExhibitions();
 		}
 	}
 </script>
 
 <style lang="less">
-	@color:#1E6CB5;
+	@color:#4F73A5;
+	@keyframes fadeInOut{
+		0%{
+			opacity: 1;
+		}
+		50%{
+			opacity: 0.5;
+		}
+		100%{
+			opacity: 1;
+		}
+	}
 	.wander{
 		.wander-body{
 			width: 700rpx;
@@ -224,12 +260,13 @@
 					.location{
 						text{
 							&:nth-child(2){
-								color: @color;
+								color: #649DD4;
 							}
 						}
 					}
 				}
 				.container{
+					margin-top: 30rpx;
 					width: 100%;
 					.swiper{
 						position: relative;
@@ -238,27 +275,45 @@
 						height: 400rpx;
 						border-radius: 24rpx;
 						overflow: hidden;
+						margin: 0 auto;
 						swiper-item{
-							margin-right: 100rpx;
-							text-align: center;
+							border-radius: 24rpx;
+							background-color: #DEDDDA;
 							.swiper-item{
+								text-align: center;
 								image{
-									width: 90%;
+									width: 100%;
 									height: 280rpx;
 									border-radius: 24rpx;
 								}
 								.description{
-									text-align: center;
-									width: 90%;
-									height: 100rpx;
-									line-height: 50rpx;
-									background-color: #DEDDDA;
-									border-radius: 24rpx;
-									margin: 0 auto;
 									font-size: 24rpx;
+									line-height: 50rpx;
 								}
 							}
 						}
+						// swiper-item{
+						// 	margin-right: 100rpx;
+						// 	text-align: center;
+						// 	.swiper-item{
+						// 		background-color: #DEDDDA;
+						// 		image{
+						// 			width: 90%;
+						// 			height: 280rpx;
+						// 			border-radius: 24rpx;
+						// 		}
+						// 		.description{
+						// 			text-align: center;
+						// 			width: 90%;
+						// 			height: 100rpx;
+						// 			line-height: 50rpx;
+						// 			background-color: #DEDDDA;
+						// 			border-radius: 24rpx;
+						// 			margin: 0 auto;
+						// 			font-size: 24rpx;
+						// 		}
+						// 	}
+						// }
 					}
 					.swiper-dots{
 						width: 100%;
@@ -282,8 +337,10 @@
 				}
 			}
 			.wander-center{
+				margin-top: 40rpx;
 				width: 100%;
 				position: relative;
+				transition: all 0.5s ease;
 				.function-title{
 					display: flex;
 					justify-content: space-around;
@@ -298,11 +355,16 @@
 						border-radius: 24rpx;
 						font-size: 28rpx;
 						color: #52739D;
+						transition: background-color 0.5s ease;
 						// background-color: #D5E3EF;
 					}
 					.assistant{
 						position: absolute;
-						transition: all 0.5s ease;
+						width: 0;
+						right: 0;
+						top: 0;
+						transition: all 0.1s ease;
+						animation: fadeInOut 1s;
 					}
 					.assistant-bottom{
 						position: absolute;
@@ -317,21 +379,22 @@
 						border-radius: 24rpx;
 						background-color: #D5E3EF;
 						z-index: -1;
+						
 					}
 					.assistantBottomActive1{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						left: 0;
 					}
 					// 第二种情况
 					.assistantBottomActive2{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						left: center;
 						
@@ -348,13 +411,14 @@
 					}
 					.assistantBottomActive3{
 						width: 33%;
-						height: 10rpx;
+						height: 14rpx;
 						border-radius: 10rpx;
-						background-color: #D5E3EF;
+						background-color: #0069D6;
 						bottom: 0;
 						right: 0;
 					}
 				}
+				
 				//第二种情况的两侧
 				.functionTitleActive{
 					.function-block{
@@ -365,6 +429,11 @@
 							background-color: #D5E3EF;
 						}
 					}
+				}
+				//文字效果
+				.textActive{
+					color: #0069D6;
+					font-weight: 700;
 				}
 				// ---------------------
 				.exhibits{
@@ -390,19 +459,6 @@
 						&:first-child{
 							margin-left: 10rpx;
 						}
-						.live-state{
-							position: absolute;
-							top: 10rpx;
-							left: 10rpx;
-							width: 60rpx;
-							height: 34rpx;
-							line-height: 34rpx;
-							font-size: 20rpx;
-							color: #fff;
-							background-color: #B1C0CA;
-							text-align: center;
-							border-radius: 20rpx;
-						}
 					}
 				}
 				.more{
@@ -415,7 +471,7 @@
 			}
 			
 			.wander-bottom{
-				margin-top: 30rpx;
+				margin-top: 50rpx;
 				.exhibits-around-top{
 					width: 100%;
 					line-height: 40rpx;
@@ -436,6 +492,7 @@
 					}
 				}
 				.exhibits-around{
+					margin-bottom: 500rpx;
 					.exhibits-around-body{
 						width: 100%;
 						margin-bottom: 500rpx;//预留位置
@@ -444,7 +501,7 @@
 							margin-top: 80rpx;
 							width: 100%;
 							height: 326rpx;
-							background-color: #D3DDE6;
+							background-color: #E5ECF5;
 							border-radius: 24rpx;
 							display: flex;
 							justify-content: space-around;
@@ -452,6 +509,8 @@
 							padding: 30rpx 0;
 							box-sizing: border-box;
 							.item-left{
+								width: 260rpx;
+								height: 332rpx;
 								.item-image{
 									// 115x170
 									position: absolute;
@@ -464,32 +523,34 @@
 								}
 							}
 							.item-right{
-								margin-left: 200rpx;
+								margin-left: -100rpx;
 								.item-right-title{
-									font-size: 32rpx;
+									font-size: 30rpx;
 									color: @color;
 									line-height: 60rpx;
 								}
 								.item-right-des{
-									font-size: 20rpx;
+									font-size: 16rpx;
 									line-height: 60rpx;
-									color: #888;
+									color: #8C8C8E;
 								}
 								.item-tabs{
 									margin-top: 30rpx;
 									display: flex;
-									justify-content: space-around;
+									justify-content: space-between;
+									width: 310rpx;
+									height: 36rpx;
 									.tab{
 										// 38x18（单个）
 										// 左右间隔13	5
 										width: 80rpx;
 										height: 36rpx;
-										margin-left: 22rpx;
+										line-height: 36rpx;	
 										border-radius: 10rpx;
-										font-size: 24rpx;
-										border: 2rpx solid @color;
+										font-size: 18rpx;
+										border: 1rpx solid #4E72A5;
 										text-align: center;
-										color: #888;
+										color: #4E72A5;
 									}
 								}
 							}
@@ -498,6 +559,7 @@
 								bottom: 30rpx;
 								right: 50rpx;
 								font-size: 24rpx;
+								color: #4E72A5;
 								.iconfont{
 									margin-left: 15rpx;
 								}
@@ -505,6 +567,7 @@
 						}
 					}
 				}
+			
 			}
 		}
 	}

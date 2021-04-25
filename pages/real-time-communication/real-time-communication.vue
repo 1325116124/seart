@@ -5,7 +5,7 @@
 				<image class="living" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
 				<view class="icons">
 					<view class="icon">
-						<view class="iconfont icon-liaotian" @click="communicate"></view>
+						<view class="iconfont icon-liaotian" @click="toCommunicate"></view>
 						<text>52</text>
 					</view>
 					<view class="icon">
@@ -31,12 +31,13 @@
 					<text class="description-content">虾忌与某些水果同吃。虾合有比较丰富的蛋白质和钙等营养物质</text>
 				</view>
 			</view>
-			<view class="communication-bottom">
+			<!-- 原评论框暂时去掉 -->
+			<!-- <view class="communication-bottom">
 				<view class="comment">
 					<input type="text" class="comment-input" placeholder="      · · ·" :cursor="cursor" @focus="setCursor">
 					<view class="iconfont icon-send"></view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -57,7 +58,7 @@
 				this.cursor=-5;
 				console.log(111)
 			},
-			communicate(){
+			toCommunicate(){
 				uni.navigateTo({
 					url:'../communication-circle/communication-circle'
 				});
@@ -99,7 +100,7 @@
 						}
 						&:nth-child(3){
 							.iconfont{
-								color: #f00;
+								color: #4F73A5;
 								font-size: 36rpx;
 							}
 						}
@@ -124,20 +125,20 @@
 							display: inline-block;
 							width: 12rpx;
 							height: 30rpx;
-							background-color: #306FB6;
+							background-color: #21277B;
 							margin-right: 20rpx;
 							border-radius: 4rpx;
 							vertical-align: middle;
 						}
 						.description-title{
 							font-size: 28rpx;
-							color: #1E6CB5;
+							color: #4F73A5;
 						}
 						margin-bottom: 30rpx;
 					}
 					.description-content{
 						font-size: 28rpx;
-						color: #888;
+						color: #707070;
 					}
 				}
 			}
