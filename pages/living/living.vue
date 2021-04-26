@@ -2,37 +2,36 @@
 	<view class="living">
 		<view class="living-main">
 			<view class="living-top">
-				<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-				<view class="enter-living" @click="toBroadcast">进入直播</view>
+				<image :src="exhibitionDetail.introImage" mode="aspectFill"></image>
+				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===1||exhibitionDetail.status===0">进入直播</view>
+				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===2">进入回放</view>
 				<view class="icons">
 					<view class="icon">
 						<view class="iconfont icon-shoucang"></view>
-						<text>52</text>
+						<text>{{exhibitionDetail.favours}}</text>
 					</view>
 					<view class="icon">
 						<view class="iconfont icon-shizhong"></view>
-						<text>52</text>
+						<text>{{exhibitionDetail.participants}}</text>
 					</view>
 					<view class="icon">
 						<view class="iconfont icon-fenxiang"></view>
-						<text>52</text>
+						<text>{{exhibitionDetail.shares}}</text>
 					</view>
 				</view>
 			</view>
 			<view class="living-center">
-				<view class="text-title">&#65378;盛开在广州的花&#65379;</view>
+				<view class="text-title">&#65378;{{exhibitionDetail.name}}&#65379;</view>
 				<view class="tabs">
-					<text class="tab">颜色丰富</text>
-					<text class="tab">草间弥生</text>
-					<text class="tab">橘色</text>
+					<text class="tab" v-for="(item,index) in exhibitionDetail.tags" :key="index">{{item}}</text>
 				</view>
-				<view class="text-content">虾忌与某些水果同吃。虾合有比较丰富的蛋白质和钙等营养物质，如果把它们与含有鞣酸的水果，如葡萄、石榴、山楂、柿子等同食，不仅会降低蛋白质的营养价值，而且鞣酸和钙酸结合形成鞣酸钙后会刺激肠胃。</view>
+				<view class="text-content">{{exhibitionDetail.introduction}}</view>
 				<view class="map-block">
 					<view class="map-top">
 						<txet class="block"></txet>
 						<text class="map-title">地图导航</text>
 					</view>
-					<map class="map" :enable-scroll='false' :longitude="longitude" :latitude="latitude" :scale="scale"></map>
+					<map class="map" :enable-scroll='false' :longitude="exhibitionDetail.longitude" :latitude="exhibitionDetail.latitude" :scale="scale" :markers="markers"></map>
 				</view>
 				<view class="remind">
 					<view class="remind-top">
@@ -75,78 +74,22 @@
 						<text class="block"></text>
 						<text class="exhibits-title">相关展品</text>
 					</view>
-					<scroll-view class="exhibits-show" scroll-x="true">
+					<scroll-view class="exhibits-show" scroll-x="true" v-for="(item,index) in exhibits" :key="item.id">
+						<view class="exhibits-show-body">
+							<view class="exhibits-item" v-for="(value,index2) in item.images" :key="index2">
+								<view><image :src="value" mode="aspectFill"></image></view>
+								<text>{{item.introduction}}</text>
+							</view>
+						</view>
+					</scroll-view>
+					<!-- <scroll-view class="exhibits-show" scroll-x="true">
 						<view class="exhibits-show-body">
 							<view class="exhibits-item">
 								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
 								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
 							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
 						</view>
-					</scroll-view>
-					<scroll-view class="exhibits-show" scroll-x="true">
-						<view class="exhibits-show-body">
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-						</view>
-					</scroll-view>
+					</scroll-view> -->
 				</view>
 			</view>
 			<view class="purchase">购买门票</view>
@@ -158,17 +101,21 @@
 	export default {
 		data() {
 			return {
-				longitude:113.411806,
-				latitude:23.053945,
+				//存放点击跳转过来的展览的id
+				id:0,
+				//存放保存的展览信息
+				exhibitionDetail:{},
+				//存放相关的展品信息
+				exhibits:{},
 				scale:13,
 				markers:[
 					{
-						longitude:113.411806,
-						latitude:23.053945,
 						iconPath:'../../static/icon/location-map.png',
 						width: 30,
 						height: 30,
-						alpha:0.3
+						alpha:0.3,
+						longitude:0,
+						latitude:0
 					}
 				]
 			}
@@ -178,7 +125,26 @@
 				uni.navigateTo({
 					url:"../real-time-communication/real-time-communication"
 				})
+			},
+			async getExhibitionDetail(){
+				const res = await this.$myRequest({
+					url:"/exhibition/"+this.id
+				})
+				this.exhibitionDetail=res.data.data;
+				this.markers[0].longitude=this.exhibitionDetail.longitude;
+				this.markers[0].latitude=this.exhibitionDetail.latitude;
+			},
+			async getNearbyExhibitions(){
+				const res = await this.$myRequest({
+					url:"/exhibition/"+this.id+"/exhibits"
+				})
+				this.exhibits=res.data.data;
 			}
+		},
+		onLoad(options) {
+			this.id=options.id
+			this.getExhibitionDetail()
+			this.getNearbyExhibitions()
 		}
 	}
 </script>

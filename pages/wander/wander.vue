@@ -47,16 +47,16 @@
 				
 				<!-- 用v-show来切换不同tab的内容 -->
 				<view v-show="functionIndex===0">
-					<scroll-view scroll-x="true" class="exhibits" @click="toLiving()">
-						<view class="exhibits-item" v-for="(item,index) in exhibitionsImg" :key="index">
-							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+					<scroll-view scroll-x="true" class="exhibits">
+						<view class="exhibits-item" v-for="(item,index) in exhibitions" :key="item.id"  @click="toLiving(item.id)">
+							<image :src="item.introImage" mode="aspectFill" lazy-load="true"></image>
 						</view>
 					</scroll-view>
 				</view>
 				<view v-show="functionIndex===1">
-					<scroll-view scroll-x="true" class="exhibits" @click="toSalon">
-						<view class="exhibits-item" v-for="(item,index) in salonsImg" :key="index">
-							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+					<scroll-view scroll-x="true" class="exhibits">
+						<view class="exhibits-item" v-for="(item,index) in salons" :key="item.id"  @click="toSalon(item.id)">
+							<image :src="item.introImage" mode="aspectFill" lazy-load="true"></image>
 						</view>
 					</scroll-view>
 				</view>
@@ -117,11 +117,13 @@
 					'http://47.112.188.99/images/shuffling.jpg',
 					'http://47.112.188.99/images/shuffling.jpg'
 				],
-				exhibitionsImg:[
-					'http://47.112.188.99/images/exhibition-1.jpg',
-					'http://47.112.188.99/images/exhibition-2.jpg',
-					'http://47.112.188.99/images/exhibition-3.jpg'
-				],
+				exhibitions:[],
+				salons:[],//沙龙的信息
+				// exhibitionsImg:[
+				// 	'http://47.112.188.99/images/exhibition-1.jpg',
+				// 	'http://47.112.188.99/images/exhibition-2.jpg',
+				// 	'http://47.112.188.99/images/exhibition-3.jpg'
+				// ],
 				salonsImg:[
 					'http://47.112.188.99/images/salons-1.jpg',
 					'http://47.112.188.99/images/salons-2.jpg',
@@ -164,9 +166,9 @@
 				})
 			},
 			//轮播图的点击跳转
-			toLiving(){
+			toLiving(id){
 				uni.navigateTo({
-					url:"../living/living"
+					url:"../living/living?id="+id
 				})
 			},
 			toClassify(){
@@ -184,9 +186,9 @@
 					})
 				}
 			},
-			toSalon(){
+			toSalon(id){
 				uni.navigateTo({
-					url:"../artSalon/artSalon"
+					url:"../artSalon/artSalon?id="+id
 				})
 			},
 			toCourse(){
@@ -199,11 +201,18 @@
 				const res = await this.$myRequest({
 					url:"/exhibitions",
 				})
-				console.log(res)
-			}
+				this.exhibitions=res.data.data.list;
+			},
+			async getSalons(){
+				const res = await this.$myRequest({
+					url:"/salons",
+				})
+				this.salons=res.data.data.list;
+			},
 		},
 		onLoad() {
 			this.getExhibitions();
+			this.getSalons();
 		}
 	}
 </script>

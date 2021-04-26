@@ -43,9 +43,9 @@
 					</view>
 				</view>
 				<view class="result-items" v-if="functionIndex===0">
-					<view class="result-item">
-						<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						<view class="des">欧初捐赠文物纪念展”分为“诸家</view>
+					<view class="result-item" v-for="(item,index) in currentExhibitons" :key="item.id">
+						<image :src="item.introImage" mode="aspectFill"></image>
+						<view class="des">{{item.name}}</view>
 						<view class="tag">展览</view>
 					</view>
 				</view>
@@ -200,7 +200,12 @@
 						albumImage:'../../static/images/wander-exhibits1.jpg',
 						albumDescription:'古籍收藏'
 					}
-				]
+				],
+				exhibitionsDetail:[],
+				exhibitionsLiving:[],//正在直播的
+				exhibitionsOver:[],//已经结束的
+				exhibitionsBefore:[],//还没开始的
+				currentExhibitons:[]//用来渲染的
 			}
 		},
 		components:{
@@ -209,7 +214,15 @@
 		methods: {
 			getIndex(index){
 				this.currentIndex=index;
-				
+				if(index===0){
+					this.currentExhibitons = this.exhibitionsBefore
+				}else if(index===1){
+					this.currentExhibitons = this.exhibitionsLiving
+				}else if(index===2){
+					this.currentExhibitons = this.exhibitionsOver
+				}else {
+					this.currentExhibitons=this.exhibitionsDetail
+				}
 			},
 			changeRecommend(index){
 				this.recommendIndex=index;
@@ -220,6 +233,21 @@
 			},
 			delSelectedWord(item,index){
 				this.isSelectedArraySum.remove(item,index);
+			},
+			async getExhibitions(){
+				const res = await this.$myRequest({
+					url:"/exhibitions"
+				})
+				this.exhibitionsDetail=res.data.data.list;
+				this.exhibitionsDetail.forEach((item,index) => {
+					if(item.status===0){
+						this.exhibitionsBefore.push(item)
+					}else if(item.status===1){
+						this.exhibitionsLiving.push(item)
+					}else if(item.status===2){
+						this.exhibitionsOver.push(item);
+					}
+				})
 			}
 		},
 		onLoad(){
@@ -227,6 +255,7 @@
 			 eventChannel.on('acceptDataFromOpenerPage', data => {
 				 this.isSelectedArraySum=data.isSelectedArraySum
 			 })
+			 this.getExhibitions();
 		}
 	}
 </script>

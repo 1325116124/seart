@@ -3,19 +3,19 @@
 		<view class="course-body">
 			<view class="course-top">
 				<view class="course-top-top">
-					<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+					<image :src="salon.introImage" mode="aspectFill"></image>
 					<view class="icons">
 						<view class="icon">
 							<view class="iconfont icon-shoucang"></view>
-							<text>52</text>
+							<text>{{salon.favours}}</text>
 						</view>
 						<view class="icon">
 							<view class="iconfont icon-shizhong"></view>
-							<text>52</text>
+							<text>{{salon.participants}}</text>
 						</view>
 						<view class="icon">
 							<view class="iconfont icon-fenxiang"></view>
-							<text>52</text>
+							<text>{{salon.shares}}</text>
 						</view>
 					</view>
 				</view>
@@ -26,9 +26,9 @@
 				<view class="course-top-bottom">
 					<view class="course-top-bottom-top">
 						<txet class="block"></txet>
-						<text class="course-top-bottom-title">课程介绍</text>
+						<text class="course-top-bottom-title">沙龙介绍</text>
 					</view>
-					<view class="text-content">虾忌与某些水果同吃。虾合有比较丰富的蛋白质和钙等营养物质，如果把它们与含有鞣酸的水果，如葡萄、石榴、山楂、柿子等同食，不仅会降低蛋白质的营养价值，而且鞣酸和钙酸结合形成鞣酸钙后会刺激肠胃。</view>
+					<view class="text-content">{{salon.introduction}}</view>
 				</view>
 			</view>
 			<view class="course-center">
@@ -40,62 +40,14 @@
 					<view class="course-center-top-bottom">
 						<scroll-view class="team-show" scroll-x="true">
 							<view class="team-show-body">
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
+								<view class="team-item" v-for="(item,index) in salon.membersPortrait" :key="index">
+									<view><image :src="item" mode="aspectFill"></image></view>
+									<text>{{salon.membersIntro[index]}}</text>
 								</view>
 							</view>
 						</scroll-view>
 					</view>
 				</view>
-				<!-- <view class="course-center-bottom">
-					<view class=".course-center-bottom-top">
-						<txet class="block"></txet>
-						<text class="course-center-bottom-title">课程内容</text>
-					</view>
-					<view class="course-center-bottom-bottom">
-						<view class="question-item">
-							<view class="question">
-								<text class="question-index">01</text>
-								<text class="question-title">什么是艺术？</text>
-							</view>
-							<view class="answer-time">2020年7月5日 14:00:00</view>
-						</view>
-						<view class="question-item">
-							<view class="question">
-								<text class="question-index">02</text>
-								<text class="question-title">艺术的思辨思维</text>
-							</view>
-							<view class="answer-time">2020年7月5日 14:00:00</view>
-						</view>
-						<view class="question-item">
-							<view class="question">
-								<text class="question-index">03</text>
-								<text class="question-title">艺术中的理想状态</text>
-							</view>
-							<view class="answer-time">2020年7月5日 14:00:00</view>
-						</view>
-						<view class="question-item">
-							<view class="question">
-								<text class="question-index">04</text>
-								<text class="question-title">生活中国的艺术品</text>
-							</view>
-							<view class="answer-time">2020年7月5日 14:00:00</view>
-						</view>
-					</view>
-				</view> -->
 			</view>
 			<view class="course-bottom">
 				<view class="comment">
@@ -106,51 +58,6 @@
 					</view>
 					<scroll-view scroll-x="true" class="comment-area">
 						<view class="comment-body">
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
 							<view class="comment-item">
 								<view class="user-info">
 									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
@@ -191,11 +98,22 @@
 	export default {
 		data() {
 			return {
-				
+				id:0,
+				salon:{}
 			}
 		},
 		methods: {
-			
+			async getSalonDetail(){
+				const res = await this.$myRequest({
+					url:"/salon/"+this.id
+				})
+				this.salon=res.data.data;
+				console.log(this.salon)
+			}
+		},
+		onLoad(options) {
+			this.id=options.id
+			this.getSalonDetail()
 		}
 	}
 </script>
@@ -275,6 +193,7 @@
 						.course-top-bottom-title{
 							font-size: 28rpx;
 							color: #4F73A5;
+							font-weight: bold;
 						}
 					}
 					.text-content{
@@ -289,7 +208,7 @@
 			.course-center{
 				margin-bottom: 60rpx;
 				.course-center-top{
-					margin-top: 40rpx;
+					margin-top: 80rpx;
 					.course-center-top-top{
 						width: 100%;
 						line-height: 40rpx;
@@ -306,6 +225,7 @@
 						.course-center-top-title{
 							font-size: 28rpx;
 							color: #4F73A5;
+							font-weight: bold;
 						}
 					}
 					.course-center-top-bottom{
