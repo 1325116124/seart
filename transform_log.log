@@ -1,0 +1,77 @@
+miniprogram to uni-app 转换日志
+
+---基本信息---
+时间: 2021-05-03 16:08:06
+语言: Javascript
+转换模式: Hbuilder X
+isTransformWXS: false
+isRenameWxToUni: false
+isMergeWxssToVue: false
+isRepair: false
+
+---小程序基本信息---
+name: seart_4.15_art_salon
+version: 
+description: 
+appid: 
+projectname: 
+compileType: miniprogram
+author: 
+
+---目录信息---
+sourceFolder: F:\Users\YFL\WeChatProjects\miniprogram-4
+targetFolder: F:\Users\YFL\WeChatProjects\miniprogram-4_uni
+outputFolder: F:\Users\YFL\WeChatProjects\miniprogram-4_uni
+miniprogramRoot: F:\Users\YFL\WeChatProjects\miniprogram-4
+
+---日志信息---
+[Tip] 检测到@scroll绑定的函数  不存在，已添加空函数占位   file-> pages/areo-main/areo-main
+[Tip] 检测到@touchstart绑定的函数 touchStart 不存在，已添加空函数占位   file-> pages/market/market
+[Tip] 检测到@touchmove绑定的函数 touchMove 不存在，已添加空函数占位   file-> pages/market/market
+[Tip] 检测到@touchend绑定的函数 touchEnd 不存在，已添加空函数占位   file-> pages/market/market
+Convert App.vue success!
+Convert component utils\scratch.js success!
+Convert component utils\util.js success!
+Convert pages\areo-main\areo-main.vue success!
+Convert pages\collection\collection.vue success!
+Convert pages\art-recommend\art-recommend.vue success!
+Convert pages\myorder\myorder.vue success!
+Convert pages\market\market.vue success!
+Convert pages\logs\logs.vue success!
+Convert pages\index\index.vue success!
+Convert pages\other-user\other-user.vue success!
+Convert pages\order-form\order-form.vue success!
+Convert pages\switch-more\switch-more.vue success!
+Convert pages\user-self\user-self.vue success!
+Convert pages\schedule\schedule.vue success!
+Convert components\Tabs\Tabs.vue success!
+
+转换完成: 
+总共 0 处调用支付Api
+输出 14 个vue文件
+耗时：2385ms
+当前转换模式：【Hbuilder X】，生成Hbuilder X 项目。
+
+
+常见问题：
+问：为什么不将 this.setData({a:1}) 转换为 this.a = 1 呢?
+答：已做polyfill，转换后可正常使用setData函数(见main.js文件)
+
+问：getApp()能在Uni-app里面使用吗？
+答：可以的，Uni-app早已支持
+
+问：为什么转换后我的资源文件都不见了？
+答：已将所有非static目录下面的资源文件都移入到static目录里
+
+问：小程序转换为Uni-app项目后，还能转换成其他小程序项目吗？
+答：当然可以，必须可以！Uni-app项目可以编译到各种小程序、H5和APP等平台
+
+问：为什么小程序运行正常，而转换到Uni-app后报了这么多错误呢？
+答：很正常。Uni-app与小程序无法一一对应，且代码写法千变万化，工具也无法预测所有情况，只能尽力做到更少的报错、更好的兼容。有问题可以添加qq group(780359397、361784059)进行交流
+
+更多信息请阅读答疑文档：https://gitee.com/zhangdaren/articles/blob/master/miniprogram-to-uniapp工具答疑.md
+
+gitee：https://gitee.com/zhangdaren/miniprogram-to-uniapp
+github：https://github.com/zhangdaren/miniprogram-to-uniapp
+
+热烈欢迎各位大佬star和issue!

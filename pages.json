@@ -1,0 +1,83 @@
+{
+	"pages": [
+		{
+			"path": "pages/areo-main/areo-main",
+			"style": {}
+		},
+		{
+			"path": "pages/market/market",
+			"style": {
+				"navigationBarBackgroundColor": "#041746"
+			}
+		},
+		{
+			"path": "pages/art-recommend/art-recommend",
+			"style": {
+				"navigationBarBackgroundColor": "#041746"
+			}
+		},
+		{
+			"path": "pages/switch-more/switch-more",
+			"style": {
+				"navigationBarBackgroundColor": "#041746"
+			}
+		},
+		{
+			"path": "pages/myorder/myorder",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/user-self/user-self",
+			"style": {
+				"navigationBarBackgroundColor": "#041746"
+			}
+		},
+		{
+			"path": "pages/collection/collection",
+			"style": {
+				"navigationBarTitleText": "我的收藏"
+			}
+		},
+		{
+			"path": "pages/other-user/other-user",
+			"style": {
+				"navigationBarBackgroundColor": "#041746"
+			}
+		},
+		{
+			"path": "pages/schedule/schedule",
+			"style": {
+				"navigationBarTitleText": "我的日程",
+				"navigationBarBackgroundColor": "#041746",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/order-form/order-form",
+			"style": {
+				"navigationBarTitleText": "HELLO 2021"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {}
+		},
+		{
+			"path": "pages/logs/logs",
+			"style": {
+				"navigationBarTitleText": "查看启动日志"
+			}
+		}
+	],
+	"style": "v2",
+	"sitemapLocation": "sitemap.json",
+	"globalStyle": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "Weixin",
+		"navigationBarTextStyle": "black"
+	},
+	"subPackages": []
+}
