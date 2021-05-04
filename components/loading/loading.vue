@@ -1,5 +1,5 @@
 <template>
-	<view class="box">
+	<view class="box" v-show="showLoading">
 		<view class="container">
 			<view class="loader"><text class="ball"></text></view>
 			<text class="text">loading</text>
@@ -14,9 +14,10 @@
 				
 			}
 		},
+		props:["showLoading"],
 		methods: {
 			
-		}
+		},
 	}
 </script>
 
@@ -30,7 +31,13 @@
 		justify-content: center;
 		align-items: center;
 		min-height: 100vh;
+		width: 100%;
 		background-color: #fff;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999; overflow: hidden;
+		background: rgb(0 0 0 / 50%);
 	}
 	.container{
 		position: relative;

@@ -40,9 +40,9 @@
 					<view class="course-center-top-bottom">
 						<scroll-view class="team-show" scroll-x="true">
 							<view class="team-show-body">
-								<view class="team-item" v-for="(item,index) in salon.membersPortrait" :key="index">
-									<view><image :src="item" mode="aspectFill"></image></view>
-									<text>{{salon.membersIntro[index]}}</text>
+								<view class="team-item" v-for="(item,index) in salon.members" :key="index">
+									<view><image :src="item.portrait" mode="aspectFill"></image></view>
+									<text>{{item.introduction}}</text>
 								</view>
 							</view>
 						</scroll-view>
@@ -105,15 +105,23 @@
 		methods: {
 			async getSalonDetail(){
 				const res = await this.$myRequest({
-					url:"/salon/"+this.id
+					url:"/salons/"+this.id
 				})
 				this.salon=res.data.data;
-				console.log(this.salon)
+				//处理传回来的json团队成员信息
+				let tempArr=[]
+				let tempObj = {}
+				for(let i = 0;i < this.salon.members.length;i++){
+					tempObj = JSON.parse(this.salon.members[i])
+					tempArr.push(tempObj);
+				}
+				this.salon.members=tempArr;
 			}
 		},
 		onLoad(options) {
 			this.id=options.id
 			this.getSalonDetail()
+			
 		}
 	}
 </script>

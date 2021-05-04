@@ -83,7 +83,6 @@
 				this.isChanged.forEach((item,index) => {
 					this.isSelectedArray.push(this.popular_word[item]);
 				})
-				console.log(this.isSelectedArraySum)
 			},
 			changeWord2(index){
 				if(this.isChanged2.indexOf(index) === -1){
@@ -97,19 +96,16 @@
 				this.isChanged2.forEach((item,index) => {
 					this.isSelectedArray2.push(this.classify_word[item]);
 				})
-				console.log(this.isSelectedArraySum)
 			},
 			delSelectedWord(item,index){
 				this.isSelectedArraySum.remove(item,index);
 				// const found = array1.find(element => element > 10);
 				const isChanged1 = this.popular_word.indexOf(item);
-				console.log(isChanged1)
 				if(isChanged1>=0){
 					this.isChanged.remove(isChanged1);
 				}else{
 					const isChanged2 = this.classify_word.indexOf(item);
 					this.isChanged2.remove(isChanged2);
-					console.log(isChanged2)
 				}
 			},
 			close(done){
@@ -127,11 +123,18 @@
 						url:"../discover-result/discover-result",
 						events: {
 						    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-						    acceptDataFromOpenedPage: function(data) {
-						      console.log(data)
+						    acceptDataFromOpenedPage: data => {
+								 if(data.isAccept){
+									 //当结果页面返回的时候清空标签
+									 this.isSelectedArray=[]
+									 this.isSelectedArray2=[]
+									 this.isSelectedArraySum=[]
+									 this.isChanged=[]
+									 this.isChanged2=[]
+								}
 						    },
 						    someEvent: function(data) {
-						      console.log(data)
+						     
 							}
 						  },
 						success: (res) => {
@@ -140,6 +143,9 @@
 					})
 				}
 			}
+		},
+		watch:{
+			
 		}
 	}
 </script>

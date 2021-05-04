@@ -78,19 +78,37 @@
 					<text class="exhibits-around-title" v-show="functionIndex===1">热 门 沙 龙</text>
 				</view>
 				<!-- 展览的展示 -->
-				<view class="exhibits-around">
+				<view class="exhibits-around" v-if="functionIndex===0">
 					<view class="exhibits-around-body">
-						<view class="exhibits-around-item" @click="toClassify()">
+						<view class="exhibits-around-item" v-for="(item,index) in nearyExhibitions" :key="item.id" @click="toClassify(item.id)">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+								<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
+								<view class="item-right-title">{{item.name}}</view>
+								<view class="item-right-des">{{item.introduction}}</view>
 								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
+									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
+								</view>
+							</view>
+							<view class="location">
+								<text class="iconfont icon-dingwei"></text>
+								<text class="distance">{{item.distance/1000}}km</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="exhibits-around" v-else-if="functionIndex===1">
+					<view class="exhibits-around-body">
+						<view class="exhibits-around-item" v-for="(item,index) in salons" :key="item.id" @click="toClassify(item.id)">
+							<view class="item-left">
+								<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
+							</view>
+							<view class="item-right">
+								<view class="item-right-title">{{item.name}}</view>
+								<view class="item-right-des">{{item.introduction}}</view>
+								<view class="item-tabs">
+									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
 							<view class="location">
@@ -100,7 +118,28 @@
 						</view>
 					</view>
 				</view>
+				<view class="exhibits-around" v-else-if="functionIndex===2">
+					<view class="exhibits-around-body">
+						<view class="exhibits-around-item" v-for="(item,index) in liveshows" :key="item.id" @click="toClassify(item.id)">
+							<view class="item-left">
+								<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
+							</view>
+							<view class="item-right">
+								<view class="item-right-title">{{item.name}}</view>
+								<view class="item-right-des">{{item.introduction}}</view>
+								<view class="item-tabs">
+									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
+								</view>
+							</view>
+							<view class="location">
+								<text class="iconfont icon-dingwei"></text>
+								<text class="distance">{{item.distance/1000}}km</text>
+							</view>
+						</view>
+					</view>
+				</view>
 			</view>
+			<loading :showLoading="showLoading"></loading>
 		</view>
 	</view>
 </template>
@@ -124,20 +163,15 @@
 				// 	'http://47.112.188.99/images/exhibition-3.jpg'
 				// ],
 				liveshows:[],//直播的信息
-				
-				salonsImg:[
-					'http://47.112.188.99/images/salons-1.jpg',
-					'http://47.112.188.99/images/salons-2.jpg',
-					'http://47.112.188.99/images/salons-3.jpg'
-				],
-				livesImg:[
-					'http://47.112.188.99/images/lives-1.jpg',
-					'http://47.112.188.99/images/lives-2.jpg',
-					'http://47.112.188.99/images/lives-3.jpg',
-				],
 				swiperCurrent:0,
 				functionTitle:["展览","沙龙","live专区"],
-				functionIndex:0
+				functionIndex:0,
+				showLoading:true,
+				//用户的位置信息，用于获取周围的展
+				userLongitude:0,
+				userLatitude:0,
+				//周围展的信息
+				nearyExhibitions:[],
 			};
 		},
 		methods: {
@@ -169,21 +203,21 @@
 			//轮播图的点击跳转
 			toLiving(id){
 				uni.navigateTo({
-					url:"../living/living?id="+id
+					url:"../living/living?id="+id,
 				})
 			},
-			toClassify(){
+			toClassify(id){
 				if(this.functionIndex===0){
 					uni.navigateTo({
-						url:"../living/living"
+						url:"../living/living?id="+id,
 					})
 				}else if(this.functionIndex===1){
 					uni.navigateTo({
-						url:"../artSalon/artSalon"
+						url:"../artSalon/artSalon?id="+id
 					})
 				}else{
 					uni.navigateTo({
-						url:"../course-template/course-template"
+						url:"../course-template/course-template?id="+id
 					})
 				}
 			},
@@ -216,13 +250,42 @@
 				})
 				this.liveshows=res.data.data.list;
 			},
+			//根据用户位置获取周围的展
+			async getNearbyExhi(){
+				const res = await this.$myRequest({
+					url:"/nearby-exhibitions/-1/0/"+this.userLongitude+'/'+this.userLatitude
+				})
+				this.nearyExhibitions = res.data.data.list;
+				console.log(this.nearyExhibitions)
+			},
+			getUserLocation(){
+				let userInfo = uni.getStorageSync("user")
+				this.userLongitude = userInfo.longitude
+				this.userLatitude = userInfo.latitude
+			},
+			isLogin(){
+				if(uni.getStorageSync('user')){
+					return;
+				}else{
+					uni.navigateTo({
+						url:"../login/login"
+					})
+				}
+			},
 		},
 		
 		onLoad() {
+			this.isLogin();
 			this.getExhibitions();
 			this.getSalons();
 			this.getLiveShow();
-			
+			this.showLoading = false;
+			//获取缓存里的用户地理位置
+			this.getUserLocation();
+			this.getNearbyExhi()
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>
@@ -298,7 +361,8 @@
 						swiper-item{
 							border-radius: 24rpx;
 							background-color: #DEDDDA;
-							margin-right: 100rpx;
+
+							
 							.swiper-item{
 								text-align: center;
 								image{
@@ -512,13 +576,13 @@
 					}
 				}
 				.exhibits-around{
-					margin-bottom: 500rpx;
+					
 					.exhibits-around-body{
 						width: 100%;
 						margin-bottom: 500rpx;//预留位置
 						.exhibits-around-item{
 							// 345x163
-							margin-top: 80rpx;
+							margin-top: 100rpx;
 							width: 100%;
 							height: 326rpx;
 							background-color: #E5ECF5;
@@ -531,35 +595,42 @@
 							.item-left{
 								width: 260rpx;
 								height: 332rpx;
+								position: absolute;
+								bottom: 50rpx;
+								left: 26rpx;
 								.item-image{
 									// 115x170
-									position: absolute;
 									width: 260rpx;
 									height: 332rpx;
 									border-radius: 10rpx;
-									bottom: 50rpx;
-									left: 26rpx;
 									box-shadow: 0 0 15rpx 0 #666;
 								}
 							}
 							.item-right{
-								margin-left: -100rpx;
+								width: 360rpx;
+								height: 227rpx;
+								position: absolute;
+								right: 20rpx;
+								top: 20rpx;
 								.item-right-title{
 									font-size: 30rpx;
 									color: @color;
-									line-height: 60rpx;
+									margin-bottom: 20rpx;
 								}
 								.item-right-des{
 									font-size: 16rpx;
-									line-height: 60rpx;
+									line-height: 30rpx;
 									color: #8C8C8E;
 								}
 								.item-tabs{
-									margin-top: 30rpx;
+									margin-top: 20rpx;
 									display: flex;
-									justify-content: space-between;
+									justify-content: flex-start;
 									width: 310rpx;
 									height: 36rpx;
+									position: absolute;
+									bottom: 0;
+									left: 0;
 									.tab{
 										// 38x18（单个）
 										// 左右间隔13	5
@@ -571,6 +642,7 @@
 										border: 1rpx solid #4E72A5;
 										text-align: center;
 										color: #4E72A5;
+										margin-right: 20rpx;
 									}
 								}
 							}
@@ -588,6 +660,11 @@
 					}
 				}
 			
+			}
+			.test{
+				width: 200rpx;
+				height: 200rpx;
+				background-color: #ff0;
 			}
 		}
 	}

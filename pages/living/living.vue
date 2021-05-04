@@ -31,7 +31,7 @@
 						<txet class="block"></txet>
 						<text class="map-title">地图导航</text>
 					</view>
-					<map class="map" :enable-scroll='false' :longitude="exhibitionDetail.longitude" :latitude="exhibitionDetail.latitude" :scale="scale" :markers="markers"></map>
+					<map class="map" :longitude="exhibitionDetail.longitude" :latitude="exhibitionDetail.latitude" :scale="scale" ></map>
 				</view>
 				<view class="remind">
 					<view class="remind-top">
@@ -82,14 +82,6 @@
 							</view>
 						</view>
 					</scroll-view>
-					<!-- <scroll-view class="exhibits-show" scroll-x="true">
-						<view class="exhibits-show-body">
-							<view class="exhibits-item">
-								<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-								<text>紫砂壶，形状奇特，外形由手工控制而成</text>
-							</view>
-						</view>
-					</scroll-view> -->
 				</view>
 			</view>
 			<view class="purchase">购买门票</view>
@@ -107,7 +99,7 @@
 				exhibitionDetail:{},
 				//存放相关的展品信息
 				exhibits:{},
-				scale:13,
+				scale:15,
 				markers:[
 					{
 						iconPath:'../../static/icon/location-map.png',
@@ -136,9 +128,10 @@
 			},
 			async getNearbyExhibitions(){
 				const res = await this.$myRequest({
-					url:"/exhibitions/"+this.id+"/exhibits"
+					url:"/exhibitions/" + this.id + "/exhibits"
 				})
 				this.exhibits=res.data.data;
+				
 			}
 		},
 		onLoad(options) {

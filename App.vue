@@ -1,7 +1,6 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
 			//实现remove的方法
 			Array.prototype.remove = function(val) {
 			var index = this.indexOf(val);
@@ -9,9 +8,11 @@
 			this.splice(index, 1);
 			}
 			};
+			
+			
 		},
 		onShow: function() {
-			console.log('App Show')
+			
 		},
 		onHide: function() {
 			console.log('App Hide')

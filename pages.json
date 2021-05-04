@@ -9,8 +9,25 @@
 			}
 		},
 		{
-		    "path" : "pages/login/login",
+		    "path" : "pages/areo-main/areo-main",
 		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+		    "path" : "pages/login/login",
+			"permission": 
+			{
+			    "scope.userLocation":
+				{
+			      "desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
+			    }
+			 },
+		    "style":                                                                                 
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
@@ -148,6 +165,7 @@
             }
             
         }
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -168,7 +186,7 @@
 				"selectedIconPath":"./static/icon/wanderSelected.png"
 			},
 			{
-				"pagePath":"pages/discover/discover",
+				"pagePath":"pages/wander-discover/wander-discover",
 				"iconPath":"./static/icon/discover.png",
 				"selectedIconPath":"./static/icon/discoverSelected.png"
 			},

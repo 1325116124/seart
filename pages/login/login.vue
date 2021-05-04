@@ -31,13 +31,21 @@
 						let country = userRes.userInfo.country;
 						let province = userRes.userInfo.province;
 						let city = userRes.userInfo.city;
+						let user={
+							nickName:nickName,
+							avatarUrl:avatarUrl,
+							gender:gender,
+							country:country,
+							province:province,
+							city:city
+						}
 						uni.login({
 							provider: 'weixin',
 							success: loginRes => {
 								// console.log('-------用户授权，并获取用户code------');
 								console.log(loginRes);
 								uni.request({
-									url:"http://47.112.188.99:8080/login",
+									url:"http://112.74.59.218:8080/login",
 									method:"PUT",
 									header : {  
 										'content-type': 'application/x-www-form-urlencoded;charset=utf-8'  
@@ -55,7 +63,19 @@
 										// city:city
 									// },
 									success(res) {
-										console.log(res);
+										user.code = loginRes.code
+										user.openId = res.data.data.id
+										uni.getLocation({
+										    type: 'wgs84',
+										    success: function (res) {
+												user.longitude = res.longitude
+												user.latitude = res.latitude
+												uni.setStorageSync('user',user);
+										    },
+											fail: function(err){
+												console.log(err)
+											}
+										});
 									},
 									fail(err) {
 										console.log("fall",err)
@@ -147,7 +167,7 @@
 		
 		},
 		onLoad() {
-			this.Login();
+			
 		}
 	}
 </script>

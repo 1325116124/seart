@@ -6,10 +6,9 @@
 					<txet class="block"></txet>
 					<text class="album-top-title">他是他，文之像为谁而作？</text>
 				</view>
-				<view class="chair" @click="toCourse">
-					<image :src="item.albumImage" mode="aspectFill"></image>
-					<view class="description">欧初捐赠文物纪念展"分为“诸家合壁”<br>
-					“历代陶瓷”“文房用品”和“青铜器”四个篇章</view>
+				<view class="chair" @click="toCourse(albumDetail.id)">
+					<image :src="albumDetail.introImage" mode="aspectFill"></image>
+					<view class="description">{{albumDetail.introduction}}</view>
 				</view>
 			</view>
 			<view class="album-center">
@@ -40,21 +39,27 @@
 	export default {
 		data() {
 			return {
-				item:{}
+				id:0,
+				albumDetail:{},
 			}
 		},
 		methods: {
-			toCourse(){
+			toCourse(id){
 				uni.navigateTo({
-					url:"../course-template/course-template"
+					url:"../course-template/course-template?id="+id
 				})
-			}
+			},
+			async getAlbum(){
+				const res = await this.$myRequest({
+					url:"/courses/" + this.id
+				})
+				this.albumDetail = res.data.data;
+				console.log(this.albumDetail)
+			},
 		},
-		onLoad() {
-			uni.$on('albumImg',(item) => {
-				this.item=item;
-				console.log(item);
-			})
+		onLoad(options) {
+			this.id=options.id
+			this.getAlbum();
 		}
 	}
 </script>
@@ -101,8 +106,8 @@
 						box-shadow: 0 0 0 0 #666,0 0 10rpx 0 #666,0 0 10rpx 0 #666,0 0 10rpx 0 #666;
 					}
 					.description{
-						font-size: 26rpx;
-						line-height: 48rpx;
+						font-size: 24rpx;
+						line-height: 38rpx;
 					}
 				}
 			}

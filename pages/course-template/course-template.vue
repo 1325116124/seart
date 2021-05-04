@@ -40,9 +40,9 @@
 					<view class="course-center-top-bottom">
 						<scroll-view class="team-show" scroll-x="true">
 							<view class="team-show-body">
-								<view class="team-item" v-for="(item,index) in course.membersPortrait" :key="index">
-									<view><image :src="item" mode="aspectFill"></image></view>
-									<text>{{course.membersIntro[index]}}</text>
+								<view class="team-item" v-for="(item,index) in course.members" :key="index">
+									<view><image :src="item.portrait" mode="aspectFill"></image></view>
+									<text>{{item.introduction}}</text>
 								</view>
 							</view>
 						</scroll-view>
@@ -126,7 +126,15 @@
 					url:"/courses/"+this.id
 				})
 				this.course=res.data.data;
-				console.log(this.course)
+				//处理团队成员的json数据
+				let tempArr=[]
+				let tempObj = {}
+				for(let i = 0;i < this.course.members.length;i++){
+					tempObj = JSON.parse(this.course.members[i])
+					tempArr.push(tempObj);
+				}
+				this.course.members=tempArr;
+				console.log(this.course.members)
 			}
 		},
 		onLoad(options) {
