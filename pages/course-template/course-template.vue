@@ -3,32 +3,32 @@
 		<view class="course-body">
 			<view class="course-top">
 				<view class="course-top-top">
-					<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+					<image :src="course.introImage" mode="aspectFill"></image>
 					<view class="icons">
 						<view class="icon">
 							<view class="iconfont icon-shoucang"></view>
-							<text>52</text>
+							<text>{{course.favours}}</text>
 						</view>
 						<view class="icon">
 							<view class="iconfont icon-shizhong"></view>
-							<text>52</text>
+							<text>{{course.participants}}</text>
 						</view>
 						<view class="icon">
 							<view class="iconfont icon-fenxiang"></view>
-							<text>52</text>
+							<text>{{course.shares}}</text>
 						</view>
 					</view>
 				</view>
 				<view class="course-top-center">
 					<view class="course-time">开播时间:2020.11.03-11.09</view>
-					<view class="course-member">主讲成员:周杰题、将朝南</view>
+					<view class="course-member">主讲成员:<text v-for="(item,index) in course.membersName">{{item}}</text></view>
 				</view>
 				<view class="course-top-bottom">
 					<view class="course-top-bottom-top">
 						<txet class="block"></txet>
 						<text class="course-top-bottom-title">课程介绍</text>
 					</view>
-					<view class="text-content">虾忌与某些水果同吃。虾合有比较丰富的蛋白质和钙等营养物质，如果把它们与含有鞣酸的水果，如葡萄、石榴、山楂、柿子等同食，不仅会降低蛋白质的营养价值，而且鞣酸和钙酸结合形成鞣酸钙后会刺激肠胃。</view>
+					<view class="text-content">{{course.introduction}}</view>
 				</view>
 			</view>
 			<view class="course-center">
@@ -40,21 +40,9 @@
 					<view class="course-center-top-bottom">
 						<scroll-view class="team-show" scroll-x="true">
 							<view class="team-show-body">
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
-								</view>
-								<view class="team-item">
-									<view><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text>虾忌与某些水果同吃，虾忌与某些水果同水同吃</text>
+								<view class="team-item" v-for="(item,index) in course.membersPortrait" :key="index">
+									<view><image :src="item" mode="aspectFill"></image></view>
+									<text>{{course.membersIntro[index]}}</text>
 								</view>
 							</view>
 						</scroll-view>
@@ -115,69 +103,6 @@
 									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
 								</view>
 							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -191,11 +116,22 @@
 	export default {
 		data() {
 			return {
-				
+				id:0,
+				course:[]
 			}
 		},
 		methods: {
-			
+			async getCourseDetail(){
+				const res = await this.$myRequest({
+					url:"/courses/"+this.id
+				})
+				this.course=res.data.data;
+				console.log(this.course)
+			}
+		},
+		onLoad(options) {
+			this.id=options.id
+			this.getCourseDetail()
 		}
 	}
 </script>
@@ -254,7 +190,7 @@
 					color: #707070;
 					letter-spacing: 2rpx;
 					.course-member{
-						margin: 18rpx;
+						margin-top: 18rpx;
 					}
 				}
 				.course-top-bottom{

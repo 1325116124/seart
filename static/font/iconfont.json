@@ -34,11 +34,25 @@
       "unicode_decimal": 58976
     },
     {
+      "icon_id": "4539899",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "4770728",
       "name": "放大镜",
       "font_class": "fangdajing",
       "unicode": "e637",
       "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "5037312",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e622",
+      "unicode_decimal": 58914
     },
     {
       "icon_id": "6275359",

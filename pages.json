@@ -9,6 +9,16 @@
 			}
 		},
 		{
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
 		    "path" : "pages/more/more",
 		    "style" :                                                                                    
 		    {
@@ -149,23 +159,23 @@
 		"list":[
 			{
 				"pagePath":"pages/bazzar/bazzar",
-				"iconPath":"./static/icon/bazzar-1.png",
-				"selectedIconPath":"./static/icon/bazzar-2.png"
+				"iconPath":"./static/icon/bazzar.png",
+				"selectedIconPath":"./static/icon/bazzarSelected.png"
 			},
 			{
 				"pagePath":"pages/wander/wander",
-				"iconPath":"./static/icon/wander-1.png",
-				"selectedIconPath":"./static/icon/wander.png"
+				"iconPath":"./static/icon/wander.png",
+				"selectedIconPath":"./static/icon/wanderSelected.png"
 			},
 			{
 				"pagePath":"pages/discover/discover",
-				"iconPath":"./static/icon/discover-1.png",
-				"selectedIconPath":"./static/icon/discover.png"
+				"iconPath":"./static/icon/discover.png",
+				"selectedIconPath":"./static/icon/discoverSelected.png"
 			},
 			{
 				"pagePath":"pages/mine/mine",
-				"iconPath":"./static/icon/mine-1.png",
-				"selectedIconPath":"./static/icon/mine.png"
+				"iconPath":"./static/icon/mine.png",
+				"selectedIconPath":"./static/icon/mineSelected.png"
 			}
 		]
 	}

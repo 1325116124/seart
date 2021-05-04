@@ -128,7 +128,7 @@
 			},
 			async getExhibitionDetail(){
 				const res = await this.$myRequest({
-					url:"/exhibition/"+this.id
+					url:"/exhibitions/"+this.id
 				})
 				this.exhibitionDetail=res.data.data;
 				this.markers[0].longitude=this.exhibitionDetail.longitude;
@@ -136,7 +136,7 @@
 			},
 			async getNearbyExhibitions(){
 				const res = await this.$myRequest({
-					url:"/exhibition/"+this.id+"/exhibits"
+					url:"/exhibitions/"+this.id+"/exhibits"
 				})
 				this.exhibits=res.data.data;
 			}

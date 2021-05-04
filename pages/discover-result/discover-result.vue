@@ -38,12 +38,12 @@
 					<view class="title">
 						<view v-for="(item,index) in titles" class="more-center-title" 
 						:class="{active:index===currentIndex}" @click="getIndex(index)" 
-						:key='index' >{{item}}
+						:key='index'>{{item}}
 						</view>
 					</view>
 				</view>
 				<view class="result-items" v-if="functionIndex===0">
-					<view class="result-item" v-for="(item,index) in currentExhibitons" :key="item.id">
+					<view class="result-item" v-for="(item,index) in currentExhibitons" :key="item.id"  @click="toLiving(item.id)">
 						<image :src="item.introImage" mode="aspectFill"></image>
 						<view class="des">{{item.name}}</view>
 						<view class="tag">展览</view>
@@ -92,78 +92,22 @@
 				<!-- 索引为1和索引为2的时候的底部相同 -->
 				<view class="result-items2" v-if="functionIndex===1||functionIndex===2">
 					<view class="result-items2-body">
-						<view class="result-items2-item">
+						<view class="result-items2-item" v-for="(item,index) in currentSalons" :key="item.id">
 							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+								<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 							</view>
 							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
+								<view class="item-right-title">{{item.name}}</view>
+								<view class="item-right-des">{{item.introduction}}</view>
 								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
+									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
 							<view class="location">
 								<text class="iconfont icon-icon-test"></text>
 								<text class="distance">1.5km</text>
 							</view>
-						</view>
-						<view class="result-items2-item">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
-						<view class="result-items2-item">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
-						<view class="result-items2-item" @click="toArtSalon">
-							<view class="item-left">
-								<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-							</view>
-							<view class="item-right">
-								<view class="item-right-title">毕加索，麻胶版画展</view>
-								<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-								<view class="item-tabs">
-									<view class="tab">浅蓝色</view>
-									<view class="tab">莫兰迪</view>
-									<view class="tab">橘色</view>
-								</view>
-							</view>
-							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
-								<text class="distance">1.5km</text>
-							</view>
-						</view>
+						</view>	
 					</view>
 				</view>
 			</view>
@@ -205,7 +149,12 @@
 				exhibitionsLiving:[],//正在直播的
 				exhibitionsOver:[],//已经结束的
 				exhibitionsBefore:[],//还没开始的
-				currentExhibitons:[]//用来渲染的
+				currentExhibitons:[],//用来渲染的,
+				salons:[],
+				salonsLiving:[],//正在直播的
+				salonsOver:[],//已经结束的
+				salonsBefore:[],//还没开始的
+				currentSalons:[]//用来渲染的,
 			}
 		},
 		components:{
@@ -214,14 +163,18 @@
 		methods: {
 			getIndex(index){
 				this.currentIndex=index;
-				if(index===0){
-					this.currentExhibitons = this.exhibitionsBefore
-				}else if(index===1){
+				if(this.currentIndex===0){
 					this.currentExhibitons = this.exhibitionsLiving
-				}else if(index===2){
+					this.currentSalons = this.salonsLiving
+				}else if(this.currentIndex===1){
+					this.currentExhibitons = this.exhibitionsBefore
+					this.currentSalons = this.salonsBefore
+				}else if(this.currentIndex===2){
 					this.currentExhibitons = this.exhibitionsOver
+					this.currentSalons = this.salonsOver
 				}else {
 					this.currentExhibitons=this.exhibitionsDetail
+					this.currentSalons = this.salons
 				}
 			},
 			changeRecommend(index){
@@ -248,7 +201,28 @@
 						this.exhibitionsOver.push(item);
 					}
 				})
-			}
+			},
+			toLiving(id){
+				console.log(id);
+				uni.navigateTo({
+					url:"../living/living?id="+id
+				})
+			},
+			async getSalons(){
+				const res = await this.$myRequest({
+					url:"/salons",
+				})
+				this.salons=res.data.data.list;
+				this.salons.forEach((item,index) => {
+					if(item.status===0){
+						this.salonsBefore.push(item)
+					}else if(item.status===1){
+						this.salonsLiving.push(item)
+					}else if(item.status===2){
+						this.salonsOver.push(item);
+					}
+				})
+			},
 		},
 		onLoad(){
 			 const eventChannel = this.getOpenerEventChannel()
@@ -256,6 +230,9 @@
 				 this.isSelectedArraySum=data.isSelectedArraySum
 			 })
 			 this.getExhibitions();
+			 this.currentExhibitons=this.exhibitionsLiving //默认进入时的初始化
+			 this.getSalons();
+			 this.currentSalons=this.salonsLiving
 		}
 	}
 </script>
@@ -521,35 +498,42 @@
 							.item-left{
 								width: 260rpx;
 								height: 332rpx;
+								position: absolute;
+								bottom: 50rpx;
+								left: 26rpx;
 								.item-image{
 									// 115x170
-									position: absolute;
 									width: 260rpx;
 									height: 332rpx;
 									border-radius: 10rpx;
-									bottom: 50rpx;
-									left: 26rpx;
 									box-shadow: 0 0 15rpx 0 #666;
 								}
 							}
 							.item-right{
-								margin-left: -100rpx;
+								width: 360rpx;
+								height: 227rpx;
+								position: absolute;
+								right: 20rpx;
+								top: 20rpx;
 								.item-right-title{
 									font-size: 30rpx;
 									color: @color;
-									line-height: 60rpx;
+									margin-bottom: 20rpx;
 								}
 								.item-right-des{
 									font-size: 16rpx;
-									line-height: 60rpx;
+									line-height: 30rpx;
 									color: #8C8C8E;
 								}
 								.item-tabs{
-									margin-top: 30rpx;
+									margin-top: 20rpx;
 									display: flex;
-									justify-content: space-between;
+									justify-content: flex-start;
 									width: 310rpx;
 									height: 36rpx;
+									position: absolute;
+									bottom: 0;
+									left: 0;
 									.tab{
 										// 38x18（单个）
 										// 左右间隔13	5
@@ -561,6 +545,7 @@
 										border: 1rpx solid #4E72A5;
 										text-align: center;
 										color: #4E72A5;
+										margin-right: 20rpx;
 									}
 								}
 							}

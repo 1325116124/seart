@@ -9,7 +9,7 @@
 					<input type="text" placeholder-class="Search" placeholder="Discover" 
 					@focus="changeInputClass" @blur="removeInputClass" @click='toSearch' disabled="true">
 					<view class="location">
-						<text class="iconfont icon-icon-test"></text>
+						<text class="iconfont icon-dingwei"></text>
 						<text>广州</text>
 					</view>
 				</view>
@@ -19,7 +19,7 @@
 				<view class="container">
 					<swiper :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" 
 					:current="swiperCurrent" @change="changeSwiper">
-						<swiper-item v-for="(item,index) in swiperImg" :key='index' @click="toLiving">
+						<swiper-item v-for="item in swiperImg" @click="toLiving">
 							<view class="swiper-item">
 								<image :src="item" mode="aspectFill"></image>
 								<view class="description">欧初捐赠文物纪念展"分为“诸家合璧”“历代陶瓷”、“文房
@@ -28,9 +28,8 @@
 						</swiper-item>
 					</swiper>
 					<view class="swiper-dots">
-						<block v-for="(item,index) in swiperImg.length" :key="index">
-							<view class="dot" :class="index==swiperCurrent ? 'active' : ''"></view>
-						</block>
+						<view class="dot" :class="index===swiperCurrent ? 'active' : ''"
+						v-for="(item,index) in swiperImg" :key="index"></view>
 					</view>
 				</view>
 				<!-- ------------------------------------------------------- -->
@@ -61,9 +60,9 @@
 					</scroll-view>
 				</view>
 				<view v-show="functionIndex===2">
-					<scroll-view scroll-x="true" class="exhibits" @click="toCourse">
-						<view class="exhibits-item" v-for="(item,index) in livesImg" :key="index">
-							<image :src="item" mode="aspectFill" lazy-load="true"></image>
+					<scroll-view scroll-x="true" class="exhibits">
+						<view class="exhibits-item" v-for="(item,index) in liveshows" :key="item.id" @tap="toCourse(item.id)">
+							<image :src="item.introImage" mode="aspectFill" lazy-load="true"></image>
 						</view>
 					</scroll-view>
 				</view>
@@ -95,7 +94,7 @@
 								</view>
 							</view>
 							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
+								<text class="iconfont icon-dingwei"></text>
 								<text class="distance">距1.5km</text>
 							</view>
 						</view>
@@ -113,9 +112,9 @@
 				isInputActive:false,//判断输入框是否focus
 				swiperImg: [
 					'http://47.112.188.99/images/shuffling.jpg',					
-					'http://47.112.188.99/images/shuffling.jpg',
-					'http://47.112.188.99/images/shuffling.jpg',
-					'http://47.112.188.99/images/shuffling.jpg'
+					'http://47.112.188.99/images/1.png',
+					'http://47.112.188.99/images/2.png',
+					'http://47.112.188.99/images/3.png'
 				],
 				exhibitions:[],
 				salons:[],//沙龙的信息
@@ -124,6 +123,8 @@
 				// 	'http://47.112.188.99/images/exhibition-2.jpg',
 				// 	'http://47.112.188.99/images/exhibition-3.jpg'
 				// ],
+				liveshows:[],//直播的信息
+				
 				salonsImg:[
 					'http://47.112.188.99/images/salons-1.jpg',
 					'http://47.112.188.99/images/salons-2.jpg',
@@ -191,9 +192,9 @@
 					url:"../artSalon/artSalon?id="+id
 				})
 			},
-			toCourse(){
+			toCourse(id){
 				uni.navigateTo({
-					url:"../course-template/course-template"
+					url:"../course-template/course-template?id="+id
 				})
 			},
 			//获取展览的请求
@@ -209,10 +210,19 @@
 				})
 				this.salons=res.data.data.list;
 			},
+			async getLiveShow(){
+				const res = await this.$myRequest({
+					url:"/live-shows"
+				})
+				this.liveshows=res.data.data.list;
+			},
 		},
+		
 		onLoad() {
 			this.getExhibitions();
 			this.getSalons();
+			this.getLiveShow();
+			
 		}
 	}
 </script>
@@ -288,6 +298,7 @@
 						swiper-item{
 							border-radius: 24rpx;
 							background-color: #DEDDDA;
+							margin-right: 100rpx;
 							.swiper-item{
 								text-align: center;
 								image{
