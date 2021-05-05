@@ -1,14 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path" : "pages/wander/wander",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
 		    "path" : "pages/areo-main/areo-main",
 		    "style" :                                                                                    
 		    {
@@ -17,7 +9,97 @@
 		    }
 		    
 		},
+		{
+		    "path" : "pages/market/market",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/switch-more/switch-more",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
 		
+		{
+		    "path" : "pages/schedule/schedule",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/logs/logs",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    } 
+		},
+		
+		{
+		    "path" : "pages/user-self/user-self",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/other-user/other-user",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+		    "path" : "pages/myorder/myorder",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/collection/collection",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/art-recommend/art-recommend",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
+		{
+			"path" : "pages/wander/wander",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
 		{
 		    "path" : "pages/login/login",
 			"permission": 
@@ -165,7 +247,16 @@
             }
             
         }
-       
+		
+        ,{
+            "path" : "components/region-picker/region-picker",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -176,7 +267,7 @@
 	"tabBar":{
 		"list":[
 			{
-				"pagePath":"pages/bazzar/bazzar",
+				"pagePath":"pages/market/market",
 				"iconPath":"./static/icon/bazzar.png",
 				"selectedIconPath":"./static/icon/bazzarSelected.png"
 			},
@@ -191,7 +282,7 @@
 				"selectedIconPath":"./static/icon/discoverSelected.png"
 			},
 			{
-				"pagePath":"pages/mine/mine",
+				"pagePath":"pages/areo-main/areo-main",
 				"iconPath":"./static/icon/mine.png",
 				"selectedIconPath":"./static/icon/mineSelected.png"
 			}

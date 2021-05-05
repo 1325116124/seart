@@ -1,0 +1,91 @@
+.myself{
+    background-color: #041746;
+}
+.myself-top{
+    width: 100%;
+    height: 442rpx;
+    color: #fff;
+    text-align: center;
+}
+.myself-top .user-img-box{
+    padding-top: 88rpx;
+    padding-bottom: 42rpx;
+}
+.myself-top .user-img-box .user-img{
+    width: 164rpx;
+    height: 168rpx;
+    border-radius: 20rpx;
+}
+.myself-top .user-name{
+    text-align: center;
+    height: 42rpx;
+    font-size: 32rpx;
+    font-weight: 700;
+    line-height: 42rpx;
+    margin-bottom: 34rpx;
+}
+.myself-top .user-follow{
+    font-size: 20rpx;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding: 0 240rpx 0 240rpx;
+}
+.myself-top .user-follow view{
+    flex: 1;
+}
+.myself-top .user-follow view .num{
+    padding-left: 6rpx;
+}
+
+.myself-main{
+    background-color: #fff;
+    padding: 58rpx 40rpx 0 40rpx;
+    border-radius: 68rpx 68rpx 0 0;
+}
+.myself-main-bottom{
+    padding-top: 60rpx;
+    text-align: center;
+    color: #006AD7;
+}
+
+.result-items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  transition: all 1s linear;
+}
+.result-items .result-item {
+  height: 480rpx;
+  width: 326rpx;
+  border-radius: 20rpx;
+  margin-top: 40rpx;
+  background-color: #EBF3FC;
+  font-size: 20rpx;
+  position: relative;
+}
+.result-items .result-item image {
+  height: 404rpx;
+  width: 100%;
+  border-radius: 20rpx;
+}
+.result-items .result-item .des {
+  width: 100%;
+  height: 96rpx;
+  line-height: 40rpx;
+  color: #041746;
+  text-align: center;
+}
+.result-items .result-item .tag {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 90rpx;
+  height: 32rpx;
+  font-size: 16rpx;
+  border-radius: 16rpx;
+  background-color: rgba(248, 248, 248, 0.5);
+  line-height: 32rpx;
+  text-align: center;
+  color: #fff;
+}

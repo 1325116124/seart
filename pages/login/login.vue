@@ -65,6 +65,7 @@
 									success(res) {
 										user.code = loginRes.code
 										user.openId = res.data.data.id
+										console.log(user.code)
 										uni.getLocation({
 										    type: 'wgs84',
 										    success: function (res) {
@@ -76,6 +77,7 @@
 												console.log(err)
 											}
 										});
+										
 									},
 									fail(err) {
 										console.log("fall",err)

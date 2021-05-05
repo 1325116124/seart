@@ -1,5 +1,8 @@
 <script>
 	export default {
+		globalData: {  
+			text: 'text'  
+		},  
 		onLaunch: function() {
 			//实现remove的方法
 			Array.prototype.remove = function(val) {

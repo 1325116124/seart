@@ -185,7 +185,7 @@
 				this.swiperCurrent = e.detail.current;
 			},
 			toSearch(){
-				uni.navigateTo({
+				uni.switchTab({
 					url:'../wander-discover/wander-discover'
 				})
 			},
@@ -253,10 +253,9 @@
 			//根据用户位置获取周围的展
 			async getNearbyExhi(){
 				const res = await this.$myRequest({
-					url:"/nearby-exhibitions/-1/0/"+this.userLongitude+'/'+this.userLatitude
+					url:"/nearby-exhibitions/"+this.userLongitude+'/'+this.userLatitude
 				})
 				this.nearyExhibitions = res.data.data.list;
-				console.log(this.nearyExhibitions)
 			},
 			getUserLocation(){
 				let userInfo = uni.getStorageSync("user")
@@ -283,6 +282,7 @@
 			//获取缓存里的用户地理位置
 			this.getUserLocation();
 			this.getNearbyExhi()
+			console.log(getApp().globalData.text)
 		},
 		onUnload() {
 			this.showLoading = true;

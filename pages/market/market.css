@@ -1,0 +1,104 @@
+page{
+    background-color: #041746;
+  }
+  .dumpIndex{
+	  z-index: -1;
+  }
+  .bg-img{
+    position: absolute;
+    border-radius: 24rpx;
+    width: 300px;
+    height: 150px;
+  }
+  .art-recommend-box{
+    margin: 0 48rpx 0rpx 48rpx;
+    height: 100%;
+  }
+  .title-box{
+    margin: 20rpx auto;
+    text-align: center;
+    background-color: #4F73A5;
+    width: 560rpx;
+    height: 82rpx;
+    border-radius: 42rpx;
+    box-shadow: 0 0 8rpx #4F73A5;
+    opacity: 53%;
+    font-size: 24rpx;
+    line-height: 82rpx;
+    color: #fff;
+  }
+  .img-box{
+    margin-bottom: 100rpx;
+    display: flex;
+    position: absolute;
+  }
+  .img-box .recommend-pic{
+    border-radius: 24rpx;
+    box-shadow: 0 6rpx 10rpx #000;
+  }
+  .scratch-canvas{
+    position: absolute;
+    color: #f0f0f0;
+    border-radius: 24rpx;
+    box-shadow: 0 6rpx 10rpx #000;
+    filter: blur(10rpx) brightness(80%) opacity(80%);
+  }
+  .box1{
+    left:318rpx;
+    top: 186rpx;
+  }
+  
+  .box1 .recommend-pic, .box1 .scratch-canvas{
+    height: 248rpx;
+    width: 240rpx;
+  }
+  .box2{
+    left:150rpx;
+    top: 306rpx;
+    z-index: -1;
+  }
+  .box2 .recommend-pic,.box2 .scratch-canvas{
+    height: 370rpx;
+    width: 390rpx;
+  }
+  .box3{
+    left:438rpx;
+    top: 434rpx;
+  }
+  .box3 .recommend-pic,.box3 .scratch-canvas{
+    height: 300rpx;
+    width: 216rpx;
+  }
+  .box4{
+    left:178rpx;
+    top: 842rpx;
+  }
+  .box4 .recommend-pic,.box4 .scratch-canvas{
+    height: 500rpx;
+    width: 460rpx;
+  }
+  .box5{
+    top: 1098rpx;
+  }
+  .box5 .recommend-pic,.box5 .scratch-canvas{
+    height: 390rpx;
+    width: 400rpx;
+	/* z-index: 1; */
+	/* z-index: -1; */
+  }
+  .tag{
+    z-index: 10;
+    position: absolute;
+    opacity: 90%;
+    border: 1rpx solid #4F73A5;
+    font-size: 30rpx;
+    line-height: 40rpx;
+    height: 40rpx;    
+    padding: 14rpx 26rpx 14rpx 26rpx;
+    background-color: #f0f0f0;
+    color: #4F73A5;
+    border-radius: 16rpx;
+  } 
+.recommend-pic{
+  margin-right: 40rpx;
+}

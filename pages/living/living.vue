@@ -6,15 +6,15 @@
 				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===1||exhibitionDetail.status===0">进入直播</view>
 				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===2">进入回放</view>
 				<view class="icons">
-					<view class="icon">
+					<view class="icon" @tap="clickFavours">
 						<view class="iconfont icon-shoucang"></view>
 						<text>{{exhibitionDetail.favours}}</text>
 					</view>
-					<view class="icon">
+					<view class="icon" @tap="clickParticipants">
 						<view class="iconfont icon-shizhong"></view>
 						<text>{{exhibitionDetail.participants}}</text>
 					</view>
-					<view class="icon">
+					<view class="icon" @tap="clickShares">
 						<view class="iconfont icon-fenxiang"></view>
 						<text>{{exhibitionDetail.shares}}</text>
 					</view>
@@ -132,6 +132,18 @@
 				})
 				this.exhibits=res.data.data;
 				
+			},
+			//点击收藏按钮的相关操作
+			clickFavours(){
+				console.log(123)
+			},
+			//点击打开图标的相关操作
+			clickParticipants(){
+				console.log(123)
+			},
+			//点击分享图标的操作
+			clickShares(){
+				console.log(123)
 			}
 		},
 		onLoad(options) {
