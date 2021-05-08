@@ -2,22 +2,24 @@
 	<view class="living">
 		<view class="living-main">
 			<view class="living-top">
-				<image :src="exhibitionDetail.introImage" mode="aspectFill"></image>
-				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===1||exhibitionDetail.status===0">进入直播</view>
-				<view class="enter-living" @click="toBroadcast" v-show="exhibitionDetail.status===2">进入回放</view>
+				<image :src="exhibitionDetail.introImage" mode="aspectFill" @tap="toBroadcast"></image>
+				<view class="enter-living" @tap="toBroadcast" v-show="exhibitionDetail.status===1||exhibitionDetail.status===0">进入直播</view>
+				<view class="enter-living" @tap="toBroadcast" v-show="exhibitionDetail.status===2">进入回放</view>
 				<view class="icons">
 					<view class="icon" @tap="clickFavours">
-						<view class="iconfont icon-shoucang"></view>
+						<view class="iconfont icon-shoucang" :class="{iconActive:favours}"></view>
 						<text>{{exhibitionDetail.favours}}</text>
 					</view>
 					<view class="icon" @tap="clickParticipants">
-						<view class="iconfont icon-shizhong"></view>
+						<view class="iconfont icon-shizhong" :class="{iconActive:participants}"></view>
 						<text>{{exhibitionDetail.participants}}</text>
 					</view>
-					<view class="icon" @tap="clickShares">
-						<view class="iconfont icon-fenxiang"></view>
-						<text>{{exhibitionDetail.shares}}</text>
-					</view>
+					<button @tap="clickShares" open-type="share">
+						<view class="icon">
+							<view class="iconfont icon-fenxiang" :class="{iconActive:true}"></view>
+							<text>{{exhibitionDetail.shares}}</text>
+						</view>
+					</button>
 				</view>
 			</view>
 			<view class="living-center">
@@ -31,7 +33,7 @@
 						<txet class="block"></txet>
 						<text class="map-title">地图导航</text>
 					</view>
-					<map class="map" :longitude="exhibitionDetail.longitude" :latitude="exhibitionDetail.latitude" :scale="scale" ></map>
+					<map class="map" :longitude="exhibitionDetail.longitude" :latitude="exhibitionDetail.latitude" :scale="scale"></map>
 				</view>
 				<view class="remind">
 					<view class="remind-top">
@@ -69,23 +71,45 @@
 						</view>
 					</view>
 				</view>
-				<view class="exhibits">
+				<view class="exhibits" v-if="exhibits">
 					<view class="exhibits-top">
 						<text class="block"></text>
 						<text class="exhibits-title">相关展品</text>
 					</view>
-					<scroll-view class="exhibits-show" scroll-x="true" v-for="(item,index) in exhibits" :key="item.id">
+					<scroll-view class="exhibits-show" scroll-x="true">
 						<view class="exhibits-show-body">
-							<view class="exhibits-item" v-for="(value,index2) in item.images" :key="index2">
-								<view><image :src="value" mode="aspectFill"></image></view>
+							<view class="exhibits-item" v-for="(item,index) in exhibits" :key="item.id">
+								<view><image :src="item.images" mode="aspectFill"></image></view>
 								<text>{{item.introduction}}</text>
 							</view>
 						</view>
 					</scroll-view>
 				</view>
+				<view class="comment" v-if="commentNum > 0">
+					<view class="comment-top">
+						<txet class="block"></txet>
+						<text class="comment-title">评论</text>
+						<text class="iconfont icon-pinglun">{{commentNum}}</text>
+					</view>
+					<scroll-view scroll-x="true" class="comment-area">
+						<view class="comment-body">
+							<view class="comment-item" v-for="(item,index) in commentInfo" :key="item.id">
+								<view class="user-info">
+									<view class="user-image"><image :src="item.avatar" mode="aspectFill"></image></view>
+									<text class="user-id"{{item.nickName}}</text>
+								</view>
+								<view class="comment-content">
+									<text>{{item.content}}</text>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
 			</view>
+			
 			<view class="purchase">购买门票</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -95,6 +119,8 @@
 			return {
 				//存放点击跳转过来的展览的id
 				id:0,
+				//存放缓存中的用户信息
+				userInfo:{},
 				//存放保存的展览信息
 				exhibitionDetail:{},
 				//存放相关的展品信息
@@ -109,14 +135,43 @@
 						longitude:0,
 						latitude:0
 					}
-				]
+				],
+				//收藏的标志，默认为不收藏
+				favours:false,
+				//打卡的标志，默认为不打卡
+				participants:false,
+				showLoading:true,
+				//评论数
+				commentNum:0,
+				// 评论数据
+				commentInfo:{},
+			}
+		},
+		watch:{
+			commentNum:function(){
+				this.getComment()
 			}
 		},
 		methods: {
 			toBroadcast(){
 				uni.navigateTo({
-					url:"../real-time-communication/real-time-communication"
+					url:"../real-time-communication/real-time-communication?id=" + this.id + "&type=0"
 				})
+			},
+			//获取评论数
+			async getCommentNum(){
+				const res = await this.$myRequest({
+					url:"/comment/getPages/0/" + this.id
+				})
+				this.commentNum = res.data.data
+			},
+			//获取所有的评论
+			async getComment(){
+				const res = await this.$myRequest({
+					// /comment/1/16/0/14
+					url:"/comment/0/" + this.id + "/0/" + this.commentNum
+				})
+				this.commentInfo = res.data.data
 			},
 			async getExhibitionDetail(){
 				const res = await this.$myRequest({
@@ -135,21 +190,106 @@
 			},
 			//点击收藏按钮的相关操作
 			clickFavours(){
-				console.log(123)
+				let isFavour = 0;
+				this.favours = !this.favours
+				if(this.favours){
+					isFavour = 1;
+				}else{
+					isFavour = -1;
+				}
+				this.$myRequest({
+					url:"/shows/" + this.id + "/favours",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},
+					data:{
+						userId:this.userInfo.openId,
+						isFavour:isFavour
+					},
+					success: res => {
+						console.log(res)
+					},
+					fail: err => {
+						console.log(err)
+					}
+				})
+				//click完之后重新调取api获取数据
+				this.getExhibitionDetail()
 			},
-			//点击打开图标的相关操作
+			//点击打卡图标的相关操作
 			clickParticipants(){
-				console.log(123)
+				let isParticipant = 0;
+				this.participants = !this.participants
+				if(this.participants){
+					isParticipant = 1;
+				}else{
+					isParticipant = -1;
+				}
+				this.$myRequest({
+					url:"/shows/" + this.id + "/participants",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},
+					data:{
+						userId:this.userInfo.openId,
+						isParticipant:isParticipant
+					},
+					success: res => {
+						
+					},
+					fail: err => {
+						
+					}
+				})
+				//click完之后重新调取api获取数据
+				this.getExhibitionDetail()
 			},
 			//点击分享图标的操作
 			clickShares(){
-				console.log(123)
+				this.$myRequest({
+					url:"/shows/" + this.id + "/shares",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},
+				})
+				//click完之后重新调取api获取数据
+				this.getExhibitionDetail()
+				uni.share({
+					provider: "weixin",
+					scene: "WXSceneSession",
+					type: 1,
+					summary: "直播马上开始啦！赶紧跟我一起看呀！",
+					success: function (res) {
+						console.log("success:" + JSON.stringify(res));
+					},
+					fail: function (err) {
+						console.log("fail:" + JSON.stringify(err));
+					}
+				})
+			},
+			//获取缓存中的用户信息
+			getUserInfo(){
+				if(uni.getStorageSync('user')){
+					this.userInfo = uni.getStorageSync('user')
+				}
 			}
 		},
 		onLoad(options) {
 			this.id=options.id
 			this.getExhibitionDetail()
 			this.getNearbyExhibitions()
+			this.getUserInfo();
+			this.getCommentNum()
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
+		},
+		onShow() {
+			this.getExhibitionDetail()
 		}
 	}
 </script>
@@ -190,23 +330,47 @@
 				.icon{
 					margin-right: 40rpx;
 					text-align: center;
+					font-weight: bold;
 					.iconfont{
 						width: 30rpx;
 						height: 28rpx;
 					}
 					&:nth-child(2){
 						.iconfont{
-							color: #4F73A5;
 							font-size: 36rpx;
 						}
 					}
 					&:last-child{
-						margin-right: 0rpx;
+						width: 40rpx;
+						height: 100rpx;
+						margin-right: 0;
+						position: absolute;
+						top: -22rpx;
+						left: 4rpx;
+						display: flex;
+						align-items: flex-start;
+						flex-wrap: wrap;
+						text{
+							margin-top:57%;
+						}
 					}
 					text{
 						font-size: 20rpx;
 					}
+					.iconActive{
+						color: #0069D6;
+					}
 				}
+				button {
+					width: 40rpx;
+					height: 100rpx;
+				  background-color: #fff;
+				  &::after{
+				   border: none;
+				  }
+				  margin: 0;
+				  padding: 0;
+				 }
 			}
 		}
 		//中间区域：文字加上地图
@@ -457,6 +621,87 @@
 					}
 				}
 			}
+			.comment{
+				margin-top: 40rpx;
+				.comment-top{
+					width: 100%;
+					line-height: 40rpx;
+					height: 40rpx;
+					position: relative;
+					.block{
+						display: inline-block;
+						width: 12rpx;
+						height: 40rpx;
+						background-color: #306FB6;
+						margin-right: 20rpx;
+						border-radius: 4rpx;
+						vertical-align: text-top;
+					}
+					.comment-title{
+						font-size: 28rpx;
+						color: #1E6CB5;
+					}
+					.icon-pinglun{
+						position: absolute;
+						right: 0;
+						color: #5A79A1;
+					}
+				}
+				.comment-area{
+					width: 700rpx;
+					margin-top: 40rpx;
+					overflow: hidden;
+					.comment-body{
+						height: 212rpx;
+						// display: flex;
+						// justify-content: flex-start;
+						white-space: nowrap;
+						.comment-item{
+							// 242x106
+							// 左右间距
+							// 13	12
+							display: inline-block;
+							width: 484rpx;
+							height: 212rpx;
+							padding: 20rpx 24rpx 20rpx 26rpx;
+							background-color: #C9DCF0;
+							border-radius: 24rpx;
+							margin-right: 30rpx;
+							box-sizing: border-box;
+							.user-info{
+								width: 100%;
+								display: flex;
+								.user-image{
+									width: 74rpx;
+									height: 74rpx;
+									image{
+										width: 100%;
+										height: 100%;
+										border-radius: 50%;
+									}
+								}
+								.user-id{
+									margin-left: 20rpx;
+									line-height: 74rpx;
+									font-size: 28rpx;
+									color: #888;
+								}
+							}
+							.comment-content{
+								margin-top: 40rpx;
+								// line-height: 50rpx;
+								height: 35rpx;
+								width: 100%;
+								overflow: hidden;
+								font-size: 22rpx;
+								color: #aaa;
+								white-space: normal;
+							}
+						}
+					}
+				}
+			}
+						
 		}
 		.purchase{
 			// 254x52	12 0 46 12

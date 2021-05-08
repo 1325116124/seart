@@ -36,6 +36,8 @@
     /* display: flex;
     flex-wrap: wrap; */
     line-height: 28rpx;
+	height: 84rpx;
+	overflow: hidden;
     font-size: 20rpx;
     font-weight: 500;
     padding-top: 10rpx;

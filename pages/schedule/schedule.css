@@ -1,3 +1,4 @@
+
 .schedule-top{
     width: 100%;
     background-color: rgb(4, 23, 70);
@@ -130,4 +131,7 @@
     color: #006AD7;
     text-align: center;
     font-size: 22rpx;
+}
+.activeSchedule{
+	color:#006FFF;
 }

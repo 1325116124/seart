@@ -1,27 +1,6 @@
 <template>
 	<view>
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-dots="true">
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/images/wander-exhibits1.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/images/wander-exhibits1.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/images/wander-exhibits1.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="../../static/images/wander-exhibits1.jpg" mode=""></image>
-				</view>
-			</swiper-item>
-		</swiper>
+		<button type="default" class="iconfont icon-dingwei"></button>
 	</view>
 </template>
 
@@ -39,13 +18,11 @@
 </script>
 
 <style lang="less">
-	swiper{
-		width: 700rpx;
-		margin: 0 auto;
-		swiper-item{
-			image{
-				width: 700rpx;
-			}
-		}
+	button{
+		//消除button的默认样式
+		margin: 0;
+		padding: 0;
+		border: 1px solid transparent;  //自定义边框
+		outline: none;    //消除默认点击蓝色边框效果
 	}
 </style>

@@ -5,6 +5,7 @@ export const myRequest = (option) => {
 			url:BASE_URL+option.url,
 			method:option.method || "GET",
 			data: option.data || {},
+			header: option.header || {'Content-Type':'application/json'},
 			success: (res) => {
 				if(res.data.status!==0){
 					return uni.showToast({

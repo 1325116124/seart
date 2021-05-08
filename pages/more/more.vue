@@ -29,14 +29,8 @@
 					</view>
 					<!-- wander里面的组件 -->
 					<scroll-view scroll-x="true" class="more-exhibits">
-						<view class="more-exhibits-item">
-							<image src="http://47.112.188.99/images/1.png" mode="aspectFill"></image>
-						</view>
-						<view class="more-exhibits-item">
-							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						</view>
-						<view class="more-exhibits-item">
-							<image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+						<view class="more-exhibits-item" v-for="(item,index) in exhibitionsLiving" :key="item.id" @tap="toLiving(item.id)">
+							<image :src="item.introImage" mode="aspectFill"></image>
 						</view>
 					</scroll-view>
 				</view>
@@ -46,9 +40,9 @@
 						<text class="center2-center-title">系列专辑</text>
 					</view>
 					<scroll-view scroll-x="true" class="more-exhibits">
-						<view class="more-exhibits-item" v-for="(item,index) in albumArea" :key='index' @click="toChair(item)"><!-- 点击跳转到讲座页面 -->
-							<image :src="item.albumImage" mode="aspectFill"></image>
-							<view class="description">{{item.albumDescription}}</view>
+						<view class="more-exhibits-item" v-for="(item,index) in courseDetail" :key='item.id' @click="toChair(item.id)"><!-- 点击跳转到讲座页面 -->
+							<image :src="item.introImage" mode="aspectFill"></image>
+							<view class="description">{{item.name}}</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -59,84 +53,71 @@
 					</view>
 				</view>
 			</view>
-			<!-- ----- -->
-			<view class="more-bottom">
+			<!-- 展览底部的展示- -->
+			<view class="more-bottom" v-if="functionIndex===0">
 				<view class="more-bottom-body">
-					<view class="more-bottom-item">
+					<view class="more-bottom-item" v-for="(item,index) in currentExhibitons" :key="item.id" @tap="toLiving(item.id)">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+							<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
-							<view class="item-right-title">毕加索，麻胶版画展</view>
-							<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
+							<view class="item-right-title">{{item.name}}</view>
+							<view class="item-right-des">{item.introduction}}</view>
 							<view class="item-tabs">
-								<view class="tab">浅蓝色</view>
-								<view class="tab">莫兰迪</view>
-								<view class="tab">橘色</view>
+								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
 						<view class="location">
-							<text class="iconfont icon-icon-test"></text>
+							<text class="iconfont icon-dingwei"></text>
 							<text class="distance">1.5km</text>
 						</view>
 					</view>
-					<view class="more-bottom-item">
+				</view>
+			</view>
+			<!-- 沙龙的展示 -->
+			<view class="more-bottom" v-else-if="functionIndex===1">
+				<view class="more-bottom-body">
+					<view class="more-bottom-item" v-for="(item,index) in currentSalons" :key="item.id" @tap="toArtSalon(item.id)">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+							<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
-							<view class="item-right-title">毕加索，麻胶版画展</view>
-							<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
+							<view class="item-right-title">{{item.name}}</view>
+							<view class="item-right-des">{item.introduction}}</view>
 							<view class="item-tabs">
-								<view class="tab">浅蓝色</view>
-								<view class="tab">莫兰迪</view>
-								<view class="tab">橘色</view>
+								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
 						<view class="location">
-							<text class="iconfont icon-icon-test"></text>
+							<text class="iconfont icon-dingwei"></text>
 							<text class="distance">1.5km</text>
 						</view>
 					</view>
-					<view class="more-bottom-item">
+				</view>
+			</view>
+			<!-- live专区的展示 -->
+			<view class="more-bottom" v-else-if="functionIndex===2">
+				<view class="more-bottom-body">
+					<view class="more-bottom-item" v-for="(item,index) in liveDetail" :key="item.id" @tap="toCourse(item.id)">
 						<view class="item-left">
-							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
+							<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 						</view>
 						<view class="item-right">
-							<view class="item-right-title">毕加索，麻胶版画展</view>
-							<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
+							<view class="item-right-title">{{item.name}}</view>
+							<view class="item-right-des">{item.introduction}}</view>
 							<view class="item-tabs">
-								<view class="tab">浅蓝色</view>
-								<view class="tab">莫兰迪</view>
-								<view class="tab">橘色</view>
+								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
 						<view class="location">
-							<text class="iconfont icon-icon-test"></text>
-							<text class="distance">1.5km</text>
-						</view>
-					</view>
-					<view class="more-bottom-item" @click="toArtSalon">
-						<view class="item-left">
-							<image class="item-image" src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image>
-						</view>
-						<view class="item-right">
-							<view class="item-right-title">毕加索，麻胶版画展</view>
-							<view class="item-right-des">毕加索麻胶版画展部分的展览</view>
-							<view class="item-tabs">
-								<view class="tab">浅蓝色</view>
-								<view class="tab">莫兰迪</view>
-								<view class="tab">橘色</view>
-							</view>
-						</view>
-						<view class="location">
-							<text class="iconfont icon-icon-test"></text>
+							<text class="iconfont icon-dingwei"></text>
 							<text class="distance">1.5km</text>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -162,7 +143,20 @@
 						albumImage:'../../static/images/wander-exhibits1.jpg',
 						albumDescription:'古籍收藏'
 					}
-				]
+				],
+				exhibitionsDetail:[],
+				exhibitionsLiving:[],//正在直播的
+				exhibitionsOver:[],//已经结束的
+				exhibitionsBefore:[],//还没开始的
+				currentExhibitons:[],//用来渲染的,
+				salons:[],
+				salonsLiving:[],//正在直播的
+				salonsOver:[],//已经结束的
+				salonsBefore:[],//还没开始的
+				currentSalons:[],//用来渲染的,
+				courseDetail:[],//用来存放课程信息的,
+				liveDetail:[],//用来存放live专区的信息
+				showLoading:true
 			}
 		},
 		methods: {
@@ -172,19 +166,88 @@
 			//center的切换效果
 			getIndex(index){
 				this.currentIndex=index;
+				if(this.currentIndex===0){
+					this.currentExhibitons = this.exhibitionsLiving
+					this.currentSalons = this.salonsLiving
+				}else if(this.currentIndex===1){
+					this.currentExhibitons = this.exhibitionsBefore
+					this.currentSalons = this.salonsBefore
+				}else if(this.currentIndex===2){
+					this.currentExhibitons = this.exhibitionsOver
+					this.currentSalons = this.salonsOver
+				}else {
+					this.currentExhibitons=this.exhibitionsDetail
+					this.currentSalons = this.salons
+				}
 			},
-			//专辑区域的事件
-			toChair(item){
-				uni.$emit('albumImg',item);
+			//沙龙tab下的点击跳往沙龙界面
+			toArtSalon(id){
 				uni.navigateTo({
-					url:"../album-template/album-template"
+					url:"../artSalon/artSalon?id="+id
 				})
 			},
-			toArtSalon(){
+			//live专区tab下线上展览的点击
+			toLiving(id){
 				uni.navigateTo({
-					url:"../artSalon/artSalon"
+					url:"../living/living?id="+id,
 				})
-			}
+			},
+			//live专区tab下专辑的点击
+			toChair(id){
+				console.log(id)
+				uni.navigateTo({
+					url:"../album-template/album-template?id="+id
+				})
+			},
+			//live专区tab下最底部的点击
+			toCourse(id){
+				uni.navigateTo({
+					url:"../course-template/course-template?id="+id
+				})
+			},
+			//展览获取
+			async getExhibitions(){
+				const res = await this.$myRequest({
+					url:"/exhibitions"
+				})
+				this.exhibitionsDetail=res.data.data.list;
+				this.exhibitionsDetail.forEach((item,index) => {
+					if(item.status===0){
+						this.exhibitionsBefore.push(item)
+					}else if(item.status===1){
+						this.exhibitionsLiving.push(item)
+					}else if(item.status===2){
+						this.exhibitionsOver.push(item);
+					}
+				})
+			},
+			async getSalons(){
+				const res = await this.$myRequest({
+					url:"/salons",
+				})
+				this.salons=res.data.data.list;
+				this.salons.forEach((item,index) => {
+					if(item.status===0){
+						this.salonsBefore.push(item)
+					}else if(item.status===1){
+						this.salonsLiving.push(item)
+					}else if(item.status===2){
+						this.salonsOver.push(item);
+					}
+				})
+			},
+			async getCourse(){
+				const res = await this.$myRequest({
+					url:"/courses",
+				})
+				this.courseDetail = res.data.data.list;
+			},
+			async getLive(){
+				const res = await this.$myRequest({
+					url:"/live-shows",
+				})
+				this.liveDetail = res.data.data.list;
+			},
 		},
 		onLoad() {
 			uni.setNavigationBarTitle({
@@ -196,6 +259,16 @@
 			        timingFunc: 'easeIn'
 			    }
 			})
+			this.getExhibitions()
+			this.currentExhibitons=this.exhibitionsLiving //默认进入时的初始化
+			this.getSalons();
+			this.currentSalons=this.salonsLiving
+			this.getCourse();
+			this.getLive();
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>
@@ -513,35 +586,44 @@
 						.item-left{
 							width: 260rpx;
 							height: 332rpx;
+							position: absolute;
+							bottom: 50rpx;
+							left: 26rpx;
 							.item-image{
 								// 115x170
-								position: absolute;
 								width: 260rpx;
 								height: 332rpx;
 								border-radius: 10rpx;
-								bottom: 50rpx;
-								left: 26rpx;
 								box-shadow: 0 0 15rpx 0 #666;
 							}
 						}
 						.item-right{
-							margin-left: -100rpx;
+							width: 360rpx;
+							height: 227rpx;
+							position: absolute;
+							right: 20rpx;
+							top: 20rpx;
 							.item-right-title{
 								font-size: 30rpx;
 								color: @color;
-								line-height: 60rpx;
+								margin-bottom: 20rpx;
 							}
 							.item-right-des{
 								font-size: 16rpx;
-								line-height: 60rpx;
+								height: 115rpx;
+								overflow: hidden;
+								width: 100%;
 								color: #8C8C8E;
 							}
 							.item-tabs{
-								margin-top: 30rpx;
+								margin-top: 20rpx;
 								display: flex;
-								justify-content: space-between;
+								justify-content: flex-start;
 								width: 310rpx;
 								height: 36rpx;
+								position: absolute;
+								bottom: 0;
+								left: 0;
 								.tab{
 									// 38x18（单个）
 									// 左右间隔13	5
@@ -553,6 +635,7 @@
 									border: 1rpx solid #4E72A5;
 									text-align: center;
 									color: #4E72A5;
+									margin-right: 20rpx;
 								}
 							}
 						}
@@ -569,7 +652,6 @@
 					}
 				}
 			}
-		
 		}
 	}
 </style>

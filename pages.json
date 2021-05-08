@@ -1,6 +1,21 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/wander/wander",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		
+		{
 		    "path" : "pages/areo-main/areo-main",
 		    "style" :                                                                                    
 		    {
@@ -74,6 +89,15 @@
 		    
 		},
 		{
+		    "path" : "pages/order-form/order-form",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
 		    "path" : "pages/collection/collection",
 		    "style" :                                                                                    
 		    {
@@ -90,15 +114,6 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		},
-		
-		{
-			"path" : "pages/wander/wander",
-			"style" :                                                                                    
-			{
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
 		},
 		{
 		    "path" : "pages/login/login",
@@ -163,14 +178,6 @@
 		    }
 		    
 		},
-		
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		
 		{
 		    "path" : "pages/real-time-communication/real-time-communication",
 		    "style" :                                                                                    
@@ -180,16 +187,6 @@
 		        "enablePullDownRefresh": false
 		    }
 		},
-		{
-		    "path" : "pages/living/living",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},
-		
 		{
 		    "path" : "pages/broadcast/broadcast",
 		    "style" :                                                                                    
@@ -225,8 +222,16 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+        {
+            "path" : "pages/living/living",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "展览",
+                "enablePullDownRefresh": false
+            }
+            
         }
-        
         
         ,{
             "path" : "pages/communication-circle/communication-circle",

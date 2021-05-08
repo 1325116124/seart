@@ -45,6 +45,7 @@ input{
 }
 .title .active{
     color: #006ad7;
+	font-weight: bold;
     /* 加粗了 
     font-weight: 700;*/
 
@@ -81,7 +82,9 @@ input{
 }
 .item-detail .item-title{
     display: block;
-    line-height: 42rpx;
+    line-height: 40rpx;
+	height: 40rpx;
+	overflow: hidden;
     font-size: 32rpx;
     color: #4F73A5;
 }

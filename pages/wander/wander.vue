@@ -111,10 +111,10 @@
 									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
-							<view class="location">
+							<!-- <view class="location">
 								<text class="iconfont icon-dingwei"></text>
-								<text class="distance">距1.5km</text>
-							</view>
+								<text class="distance">{{item.distance/1000}}km</text>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -150,10 +150,10 @@
 			return {
 				isInputActive:false,//判断输入框是否focus
 				swiperImg: [
-					'http://47.112.188.99/images/shuffling.jpg',					
-					'http://47.112.188.99/images/1.png',
-					'http://47.112.188.99/images/2.png',
-					'http://47.112.188.99/images/3.png'
+					'http://112.74.59.218/images/shuffling.jpg',					
+					'http://112.74.59.218/images/1.png',
+					'http://112.74.59.218/images/2.png',
+					'http://112.74.59.218/images/3.png'
 				],
 				exhibitions:[],
 				salons:[],//沙龙的信息
@@ -272,21 +272,28 @@
 				}
 			},
 		},
-		
+		onShow(){
+			if(uni.getStorageSync('user')){
+				this.getUserLocation()
+				this.getNearbyExhi()
+			}
+		},
 		onLoad() {
 			this.isLogin();
+			//获取缓存里的用户地理位置
 			this.getExhibitions();
 			this.getSalons();
 			this.getLiveShow();
-			this.showLoading = false;
-			//获取缓存里的用户地理位置
 			this.getUserLocation();
-			this.getNearbyExhi()
-			console.log(getApp().globalData.text)
+			if(uni.getStorageSync('user')){
+				this.getNearbyExhi()
+			}
+			this.showLoading = false;
 		},
 		onUnload() {
 			this.showLoading = true;
-		}
+		},
+		
 	}
 </script>
 
@@ -619,7 +626,10 @@
 								}
 								.item-right-des{
 									font-size: 16rpx;
-									line-height: 30rpx;
+									// line-height: 30rpx;
+									height: 115rpx;
+									overflow: hidden;
+									width: 100%;
 									color: #8C8C8E;
 								}
 								.item-tabs{

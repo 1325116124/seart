@@ -37,6 +37,16 @@
 					</view>
 			</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
+		<!-- 当标签选择超过三个的时候 弹出 -->
+		<uni-popup ref="popup" type="dialog">
+		    <uni-popup-dialog mode="base" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm" title="提示" content="标签最多选择三个哦!">
+				<view class="test">
+					<view class="title">提示</view>
+					<view class="content">标签最多选择三个哦！</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -54,7 +64,8 @@
 				isChanged2:[],
 				isSelectedArray2:[],
 				//总的标签，用于放入input框
-				isSelectedArraySum:[]
+				isSelectedArraySum:[],
+				showLoading:true,
 			}
 		},
 		//注册提示窗口的子组件
@@ -63,6 +74,13 @@
 			uniPopupDialog
 		},
 		methods: {
+			//<!-- 当标签选择超过三个的时候 弹出 -->
+			open() {
+				this.$refs.popup.open()
+			},
+			close() {
+				this.$refs.popup.close()
+			},
 			changeInputClass(){
 				this.isInputActive=true;
 			},
@@ -71,9 +89,12 @@
 			},
 			changeWord(index){
 				if(this.isChanged.indexOf(index) === -1){
-					this.isChanged.push(index);
 					if(this.isSelectedArraySum.length<3){
 						this.isSelectedArraySum.push(this.popular_word[index])
+						this.isChanged.push(index);
+					}else{
+						this.open()
+						return;
 					}
 				}else{
 					this.isChanged.splice(this.isChanged.indexOf(index),1);
@@ -86,8 +107,13 @@
 			},
 			changeWord2(index){
 				if(this.isChanged2.indexOf(index) === -1){
-					this.isChanged2.push(index);
-					this.isSelectedArraySum.push(this.classify_word[index])
+					if(this.isSelectedArraySum.length<3){
+						this.isChanged2.push(index);
+						this.isSelectedArraySum.push(this.classify_word[index])
+					}else{
+						this.open()
+						return;
+					}
 				}else{
 					this.isChanged2.splice(this.isChanged2.indexOf(index),1);
 					this.isSelectedArraySum.remove(this.classify_word[index]);
@@ -146,6 +172,12 @@
 		},
 		watch:{
 			
+		},
+		onLoad() {
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>

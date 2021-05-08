@@ -32,6 +32,7 @@
 				</view>
 			</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -41,6 +42,7 @@
 			return {
 				id:0,
 				albumDetail:{},
+				showLoading:true
 			}
 		},
 		methods: {
@@ -60,6 +62,10 @@
 		onLoad(options) {
 			this.id=options.id
 			this.getAlbum();
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>

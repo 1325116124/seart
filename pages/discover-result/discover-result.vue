@@ -52,7 +52,7 @@
 				</view>
 				<!-- 当索引为2的时候 -->
 				<view class="result-items3" v-if="functionIndex===2">
-					<view class="result-items3-top">
+					<view class="result-items3-top" v-if="exhibitionsLiving.length!==0">
 						<view class="center2-top-top">
 							<txet class="block"></txet>
 							<text class="center2-top-title">线上展览</text>
@@ -99,7 +99,7 @@
 								</view>
 							</view>
 							<view class="location">
-								<text class="iconfont icon-icon-test"></text>
+								<text class="iconfont icon-dingwei"></text>
 								<text class="distance">1.5km</text>
 							</view>
 						</view>	
@@ -107,7 +107,7 @@
 				</view>
 				<view class="result-items2" v-if="functionIndex===2">
 					<view class="result-items2-body">
-						<view class="result-items2-item" v-for="(item,index) in liveDetail" :key="index" @tap="toCourse(item.id)">
+						<view class="result-items2-item" v-for="(item,index) in liveDetail" :key="index" @tap="toClassify(item.id,item.type)">
 							<view class="item-left">
 								<image class="item-image" :src="item.introImage" mode="aspectFill"></image>
 							</view>
@@ -131,6 +131,7 @@
 			
 			<!-- <recommend-exhibits v-else="recommendIndex===1"></recommend-exhibits> -->
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -145,21 +146,10 @@
 				recommendIndex:0,
 				functionTitle:["展览","沙龙","live专区"],
 				functionIndex:0,
+				//存放传过来的所有标签
 				isSelectedArraySum:[],
-				albumArea:[
-					{
-						albumImage:'../../static/images/wander-exhibits1.jpg',
-						albumDescription:'雕像之谈合集'
-					},
-					{
-						albumImage:'../../static/images/wander-exhibits1.jpg',
-						albumDescription:'如何理解艺术之美'
-					},
-					{
-						albumImage:'../../static/images/wander-exhibits1.jpg',
-						albumDescription:'古籍收藏'
-					}
-				],
+				//用来存放所有的返回结果
+				allResults:[],
 				exhibitionsDetail:[],
 				exhibitionsLiving:[],//正在直播的
 				exhibitionsOver:[],//已经结束的
@@ -172,7 +162,7 @@
 				currentSalons:[],//用来渲染的,
 				courseDetail:[],//用来存放课程信息的,
 				liveDetail:[],//用来存放live专区的信息
-				
+				showLoading:true
 			}
 		},
 		components:{
@@ -199,60 +189,52 @@
 				this.recommendIndex=index;
 			},
 			changeIndex(index){
-				this.functionIndex=index;
-				console.log(this.isSelectedArraySum[0])
+				this.functionIndex=index;	
 			},
 			delSelectedWord(item,index){
 				this.isSelectedArraySum.remove(item,index);
 			},
-			async getExhibitions(){
+			async getResults(){
 				const res = await this.$myRequest({
-					url:"/exhibitions"
+					url:"/discover/" + this.isSelectedArraySum +"/0/10",
+					method:"GET",
+					data:{
+						list:this.isSelectedArraySum
+					},
+					dataType: "json"
 				})
-				this.exhibitionsDetail=res.data.data.list;
-				this.exhibitionsDetail.forEach((item,index) => {
-					if(item.status===0){
-						this.exhibitionsBefore.push(item)
-					}else if(item.status===1){
-						this.exhibitionsLiving.push(item)
-					}else if(item.status===2){
-						this.exhibitionsOver.push(item);
+				this.allResults = res.data.data
+				this.allResults.forEach((value,index) => {
+					if(value.type===0){
+						this.exhibitionsDetail.push(value);
+						if(value.status===0){
+							this.exhibitionsBefore.push(value)
+						}else if(value.status===1){
+							this.exhibitionsLiving.push(value)
+							this.liveDetail.push(value)
+						}else if(value.status===2){
+							this.exhibitionsOver.push(value);
+						}
+					}else if(value.type===1){
+						this.salons.push(value)
+						if(value.status===0){
+							this.salonsBefore.push(value)
+						}else if(value.status===1){
+							this.salonsLiving.push(value)
+							this.liveDetail.push(value)
+						}else if(value.status===2){
+							this.salonsOver.push(value);
+						}
+					}else if(value.type===2){
+						this.courseDetail.push(value)
+						if(value.status===1){
+							this.liveDetail.push(value)
+						}
 					}
 				})
+				console.log(this.exhibitionsLiving)
 			},
-			toLiving(id){
-				console.log(id);
-				uni.navigateTo({
-					url:"../living/living?id="+id
-				})
-			},
-			async getSalons(){
-				const res = await this.$myRequest({
-					url:"/salons",
-				})
-				this.salons=res.data.data.list;
-				this.salons.forEach((item,index) => {
-					if(item.status===0){
-						this.salonsBefore.push(item)
-					}else if(item.status===1){
-						this.salonsLiving.push(item)
-					}else if(item.status===2){
-						this.salonsOver.push(item);
-					}
-				})
-			},
-			async getCourse(){
-				const res = await this.$myRequest({
-					url:"/courses",
-				})
-				this.courseDetail = res.data.data.list;
-			},
-			async getLive(){
-				const res = await this.$myRequest({
-					url:"/live-shows",
-				})
-				this.liveDetail = res.data.data.list;
-			},
+
 			//沙龙tab下的点击跳往沙龙界面
 			toSalon(id){
 				uni.navigateTo({
@@ -267,16 +249,25 @@
 			},
 			//live专区tab下专辑的点击
 			toChair(id){
-				console.log(id)
 				uni.navigateTo({
 					url:"../album-template/album-template?id="+id
 				})
 			},
 			//live专区tab下最底部的点击
-			toCourse(id){
-				uni.navigateTo({
-					url:"../course-template/course-template?id="+id
-				})
+			toClassify(id,type){
+				if(type===0){
+					uni.navigateTo({
+						url:"../living/living?id="+id,
+					})
+				}else if(type===1){
+					uni.navigateTo({
+						url:"../artSalon/artSalon?id="+id
+					})
+				}else if(type===2){
+					uni.navigateTo({
+						url:"../course-template/course-template?id="+id
+					})
+				}
 			},
 		},
 		onLoad(){
@@ -285,16 +276,15 @@
 				 this.isSelectedArraySum=data.isSelectedArraySum
 				 console.log(this.isSelectedArraySum)
 			 })
-			 this.getExhibitions();
+			 this.getResults()
 			 this.currentExhibitons=this.exhibitionsLiving //默认进入时的初始化
-			 this.getSalons();
 			 this.currentSalons=this.salonsLiving
-			 this.getCourse();
-			 this.getLive();
+			 this.showLoading = false;
 		},
 		onUnload() {
 			const eventChannel = this.getOpenerEventChannel()
 			eventChannel.emit('acceptDataFromOpenedPage',{isAccept:true});
+			this.showLoading = true;
 		}
 	}
 </script>
@@ -534,10 +524,10 @@
 							height: 32rpx;
 							font-size: 16rpx;
 							border-radius: 16rpx;
-							background-color: rgba(248,248,248,0.5);
+							background-color: rgba(248,248,248,0.9);
 							line-height: 32rpx;
 							text-align: center;
-							color: #fff;
+							color: #888;
 						}
 					}
 				}
@@ -585,7 +575,9 @@
 								}
 								.item-right-des{
 									font-size: 16rpx;
-									line-height: 30rpx;
+									height: 115rpx;
+									overflow: hidden;
+									width: 100%;
 									color: #8C8C8E;
 								}
 								.item-tabs{
@@ -629,6 +621,7 @@
 				.result-items3{
 					.result-items3-top{
 						margin-top: 20rpx;
+						margin-bottom: 60rpx;
 						.center2-top-top{
 							width: 100%;
 							line-height: 40rpx;
@@ -674,7 +667,6 @@
 						}
 					}
 					.result-items3-center{
-						margin-top: 60rpx;
 						.center2-center-top{
 							width: 100%;
 							line-height: 40rpx;

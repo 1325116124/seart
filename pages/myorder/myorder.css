@@ -84,6 +84,7 @@
     border: 2rpx solid #139bf5;
     border-radius: 20rpx;
     box-shadow: 0 3rpx 10rpx rgb(200,200,200) inset,0 3rpx 10rpx rgb(200,200,200);
+	z-index: 999;
 }
 /* 订单过期效果 */
 .isUsed{

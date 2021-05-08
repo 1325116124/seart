@@ -3,20 +3,24 @@
 		<view class="course-body">
 			<view class="course-top">
 				<view class="course-top-top">
-					<image :src="salon.introImage" mode="aspectFill"></image>
+					<image :src="salon.introImage" mode="aspectFill" @tap="toBroadcast"></image>
+					<view class="enter-living" @tap="toBroadcast" v-show="salon.status===1||salon.status===0">进入直播</view>
+					<view class="enter-living" @tap="toBroadcast" v-show="salon.status===2">进入回放</view>
 					<view class="icons">
-						<view class="icon">
-							<view class="iconfont icon-shoucang"></view>
+						<view class="icon" @tap="clickFavours">
+							<view class="iconfont icon-shoucang" :class="{iconActive:favours}"></view>
 							<text>{{salon.favours}}</text>
 						</view>
-						<view class="icon">
-							<view class="iconfont icon-shizhong"></view>
+						<view class="icon" @tap="clickParticipants">
+							<view class="iconfont icon-shizhong" :class="{iconActive:participants}"></view>
 							<text>{{salon.participants}}</text>
 						</view>
-						<view class="icon">
-							<view class="iconfont icon-fenxiang"></view>
-							<text>{{salon.shares}}</text>
-						</view>
+						<button @tap="clickShares" open-type="share">
+							<view class="icon">
+								<view class="iconfont icon-fenxiang" :class="{iconActive:true}"></view>
+								<text>{{salon.shares}}</text>
+							</view>
+						</button>
 					</view>
 				</view>
 				<view class="course-top-center">
@@ -32,7 +36,7 @@
 				</view>
 			</view>
 			<view class="course-center">
-				<view class="course-center-top">
+				<view class="course-center-top" v-if="salons.members.length">
 					<view class="course-center-top-top">
 						<txet class="block"></txet>
 						<text class="course-center-top-title">主讲团队</text>
@@ -50,39 +54,21 @@
 				</view>
 			</view>
 			<view class="course-bottom">
-				<view class="comment">
+				<view class="comment" v-if="commentNum > 0">
 					<view class="comment-top">
 						<txet class="block"></txet>
 						<text class="comment-title">评论</text>
-						<text class="iconfont icon-pinglun">52</text>
+						<text class="iconfont icon-pinglun">{{commentNum}}</text>
 					</view>
 					<scroll-view scroll-x="true" class="comment-area">
 						<view class="comment-body">
-							<view class="comment-item">
+							<view class="comment-item" v-for="(item,index) in commentInfo" :key="item.id">
 								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
+									<view class="user-image"><image :src="item.avatar" mode="aspectFill"></image></view>
+									<text class="user-id"{{item.nickName}}</text>
 								</view>
 								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
-								</view>
-							</view>
-							<view class="comment-item">
-								<view class="user-info">
-									<view class="user-image"><image src="../../static/images/wander-exhibits1.jpg" mode="aspectFill"></image></view>
-									<text class="user-id">草间弥生</text>
-								</view>
-								<view class="comment-content">
-									<text>虾忌与某些水果同吃。虾含有比较丰富的蛋白质和钙等营养物质，如果把它们与合有鞣酸的水果。</text>
+									<text>{{item.content}}</text>
 								</view>
 							</view>
 						</view>
@@ -91,6 +77,7 @@
 			</view>
 		<view class="purchase">购买门票</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -99,10 +86,31 @@
 		data() {
 			return {
 				id:0,
-				salon:{}
+				salon:{},
+				//存放缓存中的用户信息
+				userInfo:{},
+				//收藏的标志，默认为不收藏
+				favours:false,
+				//打卡的标志，默认为不打卡
+				participants:false,
+				showLoading:true,
+				//评论数
+				commentNum:0,
+				// 评论数据
+				commentInfo:{},
+			}
+		},
+		watch:{
+			commentNum:function(){
+				this.getComment()
 			}
 		},
 		methods: {
+			toBroadcast(){
+				uni.navigateTo({
+					url:"../real-time-communication/real-time-communication?id=" + this.id + "&type=1"
+				})
+			},
 			async getSalonDetail(){
 				const res = await this.$myRequest({
 					url:"/salons/"+this.id
@@ -111,17 +119,127 @@
 				//处理传回来的json团队成员信息
 				let tempArr=[]
 				let tempObj = {}
-				for(let i = 0;i < this.salon.members.length;i++){
-					tempObj = JSON.parse(this.salon.members[i])
-					tempArr.push(tempObj);
+				if(this.salon.members){
+					for(let i = 0;i < this.salon.members.length;i++){
+						tempObj = this.salon.members[i]
+						tempArr.push(tempObj);
+					}
 				}
 				this.salon.members=tempArr;
+			},
+			//点击收藏按钮的相关操作
+			clickFavours(){
+				let isFavour = 0;
+				this.favours = !this.favours
+				if(this.favours){
+					isFavour = 1;
+				}else{
+					isFavour = -1;
+				}
+				this.$myRequest({
+					url:"/shows/" + this.id + "/favours",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},
+					data:{
+						userId:this.userInfo.openId,
+						isFavour:isFavour
+					},
+					success: res => {
+						console.log(res)
+					},
+					fail: err => {
+						console.log(err)
+					}
+				})
+				//click完之后重新调取api获取数据
+				this.getSalonDetail()
+			},
+			//点击打卡图标的相关操作
+			clickParticipants(){
+				let isParticipant = 0;
+				this.participants = !this.participants
+				if(this.participants){
+					isParticipant = 1;
+				}else{
+					isParticipant = -1;
+				}
+				this.$myRequest({
+					url:"/shows/" + this.id + "/participants",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},
+					data:{
+						userId:this.userInfo.openId,
+						isParticipant:isParticipant
+					},
+					success: res => {
+						console.log(res)
+					},
+					fail: err => {
+						console.log(err)
+					}
+				})
+				//click完之后重新调取api获取数据
+				this.getSalonDetail()
+			},
+			//点击分享图标的操作
+			clickShares(){
+				this.$myRequest({
+					url:"/shows/" + this.id + "/shares",
+					method:"PUT",
+					header:{
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8' 
+					},	
+				})
+				//click完之后重新调取api获取数据
+				this.getSalonDetail()
+				uni.share({
+					provider: "weixin",
+					scene: "WXSceneSession",
+					type: 1,
+					summary: "快来和我一起看沙龙",
+					success: function (res) {
+						console.log("success:" + JSON.stringify(res));
+					},
+					fail: function (err) {
+						console.log("fail:" + JSON.stringify(err));
+					}
+				})
+			},
+			//获取缓存中的用户信息
+			getUserInfo(){
+				if(uni.getStorageSync('user')){
+					this.userInfo = uni.getStorageSync('user')
+				}
+			},
+			//获取评论数
+			async getCommentNum(){
+				const res = await this.$myRequest({
+					url:"/comment/getPages/1/" + this.id
+				})
+				this.commentNum = res.data.data
+			},
+			//获取所有的评论
+			async getComment(){
+				const res = await this.$myRequest({
+					// /comment/1/16/0/14
+					url:"/comment/1/" + this.id + "/0/" + this.commentNum
+				})
+				this.commentInfo = res.data.data
 			}
 		},
 		onLoad(options) {
 			this.id=options.id
 			this.getSalonDetail()
-			
+			this.getUserInfo()
+			this.getCommentNum()
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>
@@ -143,6 +261,19 @@
 						border-bottom-right-radius: 40rpx;
 						border-bottom-left-radius: 40rpx;
 					}
+					.enter-living{
+						position: absolute;
+						width: 136rpx;
+						height: 54rpx;
+						line-height: 54rpx;
+						font-size: 26rpx;
+						text-align: center;
+						border-radius: 24rpx 0 0 24rpx;
+						background-color: #fff;
+						color: @color;
+						top: 350rpx;
+						right: 0;
+					}
 					// 68x27	12 0 0 12
 					.icons{
 						width: 700rpx;
@@ -152,24 +283,47 @@
 						.icon{
 							margin-right: 40rpx;
 							text-align: center;	
+							font-weight: bold;
 							.iconfont{
 								width: 30rpx;
 								height: 28rpx;
 							}
 							&:nth-child(2){
 								.iconfont{
-									color: @color;
 									font-size: 36rpx;
 								}
 							}
 							&:last-child{
-								margin-right: 20rpx;
+								width: 40rpx;
+								height: 100rpx;
+								margin-right: 0;
+								position: absolute;
+								top: -22rpx;
+								left: 4rpx;
+								display: flex;
+								align-items: flex-start;
+								flex-wrap: wrap;
+								text{
+									margin-top:57%;
+								}
 							}
 							text{
-								margin-top: 10rpx;
-								font-size: 18rpx;
+								font-size: 20rpx;
+							}
+							.iconActive{
+								color: #0069D6;
 							}
 						}
+						button {
+							width: 40rpx;
+							height: 100rpx;
+						  background-color: #fff;
+						  &::after{
+						   border: none;
+						  }
+						  margin: 0;
+						  padding: 0;
+						 }
 					}
 				}
 				.course-top-center{
@@ -242,7 +396,7 @@
 							width: 100%;
 							overflow: hidden;
 							.team-show-body{
-								height: 452rpx;
+								// height: 452rpx;
 								display: flex;
 								justify-content: flex-start;
 								white-space: nowrap;
@@ -400,8 +554,11 @@
 									}
 								}
 								.comment-content{
-									margin-top: 20rpx;
-									line-height: 50rpx;
+									margin-top: 40rpx;
+									// line-height: 50rpx;
+									height: 35rpx;
+									width: 100%;
+									overflow: hidden;
 									font-size: 22rpx;
 									color: #aaa;
 									white-space: normal;
@@ -410,6 +567,7 @@
 						}
 					}
 				}
+			
 			}
 			.purchase{
 				// 254x52	12 0 46 12

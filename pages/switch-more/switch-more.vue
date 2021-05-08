@@ -65,6 +65,7 @@
             <view class="enter">Enter></view>
         </view>
     </view>
+	
 </view>
 </template>
 

@@ -235,6 +235,7 @@
 			</view>
 			<view class="purchase">购买门票</view>
 		</view>
+		<loading :showLoading="showLoading"></loading>
 	</view>
 </template>
 
@@ -254,11 +255,19 @@
 						height: 30,
 						alpha:0.3
 					}
-				]
+				],
+				showLoading:true
 			}
 		},
 		methods: {
 			
+		},
+		onLoad(options) {
+			console.log(options)
+			this.showLoading = false;
+		},
+		onUnload() {
+			this.showLoading = true;
 		}
 	}
 </script>

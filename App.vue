@@ -1,18 +1,17 @@
 <script>
 	export default {
 		globalData: {  
-			text: 'text'  
+			text: 'text',
+			 BASE_URL:'http://112.74.59.218:8080'
 		},  
 		onLaunch: function() {
 			//实现remove的方法
 			Array.prototype.remove = function(val) {
-			var index = this.indexOf(val);
-			if (index > -1) {
-			this.splice(index, 1);
-			}
+				var index = this.indexOf(val);
+				if (index > -1) {
+				this.splice(index, 1);
+				}
 			};
-			
-			
 		},
 		onShow: function() {
 			
@@ -22,9 +21,8 @@
 		}
 	}
 </script>
-	
 <style>
-	html,page,#app {height: 100%;}
+	html,page,#app {height: 100%;font-family: .PingFang SC;}
 	::-webkit-scrollbar{
 	
 	  display: none;

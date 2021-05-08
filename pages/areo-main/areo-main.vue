@@ -4,11 +4,11 @@
     <!-- 个人信息头部 -->
     <view class="areo-top">
         <view class="user">
-            <navigator url="../../pages/user-self/user-self">
-                <image class="user-image" src="/static/images/user-image.jpg" mode="aspectFit" lazy-load="false" @error @load></image>
-            </navigator>
+            <view @tap="toMyself">
+                <image class="user-image" :src="userInfo.avatarUrl" mode="aspectFit" lazy-load="false" @error @load></image>
+            </view>
             <view class="user-info">
-                <text class="user-name">想不出名字啦</text>
+                <text class="user-name">{{userInfo.nickName}}</text>
                 <view class="user-customization-block" :id="isDayTime ? 'UserInDay':''">
                     <text class="user-customization">我的艺术定制</text>
                 </view>
@@ -19,11 +19,11 @@
             <text class="user-follow">
                 <text class="followed">
                     <text class="follow-title">关注</text>
-                    <text class="num">12</text>
+                    <text class="num">{{userMine.follows}}</text>
                 </text>
                 <text class="follower">
                     <text class="follow-title">粉丝</text>
-                    <text class="num">12</text>
+                    <text class="num">{{userMine.fans}}</text>
                 </text>
             </text>
         </view>
@@ -35,37 +35,37 @@
                 <view class="title-bar"></view>
                 <text class="title-name">我的日程</text>
             </view>
-            <navigator url="../../pages/schedule/schedule">
-                <view class="schedule-and-order">
-                    <text>广州车展2021年7月5日 14：00</text>
+            <!-- <navigator url="../../pages/schedule/schedule"> -->
+                <view class="schedule-and-order" @tap="toSchedule()">
+                    <text>{{userSchedule[0].name}} {{myDate}}</text>
                 </view>
-            </navigator>
+            <!-- </navigator> -->
             <view class="title">
                 <view class="title-bar"></view>
                 <text class="title-name">我的订单</text>
             </view>
-            <navigator url="../../pages/myorder/myorder">
+            <view @tap="toOrder()">
                 <view class="schedule-and-order">
-                    <text>2个待使用</text>
+                    <text>{{orderNum}}个待使用</text>
                 </view>
-            </navigator>
+            </view>
             <view class="title">
                 <view class="title-bar"></view>
                 <text class="title-name">我的收藏</text>
             </view>
             <view class="collection-block">
-                <navigator url="../../pages/collection/collection" class="collection-item">
+                <view class="collection-item" @tap="toCollection(0)">
                     <text class="category">展览</text>
-                    <text class="collection-count">共12个</text>
-                </navigator>
-                <navigator url="../../pages/collection/collection" class="collection-item">
+                    <text class="collection-count">共{{exhibitionsNum}}个</text>
+                </view>
+                <view class="collection-item" @tap="toCollection(1)">
                     <text class="category">沙龙</text>
-                    <text class="collection-count">共12个</text>
-                </navigator>
-                <navigator url="../../pages/collection/collection" class="collection-item">
+                    <text class="collection-count">共{{salonsNum}}个</text>
+                </view>
+                <view class="collection-item" @tap="toCollection(2)">
                     <text class="category">live</text>
-                    <text class="collection-count">共12个</text>
-                </navigator>
+                    <text class="collection-count">共{{coursesNum}}个</text>
+                </view>
             </view>
             <view class="title">
                 <view class="title-bar"></view>
@@ -77,41 +77,14 @@
                 <view class="scroll-line"></view>
                 <view class="scroll-dot"></view>
                 <view class="date">一天前</view>
-                <scroll-view class="history-scroll" scroll-x="true" @scroll>
-                    <view class="history-item">
+                <scroll-view class="history-scroll" scroll-x="true" @scroll @scrolltolower="loadingMore()">
+                    <view class="history-item" v-for="(item,index) in userHistory" :key="index" @tap="toClassify(item.id,item.type)">
                         <view class="pic-box">
                             <text class="tag">雕塑</text>
-                            <image class="pic" src="/static/images/album.jpg"></image>
+                            <image class="pic" src="../../static/images/broadcast.jpg" lazy-load="true" mode="aspectFill"></image>
                         </view>
                         <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <text class="tag">雕塑</text>
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <text class="tag">雕塑</text>
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <text class="tag">雕塑</text>
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
+                            <text class="intro">{{item.introduction}}</text>
                         </view>
                     </view>
                 </scroll-view>
@@ -121,36 +94,12 @@
                 <view class="scroll-dot"></view>
                 <view class="date">一天前</view>
                 <scroll-view class="history-scroll" scroll-x="true" @scroll>
-                    <view class="history-item">
+                    <view class="history-item" v-for="(item,index) in userHistory" :key="index" @tap="toClassify(item.id,item.type)">
                         <view class="pic-box">
-                            <image class="pic" src="/static/images/album.jpg"></image>
+                            <image class="pic" src="../../static/images/broadcast.jpg" lazy-load="true" mode="aspectFill"></image>
                         </view>
                         <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
-                        </view>
-                    </view>
-                    <view class="history-item">
-                        <view class="pic-box">
-                            <image class="pic" src="/static/images/album.jpg"></image>
-                        </view>
-                        <view class="text-box">
-                            <text class="intro">欧初捐赠文物纪念展”分为“诸家“历代陶瓷”、“文房用品”和“青铜器”四个篇章。</text>
+                            <text class="intro">{{item.introduction}}</text>
                         </view>
                     </view>
                 </scroll-view>
@@ -158,6 +107,7 @@
         </view>
         <view class="areo-bottom">......已经到底啦......</view>
     </view>
+	<loading :showLoading="showLoading"></loading>
 </view>
 </template>
 
@@ -168,16 +118,153 @@ export default {
   data() {
     return {
       hour: '',
-      isDayTime: false
+      isDayTime: false,
+	  //表示的是缓存里面的数据
+	  userInfo:{},
+	  //表示 的是用户我的页表里面的数据
+	  userMine:{},
+	  test:{},
+	  //记录用户的历史踪迹
+	  userHistory:[],
+	  //记录用户的日程
+	  userSchedule:[],
+	  //用来获取数据
+	  lastIndex:0,
+	  //加载一次获取的数量
+	  count:8,	
+	  exhibitionsNum:0,
+	  salonsNum:0,
+	  coursesNum:0,
+	  //订单数(未使用)
+	  orderNum:0,
+	  //订单总数
+	  orderSum:0,
+	  showLoading:true,
     };
   },
   components: {},
   props: {},
+  computed:{
+	myDate(){
+		let date = new Date()
+		return this.$formatDate(date)
+	},
+  },
+  methods:{
+	  //获取用户信息
+	   async getUserInfo(){
+		  if(uni.getStorageSync('user')){
+			  this.userInfo = uni.getStorageSync('user');
+			  const res = await this.$myRequest({
+				  url:"/user/getMine/" + this.userInfo.userId,
+			  })
+			  this.userMine = res.data.data
+			  console.log(this.userMine)
+		  } 
+	  },
+	  //获取历史记录
+	  async getHistory(){
+		  let res = await this.$myRequest({
+		  	url:"/user/getHistory/" + this.userInfo.userId + "/" + this.lastIndex + "/" + this.count,
+		  })
+		  this.userHistory = [...this.userHistory,...res.data.data]
+		  this.lastIndex += this.count
+	  },
+	  //加载更多
+	  loadingMore(){
+		this.showLoading=true;
+		this.getHistory();
+		this.showLoading=false
+	  }, 
+	  //获取我的日程
+	  async getMySchedule(){
+		  let res = await this.$myRequest({
+		  	url:"/user/getSchedules/" + this.userInfo.userId,
+		  })
+		  this.userSchedule = res.data.data
+	  },
+	  //前往我的日程
+	  toSchedule(){
+		  uni.navigateTo({
+		  	url:"../schedule/schedule?id="+this.userInfo.userId,
+		  })
+	  },
+	  //获取收藏各部分的总数
+	  async getCollection(){
+		  //showType 展览：0，沙龙：1，课程：2
+		  let showType = 0
+		  let res = await this.$myRequest({
+			  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+		  })
+		  this.exhibitionsNum = res.data.data;
+		  showType++;
+		  res = await this.$myRequest({
+		  	  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+		  })
+		  this.salonsNum = res.data.data;
+		  showType++;
+		  res = await this.$myRequest({
+		  	  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+		  })
+		  this.coursesNum = res.data.data;
+	  },
+	  //获取未使用订单的数量
+	  async getOrder(){
+		  // usedStatus，已使用:1,未使用:0
+		  let res = await this.$myRequest({
+			  url:"/order/nums/" + this.userInfo.userId + "?usedStatus=0",
+			  fail:err => {
+				  console.log(err)
+			  }
+		  })
+		  this.orderNum = res.data.data
+		  res = await this.$myRequest({
+		  	  url:"/order/nums/" + this.userInfo.userId
+		  })
+		  this.orderSum = res.data.data
+	  },
+	  //前往收藏页面
+	  toCollection(id){
+		  uni.navigateTo({
+			  url:"../../pages/collection/collection?id=" + id + "&exhibitionsNum=" + this.exhibitionsNum
+			  + "&salonsNum=" + this.salonsNum + "&coursesNum=" + this.coursesNum
+		  })
+	  },
+	  //前往订单页面
+	  toOrder(){
+		  uni.navigateTo({
+		  	url:"../../pages/myorder/myorder?orderNum="+this.orderSum
+		  })
+	  },
+	  //前往我的页面
+	  toMyself(){
+		  uni.navigateTo({
+			  url:"../../pages/user-self/user-self"+ "?exhibitionsNum=" + this.exhibitionsNum
+			  + "&salonsNum=" + this.salonsNum + "&coursesNum=" + this.coursesNum
+		  })
+	  },
+	  //根据type跳转到相对应的页
+	  toClassify(id,type){
+	  	if(type===0){
+	  		uni.navigateTo({
+	  			url:"../living/living?id="+id,
+	  		})
+	  	}else if(type===1){
+	  		uni.navigateTo({
+	  			url:"../artSalon/artSalon?id="+id
+	  		})
+	  	}else if(type===2){
+	  		uni.navigateTo({
+	  			url:"../course-template/course-template?id="+id
+	  		})
+	  	}
+	  },
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var hour = util.formatHour(new Date());
+  onLoad(){
+    let hour = util.formatHour(new Date());
     this.setData({
       hour: hour
     }); // 早上6点到晚上6点为白天
@@ -186,6 +273,13 @@ export default {
         isDayTime: true
       });
     }
+	
+	this.getUserInfo()
+	this.getHistory()
+	this.getMySchedule()
+	this.getCollection()
+	this.getOrder()
+	this.showLoading = false
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -220,7 +314,9 @@ export default {
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+	  this.getOrder()
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -228,7 +324,9 @@ export default {
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () {
+	  this.showLoading = true;
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -241,11 +339,6 @@ export default {
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-  methods: {
-    // () {
-    //   console.log("占位：函数  未声明");
-    // }
-  }
 };
 </script>
 <style>
@@ -434,6 +527,9 @@ export default {
   overflow: hidden;
   white-space: nowrap;
 }
+ .history-scroll {
+	 width: 620rpx;
+ }
 .history-item{
     display: inline-block;
     text-align: center;

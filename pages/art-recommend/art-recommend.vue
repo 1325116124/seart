@@ -6,14 +6,14 @@
         <movable-area class="move-body">
             <movable-view class="img-box" :style="'width:' + (pic_width*2) + 'rpx'" direction="horizontal" :inertia="true" :out-of-bounds="true" x="1000" @change="handlemove">
                 <text class="tag" :style="'opacity:' + opacity_tag">雕塑</text>
-                <image class="recommend-pic" src="/static/images/recommend-pic.jpg" :style="'width:' + (pic_width*2) + 'rpx'" mode="aspectFill"></image>
+                <image class="recommend-pic" :src="myArt.introImage" :style="'width:' + (pic_width*2) + 'rpx;'" mode="aspectFill" @tap="toClassify"></image>
             </movable-view>
         </movable-area>
         <view class="body-right" :style="'opacity:' + opacity_right">
             <view class="class-intro">
                 <view class="intro-title">课程介绍</view>
                 <view class="class-detail">
-                    “隐·形”的话题跨越时代和地域空间，又以其普适性、通识性毫无违和感地适用于我们所处的数码世代。此次参展的七位艺术家以各自不同的创作历程、视觉语言、表达方式、技术手段通过绘画、雕塑、摄影、版画、影像.......
+                   {{myArt.introduction}}
                 </view>
                 <view class="click-to-detail">详情</view>
             </view>
@@ -69,6 +69,7 @@
     <view class="slide" @touchstart="handletouchstart" @touchmove="handletouchmove" :style="'opacity:' + opacity_tag">
         左右滑动查看更多
     </view>
+	<loading :showLoading="showLoading"></loading>
 </view>
 </template>
 
@@ -82,43 +83,18 @@ export default {
       opacity_right: 0,
       opacity_left: 0,
       pic_width: 327,
-      ini_x: 210
+      ini_x: 210,
+	  //传回来的类型
+	  type:0,
+	  //传回来的id
+	  id:0,
+	  //接受展示的数据
+	  myArt:{},
+	  showLoading:true
     };
   },
   components: {},
   props: {},
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {},
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
   methods: {
     handlemove(e) {
       let ini_x = this.ini_x;
@@ -157,8 +133,83 @@ export default {
       this.setData({
         lastX: e.touches[0].pageX
       });
-    }
-  }
+    },
+  //获取art数据
+	async getArt(){
+	  if(this.type==0){
+		  let res = await this.$myRequest({
+			  url:"/exhibitions/" + this.id
+		  })
+		 this.myArt = res.data.data
+	  }else if(this.type==1){
+		  let res = await this.$myRequest({
+		  	  url:"/salons/" + this.id
+		   })
+		  this.myArt = res.data.data
+	  }else if(this.type==2){
+		  let res = await this.$myRequest({
+		  	  url:"/courses/" + this.id
+		   })
+		  this.myArt = res.data.data
+	  }
+	},
+	//根据type跳转到相对应的页
+	toClassify(){
+		if(this.type==0){
+			uni.navigateTo({
+				url:"../living/living?id="+this.id,
+			})
+		}else if(this.type==1){
+			uni.navigateTo({
+				url:"../artSalon/artSalon?id="+this.id
+			})
+		}else if(this.type==2){
+			uni.navigateTo({
+				url:"../course-template/course-template?id="+this.id
+			})
+		}
+	},
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+	  this.id = options.id
+	  this.type = options.type
+	  this.getArt()
+	  this.showLoading = false;
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {},
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {},
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {},
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+	  this.showLoading = true
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {},
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {},
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {},
+  
 };
 </script>
 <style>
