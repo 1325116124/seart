@@ -116,6 +116,10 @@
     line-height: 36rpx;
     color: #5F83B1;
 }
+.schedule-item .schedule-matters .matters-content{
+	height: 108rpx;
+	overflow: hidden;
+}
 .main-body map{
     margin: 42rpx 0 0 0;
     height: 180rpx;

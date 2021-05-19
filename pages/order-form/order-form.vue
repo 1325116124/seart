@@ -92,6 +92,7 @@ export default {
   methods:{
 	  //自定义格式化时间2:2021.7.21
 	  formatDate(date){
+		date *= 1000
 	  	let d = new Date(date)
 	  	let month = '' + (d.getMonth() + 1)
 	  	let day = '' + d.getDate()
@@ -110,7 +111,7 @@ export default {
 	  //获取订单信息
 	  async getOrderDetail(){
 		  let res = await this.$myRequest({
-			  url:"/order/getOrder/" + this.id
+			  url:"/orders/getOrder/" + this.id
 		  })
 		  this.orderDetail = res.data.data
 		  if(this.orderDetail.price % 1 === 0){

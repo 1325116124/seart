@@ -1,39 +1,40 @@
 <template>
 	<view class="wander">
-		<view class="wander-body">
-			<view class="wander-top">
-				<!-- 搜索框模块 -->
-				<view class="search" >
-					<text class="iconfont icon-fangdajing" @click='toSearch'></text>
-					<!-- 按照设计图来看，搜索点击之后没有动态样式 -->
-					<input type="text" placeholder-class="Search" placeholder="Discover" 
-					@focus="changeInputClass" @blur="removeInputClass" @click='toSearch' disabled="true">
-					<view class="location">
-						<text class="iconfont icon-dingwei"></text>
-						<text>广州</text>
-					</view>
+		<view class="wander-top">
+			<!-- 搜索框模块 -->
+			<view class="search" >
+				<text class="iconfont icon-fangdajing" @click='toSearch'></text>
+				<!-- 按照设计图来看，搜索点击之后没有动态样式 -->
+				<input type="text" placeholder-class="Search" placeholder="Discover" 
+				@focus="changeInputClass" @blur="removeInputClass" @click='toSearch' disabled="true">
+				<view class="location">
+					<text class="iconfont icon-dingwei"></text>
+					<text>广州</text>
 				</view>
-				<!-- ------------------------------------------------ -->
-				
-				<!-- 轮播图模块 -->
-				<view class="container">
-					<swiper :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" 
-					:current="swiperCurrent" @change="changeSwiper">
-						<swiper-item v-for="item in swiperImg" @click="toLiving">
-							<view class="swiper-item">
-								<image :src="item" mode="aspectFill"></image>
-								<view class="description">欧初捐赠文物纪念展"分为“诸家合璧”“历代陶瓷”、“文房
-								<br>用品”和“青铜器”四个篇章。欧初先生希望能但求天下暖......</view>
-							</view>
-						</swiper-item>
-					</swiper>
-					<view class="swiper-dots">
-						<view class="dot" :class="index===swiperCurrent ? 'active' : ''"
-						v-for="(item,index) in swiperImg" :key="index"></view>
-					</view>
-				</view>
-				<!-- ------------------------------------------------------- -->
 			</view>
+			<!-- ------------------------------------------------ -->
+			
+			<!-- 轮播图模块 -->
+			<view class="container">
+				<swiper :circular="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" 
+				:current="swiperCurrent" @change="changeSwiper">
+					<swiper-item v-for="item in swiperImg" @click="toLiving">
+						<view class="swiper-item">
+							<image :src="item" mode="aspectFill"></image>
+							<view class="description">欧初捐赠文物纪念展"分为“诸家合璧”“历代陶瓷”、“文房
+							<br>用品”和“青铜器”四个篇章。欧初先生希望能但求天下暖......</view>
+						</view>
+					</swiper-item>
+				</swiper>
+				<view class="swiper-dots">
+					<view class="dot" :class="index===swiperCurrent ? 'active' : ''"
+					v-for="(item,index) in swiperImg" :key="index"></view>
+				</view>
+			</view>
+			<!-- ------------------------------------------------------- -->
+		</view>
+		<view class="wander-body">
+			
 			<view class="wander-center" >
 				<view class="function-title" :class="{functionTitleActive:functionIndex===1}">
 					<view class="function-block" v-for="(item,index) in functionTitle" 
@@ -131,10 +132,10 @@
 									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
-							<view class="location">
+							<!-- <view class="location">
 								<text class="iconfont icon-dingwei"></text>
 								<text class="distance">{{item.distance/1000}}km</text>
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -150,10 +151,10 @@
 			return {
 				isInputActive:false,//判断输入框是否focus
 				swiperImg: [
-					'http://112.74.59.218/images/shuffling.jpg',					
-					'http://112.74.59.218/images/1.png',
-					'http://112.74.59.218/images/2.png',
-					'http://112.74.59.218/images/3.png'
+					'http://120.79.57.164:8088/images/封面1.png',					
+					'http://120.79.57.164:8088/images/封面2.png',
+					'http://120.79.57.164:8088/images/封面5.png',
+					'http://120.79.57.164:8088/images/封面4.png'
 				],
 				exhibitions:[],
 				salons:[],//沙龙的信息
@@ -311,122 +312,124 @@
 		}
 	}
 	.wander{
-		.wander-body{
-			width: 700rpx;
+		.wander-top{
+			padding: 20rpx 0;
+			width: 730rpx;
+			position: relative;
+			overflow: hidden;
 			margin: 0 auto;
-			.wander-top{
-				padding: 20rpx 0;
+			.search{
+				display: flex;
+				justify-content: space-around;
+				line-height: 50rpx;
 				width: 700rpx;
-				// background-color: red;
-				position: relative;
-				overflow: hidden;
 				margin: 0 auto;
-				.search{
-					display: flex;
-					justify-content: space-around;
-					line-height: 50rpx;
-					width: 100%;
-					.icon-fangdajing{
-						font-size: 50rpx;
-						color: @color;
-						margin-top: -2rpx;
-					}
-					.Search{
-						color: #649DD4;
-						font-size: 50rpx;
-					}
-					input[type=text]{
-						width: 70%;
-						height: 100%;
-						transform: all 1s ease;
-						padding: 0 0 10rpx 0;
-						box-sizing: border-box;
-						border-bottom: 2rpx solid transparent;
-					}
-					.inputActive{
-						border-bottom: 2rpx solid @color !important;
-					}
-					.location{
-						text{
-							&:nth-child(2){
-								color: #649DD4;
-							}
-						}
-					}
+				.icon-fangdajing{
+					font-size: 50rpx;
+					color: @color;
+					margin-top: -2rpx;
 				}
-				.container{
-					margin-top: 30rpx;
-					width: 100%;
-					.swiper{
-						position: relative;
-						top: 20rpx;
-						width: 100%;
-						height: 400rpx;
-						border-radius: 24rpx;
-						overflow: hidden;
-						margin: 0 auto;
-						swiper-item{
-							border-radius: 24rpx;
-							background-color: #DEDDDA;
-
-							
-							.swiper-item{
-								text-align: center;
-								image{
-									width: 100%;
-									height: 280rpx;
-									border-radius: 24rpx;
-								}
-								.description{
-									font-size: 24rpx;
-									line-height: 50rpx;
-								}
-							}
-						}
-						// swiper-item{
-						// 	margin-right: 100rpx;
-						// 	text-align: center;
-						// 	.swiper-item{
-						// 		background-color: #DEDDDA;
-						// 		image{
-						// 			width: 90%;
-						// 			height: 280rpx;
-						// 			border-radius: 24rpx;
-						// 		}
-						// 		.description{
-						// 			text-align: center;
-						// 			width: 90%;
-						// 			height: 100rpx;
-						// 			line-height: 50rpx;
-						// 			background-color: #DEDDDA;
-						// 			border-radius: 24rpx;
-						// 			margin: 0 auto;
-						// 			font-size: 24rpx;
-						// 		}
-						// 	}
-						// }
-					}
-					.swiper-dots{
-						width: 100%;
-						display: flex;
-						justify-content: center;
-						margin-top: 30rpx;
-						.dot{
-							width: 16rpx;
-							height: 16rpx;
-							border-radius: 50%;
-							background-color: #DEDDDA;
-							margin-right: 20rpx;
-							transition: all 0.2s;
-						}
-						.active{
-							width: 40rpx;
-							border-radius: 8rpx;
-							background-color: @color;
+				.Search{
+					color: #649DD4;
+					font-size: 50rpx;
+				}
+				input[type=text]{
+					width: 70%;
+					height: 100%;
+					transform: all 1s ease;
+					padding: 0 0 10rpx 0;
+					box-sizing: border-box;
+					border-bottom: 2rpx solid transparent;
+				}
+				.inputActive{
+					border-bottom: 2rpx solid @color !important;
+				}
+				.location{
+					text{
+						&:nth-child(2){
+							color: #649DD4;
 						}
 					}
 				}
 			}
+			.container{
+				margin-top: 30rpx;
+				width: 100%;
+				.swiper{
+					position: relative;
+					top: 20rpx;
+					width: 100%;
+					height: 400rpx;
+					border-radius: 24rpx;
+					overflow: hidden;
+					margin: 0 auto;
+					swiper-item{
+						width: 100%;
+						.swiper-item{
+							margin: 0 auto;
+							text-align: center;
+							background-color: #DEDDDA;
+							width: 700rpx;
+							border-radius: 24rpx;
+							image{
+								width: 700rpx;
+								height: 280rpx;
+								border-radius: 24rpx;
+							}
+							.description{
+								font-size: 24rpx;
+								line-height: 50rpx;
+							}
+						}
+					}
+					// swiper-item{
+					// 	margin-right: 100rpx;
+					// 	text-align: center;
+					// 	.swiper-item{
+					// 		background-color: #DEDDDA;
+					// 		image{
+					// 			width: 90%;
+					// 			height: 280rpx;
+					// 			border-radius: 24rpx;
+					// 		}
+					// 		.description{
+					// 			text-align: center;
+					// 			width: 90%;
+					// 			height: 100rpx;
+					// 			line-height: 50rpx;
+					// 			background-color: #DEDDDA;
+					// 			border-radius: 24rpx;
+					// 			margin: 0 auto;
+					// 			font-size: 24rpx;
+					// 		}
+					// 	}
+					// }
+				}
+				.swiper-dots{
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					margin-top: 30rpx;
+					.dot{
+						width: 16rpx;
+						height: 16rpx;
+						border-radius: 50%;
+						background-color: #DEDDDA;
+						margin-right: 20rpx;
+						transition: all 0.2s;
+					}
+					.active{
+						width: 40rpx;
+						border-radius: 8rpx;
+						background-color: @color;
+					}
+				}
+			}
+		}
+		.wander-body{
+			width: 700rpx;
+			margin: 0 auto;
+			
 			.wander-center{
 				margin-top: 40rpx;
 				width: 100%;

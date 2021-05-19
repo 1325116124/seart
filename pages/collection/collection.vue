@@ -99,7 +99,7 @@ export default {
 	//获取展览的收藏
 	async getExhibitions(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/0/0/" + this.exhibitionsNum
+			url:'/users/' + this.userInfo.userId + "/0/0/" + this.exhibitionsNum + "/favour" 
 		})
 		this.exhibitionsDetail = res.data.data
 		if(this.currentIndex==0){
@@ -108,7 +108,7 @@ export default {
 	},
 	async getSalons(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/1/0/" + this.salonsNum
+			url:'/users/' + this.userInfo.userId + "/1/0/" + this.salonsNum + "/favour"
 		})
 		this.salonsDetail = res.data.data
 		if(this.currentIndex==1){
@@ -117,7 +117,7 @@ export default {
 	},
 	async getCourse(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/2/0/" + this.coursesNum
+			url:'/users/' + this.userInfo.userId + "/2/0/" + this.coursesNum + "/favour"
 		})
 		this.coursesDetail = res.data.data
 		if(this.currentIndex==2){

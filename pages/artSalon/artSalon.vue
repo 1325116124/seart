@@ -7,16 +7,20 @@
 					<view class="enter-living" @tap="toBroadcast" v-show="salon.status===1||salon.status===0">进入直播</view>
 					<view class="enter-living" @tap="toBroadcast" v-show="salon.status===2">进入回放</view>
 					<view class="icons">
-						<view class="icon" @tap="clickFavours">
-							<view class="iconfont icon-shoucang" :class="{iconActive:favours}"></view>
-							<text>{{salon.favours}}</text>
-						</view>
-						<view class="icon" @tap="clickParticipants">
-							<view class="iconfont icon-shizhong" :class="{iconActive:participants}"></view>
-							<text>{{salon.participants}}</text>
-						</view>
-						<button @tap="clickShares" open-type="share">
-							<view class="icon">
+						<button @tap="clickFavours" class="icon">
+							<view class="icon-box">
+								<view class="iconfont icon-shoucang" :class="{iconActive:favours}"></view>
+								<text>{{salon.favours}}</text>
+							</view>
+						</button>
+						<button @tap="clickParticipants" class="icon">
+							<view class="icon-box"> 
+								<view class="iconfont icon-shizhong" :class="{iconActive:participants}"></view>
+								<text>{{salon.participants}}</text>
+							</view>
+						</button>
+						<button @tap="clickShares" open-type="share"  class="icon">
+							<view class="icon-box">
 								<view class="iconfont icon-fenxiang" :class="{iconActive:true}"></view>
 								<text>{{salon.shares}}</text>
 							</view>
@@ -36,7 +40,7 @@
 				</view>
 			</view>
 			<view class="course-center">
-				<view class="course-center-top" v-if="salons.members.length">
+				<view class="course-center-top"  v-if="salon.members.length">
 					<view class="course-center-top-top">
 						<txet class="block"></txet>
 						<text class="course-center-top-title">主讲团队</text>
@@ -218,7 +222,7 @@
 			//获取评论数
 			async getCommentNum(){
 				const res = await this.$myRequest({
-					url:"/comment/getPages/1/" + this.id
+					url:"/comments/1/" + this.id + "/pages"
 				})
 				this.commentNum = res.data.data
 			},
@@ -226,7 +230,7 @@
 			async getComment(){
 				const res = await this.$myRequest({
 					// /comment/1/16/0/14
-					url:"/comment/1/" + this.id + "/0/" + this.commentNum
+					url:"/comments/1/" + this.id + "/0/" + this.commentNum
 				})
 				this.commentInfo = res.data.data
 			}
@@ -275,60 +279,49 @@
 						right: 0;
 					}
 					// 68x27	12 0 0 12
+					overflow: hidden;
 					.icons{
-						width: 700rpx;
-						height: 28rpx;
+						margin-top: -8rpx;
 						display: flex;
-						justify-content: flex-end;
+						justify-content: space-around;
+						position: relative;
+						width: 220rpx;
+						height: 100rpx;
+						float: right;
 						.icon{
-							margin-right: 40rpx;
-							text-align: center;	
-							font-weight: bold;
-							.iconfont{
-								width: 30rpx;
-								height: 28rpx;
-							}
-							&:nth-child(2){
+							background-color: #fff;
+							position: relative;
+							// height: 80rpx;
+							.icon-box{
+								display: flex;
+								flex-direction: column;
+								justify-content: space-around;
+								height: 50rpx;
+								font-weight: bold;
 								.iconfont{
 									font-size: 36rpx;
 								}
 							}
-							&:last-child{
-								width: 40rpx;
-								height: 100rpx;
-								margin-right: 0;
-								position: absolute;
-								top: -22rpx;
-								left: 4rpx;
-								display: flex;
-								align-items: flex-start;
-								flex-wrap: wrap;
-								text{
-									margin-top:57%;
-								}
-							}
 							text{
+								position: absolute;
+								top: 40rpx;
+								right: 12rpx;
 								font-size: 20rpx;
 							}
-							.iconActive{
+							&::after{
+							   border: none;
+							  }
+							  margin: 0;
+							  padding: 0;
+							  .iconActive{
 								color: #0069D6;
 							}
 						}
-						button {
-							width: 40rpx;
-							height: 100rpx;
-						  background-color: #fff;
-						  &::after{
-						   border: none;
-						  }
-						  margin: 0;
-						  padding: 0;
-						 }
 					}
 				}
 				.course-top-center{
 					padding-left: 40rpx;
-					margin-top: 34rpx;
+					margin-top: -20rpx;
 					font-size: 28rpx;
 					line-height: 44rpx;
 					color: #707070;

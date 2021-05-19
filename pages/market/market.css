@@ -38,10 +38,11 @@ page{
   }
   .scratch-canvas{
     position: absolute;
-    color: #f0f0f0;
+    /* color: #f0f0f0; */
     border-radius: 24rpx;
-    box-shadow: 0 6rpx 10rpx #000;
-    filter: blur(10rpx) brightness(80%) opacity(80%);
+    box-shadow: 0 6rpx 10rpx #fff;
+    /* filter: blur(10rpx) brightness(80%) opacity(80%); */
+	/* filter: blur(20rpx); */
   }
   .box1{
     left:318rpx;

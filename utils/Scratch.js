@@ -5,7 +5,7 @@ class Scratch {
     this.canvasId = opts.canvasId || 'canvas';
     this.width = opts.width || 300;
     this.height = opts.height || 300;
-    this.maskColor = opts.maskColor || '#dddddd';
+    this.maskColor = opts.maskColor || 'rgba(255,255,255,0.8)';
     this.size = opts.size || 15, //this.r = this.size * 2;
     this.r = this.size;
     this.area = this.r * this.r; //this.scale = opts.scale || 0.7;
@@ -26,6 +26,7 @@ class Scratch {
   drawMask() {
     this.ctx.setFillStyle(this.maskColor);
     this.ctx.fillRect(0, 0, this.width, this.height);
+	this.ctx.setShadow(50, 50, 50, 'white')
     this.ctx.draw();
   }
 

@@ -62,15 +62,15 @@
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">{{item.name}}</view>
-							<view class="item-right-des">{item.introduction}}</view>
+							<view class="item-right-des">{{item.introduction}}</view>
 							<view class="item-tabs">
 								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
-						<view class="location">
+						<!-- <view class="location">
 							<text class="iconfont icon-dingwei"></text>
-							<text class="distance">1.5km</text>
-						</view>
+							<text class="distance">{{item.distance/1000}}km</text>
+						</view> -->
 					</view>
 				</view>
 			</view>
@@ -83,15 +83,15 @@
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">{{item.name}}</view>
-							<view class="item-right-des">{item.introduction}}</view>
+							<view class="item-right-des">{{item.introduction}}</view>
 							<view class="item-tabs">
 								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
-						<view class="location">
+						<!-- <view class="location">
 							<text class="iconfont icon-dingwei"></text>
 							<text class="distance">1.5km</text>
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</view>
@@ -104,15 +104,15 @@
 						</view>
 						<view class="item-right">
 							<view class="item-right-title">{{item.name}}</view>
-							<view class="item-right-des">{item.introduction}}</view>
+							<view class="item-right-des">{{item.introduction}}</view>
 							<view class="item-tabs">
 								<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 							</view>
 						</view>
-						<view class="location">
+						<!-- <view class="location">
 							<text class="iconfont icon-dingwei"></text>
 							<text class="distance">1.5km</text>
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</view>

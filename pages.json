@@ -283,8 +283,8 @@
 			},
 			{
 				"pagePath":"pages/wander-discover/wander-discover",
-				"iconPath":"./static/icon/discover.png",
-				"selectedIconPath":"./static/icon/discoverSelected.png"
+				"iconPath":"./static/icon/deotion.png",
+				"selectedIconPath":"./static/icon/deotionSelected.png"
 			},
 			{
 				"pagePath":"pages/areo-main/areo-main",

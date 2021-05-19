@@ -65,7 +65,7 @@
 						</scroll-view>
 					</view>
 					<view class="result-items3-center">
-						<view class="center2-center-top">
+						<view class="center2-center-top" v-if="courseDetail.length!==0">
 							<txet class="block"></txet>
 							<text class="center2-center-title">系列专辑</text>
 						</view>
@@ -77,7 +77,7 @@
 						</scroll-view>
 					</view>
 					<view class="result-items3-bottom">
-						<view class="center2-bottom-top">
+						<view class="center2-bottom-top" v-if="currentSalons.length!==0">
 							<txet class="block"></txet>
 							<text class="center2-bottom-title">单场live</text>
 						</view>
@@ -98,10 +98,10 @@
 									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
-							<view class="location">
+							<!-- <view class="location">
 								<text class="iconfont icon-dingwei"></text>
 								<text class="distance">1.5km</text>
-							</view>
+							</view> -->
 						</view>	
 					</view>
 				</view>
@@ -118,10 +118,10 @@
 									<view class="tab" v-for="(value,index2) in item.tags" :key="index2">{{value}}</view>
 								</view>
 							</view>
-							<view class="location">
+							<!-- <view class="location">
 								<text class="iconfont icon-dingwei"></text>
 								<text class="distance">1.5km</text>
-							</view>
+							</view> -->
 						</view>	
 					</view>
 				</view>
@@ -196,7 +196,7 @@
 			},
 			async getResults(){
 				const res = await this.$myRequest({
-					url:"/discover/" + this.isSelectedArraySum +"/0/10",
+					url:"/discovers/" + this.isSelectedArraySum +"/0/10",
 					method:"GET",
 					data:{
 						list:this.isSelectedArraySum
@@ -271,15 +271,21 @@
 			},
 		},
 		onLoad(){
-			 const eventChannel = this.getOpenerEventChannel()
-			 eventChannel.on('acceptDataFromOpenerPage', data => {
-				 this.isSelectedArraySum=data.isSelectedArraySum
-				 console.log(this.isSelectedArraySum)
-			 })
-			 this.getResults()
-			 this.currentExhibitons=this.exhibitionsLiving //默认进入时的初始化
-			 this.currentSalons=this.salonsLiving
-			 this.showLoading = false;
+			let promise = new Promise((resolve,reject) => {
+				const eventChannel = this.getOpenerEventChannel()
+				eventChannel.on('acceptDataFromOpenerPage', data => {
+					this.isSelectedArraySum=data.isSelectedArraySum
+					resolve()
+				})
+			})
+			promise.then(() => {
+				this.getResults()
+				this.currentExhibitons=this.exhibitionsLiving //默认进入时的初始化
+				this.currentSalons=this.salonsLiving
+				this.showLoading = false;
+			})
+			 
+			
 		},
 		onUnload() {
 			const eventChannel = this.getOpenerEventChannel()

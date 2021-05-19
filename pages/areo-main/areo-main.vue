@@ -78,10 +78,10 @@
                 <view class="scroll-dot"></view>
                 <view class="date">一天前</view>
                 <scroll-view class="history-scroll" scroll-x="true" @scroll @scrolltolower="loadingMore()">
-                    <view class="history-item" v-for="(item,index) in userHistory" :key="index" @tap="toClassify(item.id,item.type)">
+                    <view class="history-item" v-for="(item,index) in userHistoryLate" :key="index" @tap="toClassify(item.id,item.type)">
                         <view class="pic-box">
                             <text class="tag">雕塑</text>
-                            <image class="pic" src="../../static/images/broadcast.jpg" lazy-load="true" mode="aspectFill"></image>
+                            <image class="pic" :src="item.introImage" lazy-load="true" mode="aspectFill"></image>
                         </view>
                         <view class="text-box">
                             <text class="intro">{{item.introduction}}</text>
@@ -94,9 +94,9 @@
                 <view class="scroll-dot"></view>
                 <view class="date">一天前</view>
                 <scroll-view class="history-scroll" scroll-x="true" @scroll>
-                    <view class="history-item" v-for="(item,index) in userHistory" :key="index" @tap="toClassify(item.id,item.type)">
+                    <view class="history-item" v-for="(item,index) in userHistoryEarly" :key="index" @tap="toClassify(item.id,item.type)">
                         <view class="pic-box">
-                            <image class="pic" src="../../static/images/broadcast.jpg" lazy-load="true" mode="aspectFill"></image>
+                            <image class="pic" :src="item.introImage" lazy-load="true" mode="aspectFill"></image>
                         </view>
                         <view class="text-box">
                             <text class="intro">{{item.introduction}}</text>
@@ -126,6 +126,9 @@ export default {
 	  test:{},
 	  //记录用户的历史踪迹
 	  userHistory:[],
+	  //临时修改
+	  userHistoryEarly:[],
+	  userHistoryLate:[],
 	  //记录用户的日程
 	  userSchedule:[],
 	  //用来获取数据
@@ -156,7 +159,7 @@ export default {
 		  if(uni.getStorageSync('user')){
 			  this.userInfo = uni.getStorageSync('user');
 			  const res = await this.$myRequest({
-				  url:"/user/getMine/" + this.userInfo.userId,
+				  url:"/users/" + this.userInfo.userId + "/mine"
 			  })
 			  this.userMine = res.data.data
 			  console.log(this.userMine)
@@ -165,9 +168,16 @@ export default {
 	  //获取历史记录
 	  async getHistory(){
 		  let res = await this.$myRequest({
-		  	url:"/user/getHistory/" + this.userInfo.userId + "/" + this.lastIndex + "/" + this.count,
+		  	url:"/users/" + this.userInfo.userId + "/" + this.lastIndex + "/" + this.count + "/history"
 		  })
 		  this.userHistory = [...this.userHistory,...res.data.data]
+		  this.userHistory.forEach((value,index) => {
+			  if(value.time<=1620290207){
+				  this.userHistoryEarly.push(value)
+			  }else {
+				  this.userHistoryLate.push(value)
+			  }
+		  })
 		  this.lastIndex += this.count
 	  },
 	  //加载更多
@@ -179,7 +189,7 @@ export default {
 	  //获取我的日程
 	  async getMySchedule(){
 		  let res = await this.$myRequest({
-		  	url:"/user/getSchedules/" + this.userInfo.userId,
+		  	url:"/users/" + this.userInfo.userId + '/schedule'
 		  })
 		  this.userSchedule = res.data.data
 	  },
@@ -194,17 +204,17 @@ export default {
 		  //showType 展览：0，沙龙：1，课程：2
 		  let showType = 0
 		  let res = await this.$myRequest({
-			  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+			  url:"/users/" + this.userInfo.userId + "/" + showType + '/favour-nums'
 		  })
 		  this.exhibitionsNum = res.data.data;
 		  showType++;
 		  res = await this.$myRequest({
-		  	  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+		  	  url:"/users/" + this.userInfo.userId + "/" + showType + "/favour-nums"
 		  })
 		  this.salonsNum = res.data.data;
 		  showType++;
 		  res = await this.$myRequest({
-		  	  url:"/user/favour-nums/" + this.userInfo.userId + "/" + showType
+		  	  url:"/users/" + this.userInfo.userId + "/" + showType + "/favour-nums"
 		  })
 		  this.coursesNum = res.data.data;
 	  },
@@ -212,14 +222,14 @@ export default {
 	  async getOrder(){
 		  // usedStatus，已使用:1,未使用:0
 		  let res = await this.$myRequest({
-			  url:"/order/nums/" + this.userInfo.userId + "?usedStatus=0",
+			  url:"/orders/" + this.userInfo.userId + "/nums?usedStatus=0",
 			  fail:err => {
 				  console.log(err)
 			  }
 		  })
 		  this.orderNum = res.data.data
 		  res = await this.$myRequest({
-		  	  url:"/order/nums/" + this.userInfo.userId
+		  	  url:"/orders/" + this.userInfo.userId + "/nums"
 		  })
 		  this.orderSum = res.data.data
 	  },
@@ -534,6 +544,7 @@ export default {
     display: inline-block;
     text-align: center;
     margin-right: 36rpx;
+	vertical-align: top;
 }
 .history-item .pic-box{
     height: 142rpx;

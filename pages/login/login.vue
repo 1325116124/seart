@@ -47,9 +47,8 @@
 							provider: 'weixin',
 							success: loginRes => {
 								// console.log('-------用户授权，并获取用户code------');
-								console.log(loginRes);
 								uni.request({
-									url:"http://112.74.59.218:8080/login",
+									url:"http://120.79.57.164:8080/login",
 									method:"PUT",
 									header : {  
 										'content-type': 'application/x-www-form-urlencoded;charset=utf-8'  
@@ -69,8 +68,6 @@
 									success: res => {
 										user.code = loginRes.code
 										user.openId = res.data.data.id
-										console.log(user.code)
-										console.log(123)
 										uni.getLocation({
 										    type: 'wgs84',
 										    success: res => {
@@ -78,7 +75,7 @@
 												user.latitude = res.latitude
 												//获取用户在数据库中的id
 												uni.request({
-													url:"http://112.74.59.218:8080/authorize/"+ user.openId + "/" + user.nickName,
+													url:"http://120.79.57.164:8080/authorize/"+ user.openId + "/" + user.nickName,
 													data:{
 														avatarUrl:user.avatarUrl,
 														gender:user.gender,
@@ -89,7 +86,6 @@
 													method:"POST",
 													success:function(res){
 														user.userId = res.data.data;
-														console.log(res.data.data)
 														uni.setStorageSync('user',user);
 													},
 													fail: function(err){

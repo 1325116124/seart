@@ -28,9 +28,9 @@
                     </view>
                 </view>
                 <view class="schedule-matters">
-                    <view>注意事项：</view>
+                    <view>介绍：</view>
                     <view class="matters-content">
-                        《时间的形态》将于2020.11.16-11.26闭展更新部分展品。《时间的形态》将于2020.11.16-11.26闭展更新部分展品。
+                        {{item.introduction}}
                     </view>
                 </view>
 				 <!-- <map class="map" :enable-scroll="false" :longitude="longitude" :latitude="latitude" :markers="markers" :scale="scale"></map> -->
@@ -84,12 +84,13 @@ export default {
 	  async getMySchedule(){
 		  const res = await this.$myRequest({
 			  // getApp().globalData.BASE_URL + 
-			url:"/user/getSchedules/" + this.userid
+			url:"/users/" + this.userid + "/schedule"
 		  })
 		  this.userSchedule = res.data.data
 	  },
 	  //自定义格式化函数
 	  formatDate(date){
+		date *= 1000
 		let d = new Date(date)
 		let month = '' + (d.getMonth() + 1)
 		let day = '' + d.getDate()
@@ -98,6 +99,7 @@ export default {
 	},
 	//自定义格式化时间2:2021.7.21
 	formatDate2(date){
+		date *= 1000
 		let d = new Date(date)
 		let month = '' + (d.getMonth() + 1)
 		let day = '' + d.getDate()

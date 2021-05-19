@@ -113,7 +113,9 @@
 					}
 					.description{
 						font-size: 24rpx;
-						line-height: 38rpx;
+						line-height: 53rpx;
+						height: 106rpx;
+						overflow: hidden;
 					}
 				}
 			}

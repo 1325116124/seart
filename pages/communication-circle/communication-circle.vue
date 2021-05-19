@@ -79,7 +79,7 @@
 			//获取评论数
 			async getCommentNum(){
 				const res = await this.$myRequest({
-					url:"/comment/getPages/" + this.type + "/" + this.id
+					url:"/comments/" + this.type + "/" + this.id + "/pages"
 				})
 				this.commentNum = res.data.data
 			},
@@ -87,7 +87,7 @@
 			async getComment(){
 				const res = await this.$myRequest({
 					// /comment/1/16/0/14
-					url:"/comment/" + this.type + "/" + this.id + "/0/" + this.commentNum
+					url:"/comments/" + this.type + "/" + this.id + "/0/" + this.commentNum
 				})
 				this.commentInfo = res.data.data
 			},

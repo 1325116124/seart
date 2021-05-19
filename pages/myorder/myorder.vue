@@ -116,6 +116,7 @@ export default {
   	  },
 	  //自定义格式化时间2:2021.7.21
 	  formatDate2(date){
+		date *= 1000
 	  	let d = new Date(date)
 	  	let month = '' + (d.getMonth() + 1)
 	  	let day = '' + d.getDate()
@@ -136,17 +137,17 @@ export default {
 		  this.sumOrder = []
 		  //先获取未过期的
 		  let res = await this.$myRequest({
-			  url:"/order/" + this.userInfo.userId + "/0/" + this.orderNum
+			  url:"/orders/" + this.userInfo.userId + "/0/" + this.orderNum
 			  // order/{id}/{current}/{count}
 		  })
 		  this.sumOrder = res.data.data
 		  res = await this.$myRequest({
-			  url:"/order/" + this.userInfo.userId + "/0/" + this.orderNum + "?usedStatus=1"
+			  url:"/orders/" + this.userInfo.userId + "/0/" + this.orderNum + "?usedStatus=1"
 			  // order/{id}/{current}/{count}
 		  })
 		  this.overdueOrder = res.data.data
 		  res = await this.$myRequest({
-			  url:"/order/" + this.userInfo.userId + "/0/" + this.orderNum + "?usedStatus=0"
+			  url:"/orders/" + this.userInfo.userId + "/0/" + this.orderNum + "?usedStatus=0"
 			  // order/{id}/{current}/{count}
 		  })
 		  this.unoverdueOrder = res.data.data
@@ -154,7 +155,7 @@ export default {
 	  //删除订单
 	  deleteOrder(id){
 		  this.$myRequest({
-			  url:"/order/delete/" + id,
+			  url:"/orders/" + id,
 			  method:"POST",
 			  success:function(res){
 				  console.log(res)

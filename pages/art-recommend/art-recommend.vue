@@ -33,7 +33,7 @@
                 <!-- 首个评论详情高度不同 -->
                 <view class="comment-item">
                     <view class="user-box">
-                        <image class="user-img" src="/static/images/user-image.jpg" mode="scaleToFill"></image>
+                        <image class="user-img" src="http://120.79.57.164:8088/images/logo.png" mode="scaleToFill"></image>
                         <text class="user-name">草间弥生</text>
                     </view>
                     <view class="content isTopComment">
@@ -44,7 +44,7 @@
             <view class="comment">
                 <view class="comment-item">
                     <view class="user-box">
-                        <image class="user-img" src="/static/images/user-image.jpg" mode="scaleToFill"></image>
+                        <image class="user-img" src="http://120.79.57.164:8088/images/1.png" mode="scaleToFill"></image>
                         <text class="user-name">草间弥生</text>
                     </view>
                     <view class="content ">
@@ -55,7 +55,7 @@
             <view class="comment">
                 <view class="comment-item">
                     <view class="user-box">
-                        <image class="user-img" src="/static/images/user-image.jpg" mode="scaleToFill"></image>
+                        <image class="user-img" src="http://120.79.57.164:8088/images/2.png" mode="scaleToFill"></image>
                         <text class="user-name">草间弥生</text>
                     </view>
                     <view class="content ">

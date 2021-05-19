@@ -76,28 +76,28 @@ export default {
 		  if(uni.getStorageSync('user')){
 			  this.userInfo = uni.getStorageSync('user');
 			  const res = await this.$myRequest({
-				  url:"/user/getMine/" + this.userInfo.userId,
+				  url:"/users/" + this.userInfo.userId + "/mine"
 			  })
 			  this.userMine = res.data.data
 		  } 
 	  },
 	async getExhibitions(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/0/0/" + this.exhibitionsNum
+			url:'/users/' + this.userInfo.userId + "/0/0/" + this.exhibitionsNum + "/favour"
 		})
 		this.exhibitionsDetail = res.data.data
 		this.collectionDetail = [...this.collectionDetail,...res.data.data]
 	},
 	async getSalons(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/1/0/" + this.salonsNum
+			url:'/users/' + this.userInfo.userId + "/1/0/" + this.salonsNum + "/favour"
 		})
 		this.salonsDetail = res.data.data
 		this.collectionDetail = [...this.collectionDetail,...res.data.data]
 	},
 	async getCourse(){
 		let res = await this.$myRequest({
-			url:'/user/getFavour/' + this.userInfo.userId + "/2/0/" + this.coursesNum
+			url:'/users/' + this.userInfo.userId + "/2/0/" + this.coursesNum + "/favour"
 		})
 		this.coursesDetail = res.data.data
 		this.collectionDetail = [...this.collectionDetail,...res.data.data]
